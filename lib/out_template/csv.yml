@@ -1,0 +1,5 @@
+pre: "{% if context.options.header != null and context.options.header == 'true' %}{{ context.names | join: ',' }}\n{% endif %}"
+item: "{{ context.values | join: ',' }}\n"
+post:
+empty:
+

@@ -1,0 +1,7 @@
+pre: |
+  -- data generated using datarator
+  -- used input: {% in_params.inspect %}
+item: |-- TODO batches
+ INSERT INTO {% context.document %} ({% context.names.join(",") %}) values ({% context.values.join(",") %});
+post:
+
