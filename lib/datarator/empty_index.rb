@@ -7,35 +7,14 @@ module Datarator
 				raise ArgumentError, 'overall_count has to be integer > 0' unless overall_count.is_a? Integer and overall_count > 0
 
 				return Set.new if empty_percent == 0
-
 				empty_count = overall_count * empty_percent / 100
 
 				return (1..overall_count).to_set if empty_percent == 100 or empty_count == overall_count
-
-				if empty_percent > 50
-					indexes = Set.new
-					non_empty_indexes = fill_indexes(overall_count, overall_count - empty_count)
-					overall_count.times do | index |
-						indexes.add(index) unless non_empty_indexes.include? index
-					end
-				else
-					indexes = fill_indexes(overall_count, empty_count)
-				end
-
-				indexes
-			end
-
-			def fill_indexes (overall_count, to_fill_count)
-				result = Set.new
-				to_fill_count.times {
-					index = rand(overall_count) while result.include? index
-					result.add(index)
-				}
-				result
+				# idea found: http://stackoverflow.com/questions/119107/how-do-i-generate-a-list-of-n-unique-random-numbers-in-ruby 
+				(1..overall_count).to_a.shuffle[0..empty_count-1].to_set
 			end
 
 		end
 
-		private_class_method :fill_indexes
 	end
 end

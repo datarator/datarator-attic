@@ -31,10 +31,18 @@ module Datarator
 				expect(EmptyIndex.indexes(10, 50).size).to eq 5
 			end
 
-			# TODO is that correct, or should we generate 9 only???
-			it 'returns 10 indexes for 99 percent of 10 elements' do
-				expect(EmptyIndex.indexes(10, 99).size).to eq 10
+			it 'returns 9 indexes for 99 percent of 10 elements' do
+				expect(EmptyIndex.indexes(10, 99).size).to eq 9
 			end
+
+			it 'returns 4 indexes for 40 percent of 10 elements' do
+				expect(EmptyIndex.indexes(10, 40).size).to eq 4
+			end
+
+			it 'returns 3 indexes for 39 percent of 10 elements' do
+				expect(EmptyIndex.indexes(10, 39).size).to eq 3
+			end
+
 		end
 
 	end
