@@ -28,8 +28,18 @@ module Datarator
 
 		post '/dump' do
 			request.body.rewind
-			in_params = InParams.from_json request.body.read
-			in_params.validate
+			begin
+				in_params = InParams.from_json request.body.read
+			rescue ArgumentError => e
+				halt 400, e.message
+			end
+
+			begin
+				in_params.validate
+			rescue Exception => e
+				halt 409, e.message + e.backtrace.inspect
+			end
+
 			out_context = OutContext.new in_params
 
 			empty_indexes = Hash.new
