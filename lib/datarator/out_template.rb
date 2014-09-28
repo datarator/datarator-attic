@@ -1,4 +1,3 @@
-# require 'datarator/out_context'
 require 'yaml'
 require 'liquid'
 
