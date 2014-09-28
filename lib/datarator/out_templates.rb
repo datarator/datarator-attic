@@ -31,11 +31,6 @@ module Datarator
 				TEMPLATES[out_context.template].post(out_context)
 			end
 
-			def post (out_context)
-				# raise "out_context must be of type OutContext" unless out_context.kind_of? OutContext
-				TEMPLATES[out_context.template].post(out_context)
-			end
-
 			def empty (out_context)
 				# raise "out_context must be of type OutContext" unless out_context.kind_of? OutContext
 				TEMPLATES[out_context.template].empty(out_context)
