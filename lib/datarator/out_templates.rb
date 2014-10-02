@@ -1,5 +1,6 @@
 require 'datarator/out_template'
 require 'datarator/out_template_csv'
+require 'datarator/out_template_sql'
 
 module Datarator
 
@@ -7,7 +8,8 @@ module Datarator
 
 		TEMPLATES = {
 			# 'csv' => OutTemplate.new('csv')
-			'csv' => OutTemplateCsv.new()
+			'csv' => OutTemplateCsv.new(),
+			'sql' => OutTemplateSql.new()
 		}
 
 		class << self
