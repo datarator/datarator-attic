@@ -15,6 +15,11 @@ module Datarator
 		end
 
 		def item (out_context)
+			# escape character: ,
+			out_context.values.map! do | value |
+				value.include?(",") ? "'#{value}'" : value
+			end
+
 			out_context.values.join(',') + "\n"
 		end
 

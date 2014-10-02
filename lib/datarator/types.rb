@@ -12,6 +12,10 @@ module Datarator
 			def validate(name)
 				raise "type not supported: #{name}" unless supports? name
 			end
+
+			def escape? (name)
+				TYPES[name].escape?
+			end
 		end
 	end
 

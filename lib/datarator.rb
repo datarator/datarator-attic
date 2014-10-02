@@ -43,9 +43,15 @@ module Datarator
 			out_context = OutContext.new in_params
 
 			empty_indexes = Hash.new
-			# generate empty indexes
+			# generate empty indexes per column type
 			in_params.columns.each do | column |
 				empty_indexes[column.name] = EmptyIndex.indexes(out_context.count, column.empty_percent)
+			end
+
+			out_context.escapes = Array.new
+			# set escapes per column type
+			in_params.columns.each do | column |
+				out_context.escapes.push Types.escape? column.type
 			end
 
 			out_context.values = Array.new

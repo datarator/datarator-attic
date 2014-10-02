@@ -9,6 +9,10 @@ module Datarator
 				'name'
 			end
 		end
+
+		def escape?
+			true
+		end
 	end
 
 	class TypeNameName < TypeName

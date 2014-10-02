@@ -5,7 +5,7 @@ module Datarator
 	class OutContext
 		attr_reader :template, :document, :names, :count, :options
 		attr_writer :template, :options # just to make testing simple
-		attr_accessor :values, :index
+		attr_accessor :values, :escapes, :index
 
 		def initialize(in_params)
 			raise ArgumentError, 'in_params type invalid' unless in_params.is_a?(InParams)
@@ -28,6 +28,7 @@ module Datarator
 				'document' => @document,
 				'names' => @names,
 				'values' => @values,
+				'escapes' => @escapes,
 				'count' => @count,
 				'index' => @index,
 				'options' => @options

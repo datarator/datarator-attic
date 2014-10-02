@@ -15,6 +15,14 @@ module Datarator
 				expect(TypeNameName.name).to eq 'name.name'
 			end
 		end
+
+		describe '.escape?' do
+			it 'returns true' do
+				expect(TypeNameFirstName.new.escape?).to eq true
+			end
+		end
+
+
 	end
 
 	describe TypeNameFirstName do
@@ -30,5 +38,12 @@ module Datarator
 				expect(TypeNameFirstName.name).to eq 'name.first_name'
 			end
 		end
+
+		describe '.escape?' do
+			it 'returns true' do
+				expect(TypeNameFirstName.new.escape?).to eq true
+			end
+		end
+
 	end
 end
