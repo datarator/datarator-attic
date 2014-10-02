@@ -9,6 +9,13 @@ module Datarator
 				expect{ Type.new.value }.to raise_error(NotImplementedError)
 			end
 		end
+
+		describe '.escape?' do
+			it 'raises NotImplementedError' do
+				expect{ Type.new.escape? }.to raise_error(NotImplementedError)
+			end
+		end
+
 	end
 end
 
