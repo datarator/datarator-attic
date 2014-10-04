@@ -1,6 +1,3 @@
-require "rubygems"
-require "sinatra"
+require File.expand_path(File.dirname(__FILE__) + '/lib/datarator.rb')
 
-require File.expand_path './lib/datarator.rb', __FILE__
-
-run Datarator
+run Datarator::Datarator
