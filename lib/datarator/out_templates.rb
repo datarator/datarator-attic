@@ -1,6 +1,6 @@
-require 'datarator/out_template'
-require 'datarator/out_template_csv'
-require 'datarator/out_template_sql'
+require_relative 'out_template'
+require_relative 'out_template_csv'
+require_relative 'out_template_sql'
 
 module Datarator
 

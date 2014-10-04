@@ -1,4 +1,4 @@
-require 'datarator/out_context'
+require_relative 'out_context'
 
 module Datarator
 

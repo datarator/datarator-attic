@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 require 'sinatra'
-# require 'datarator/reader_yaml'
 
-require "datarator/version"
-require "datarator/empty_index"
-require "datarator/out_templates"
-require "datarator/out_context"
-require "datarator/in_params"
-require "datarator/types"
-require "datarator/empty_index"
+require_relative "datarator/version"
+require_relative "datarator/empty_index"
+require_relative "datarator/out_templates"
+require_relative "datarator/out_context"
+require_relative "datarator/in_params"
+require_relative "datarator/types"
+require_relative "datarator/empty_index"
 
 require 'ruby-prof'
 
@@ -99,4 +98,4 @@ module Datarator
 	end
 end
 
-require 'datarator/type_name'
+require_relative 'datarator/type_name'

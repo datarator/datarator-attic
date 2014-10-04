@@ -1,4 +1,4 @@
-require 'datarator/type.rb'
+require_relative 'type.rb'
 require 'faker'
 
 module Datarator

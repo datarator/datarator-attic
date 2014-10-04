@@ -1,4 +1,4 @@
-require 'datarator/in_params'
+require_relative 'in_params'
 
 module Datarator
 

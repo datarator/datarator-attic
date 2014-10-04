@@ -19,7 +19,7 @@ module Datarator
 		end
 	end
 
-	require 'datarator/type_name'
+	require_relative 'type_name'
 
 	TYPES = {
 		# name

@@ -1,5 +1,5 @@
 require 'json'
-require 'datarator/types'
+require_relative 'types'
 
 module Datarator
 
