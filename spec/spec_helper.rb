@@ -2,8 +2,6 @@
 require 'coveralls'
 Coveralls.wear!
 
-# require 'minitest/autorun'
-# require 'test/unit'
 require 'rubygems'
 # require 'yaml'
 require 'pry'
