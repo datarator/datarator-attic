@@ -1,13 +1,16 @@
 require 'spec_helper'
 require 'datarator/out_templates'
 require 'datarator/out_context'
+require 'datarator/type_name'
 
 module Datarator
 	describe OutTemplates do
 		before(:each) do
 			in_params = InParams.new
 			in_params.document = 'table1'
-			in_params.columns = [ InColumn.new("name1", "foo", "0"), InColumn.new("name2", "foo", "0"), InColumn.new("name3", "foo", "0")]
+			in_params.columns = [ InColumn.new("name1", TypeNameName.name, "0", nil), InColumn.new("name2", TypeNameName.name, "0", nil), InColumn.new("name3", TypeNameName.name, "0", nil)]
+			in_params.count = 1
+			in_params.template = 'csv'
 			@out_context = OutContext.new in_params
 		end
 
@@ -111,7 +114,7 @@ module Datarator
 					@out_context.template = 'csv'
 				end
 				it 'returns empty string' do
-					expect(OutTemplates.empty(@out_context)).to eq ''
+					expect(OutTemplates.empty(@out_context.template)).to eq ''
 				end
 			end
 
@@ -120,7 +123,7 @@ module Datarator
 					@out_context.template = 'sql'
 				end
 				it 'returns string: NULL' do
-					expect(OutTemplates.empty(@out_context)).to eq 'NULL'
+					expect(OutTemplates.empty(@out_context.template)).to eq 'NULL'
 				end
 			end
 		end

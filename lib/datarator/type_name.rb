@@ -23,7 +23,7 @@ module Datarator
 			end
 		end
 
-		def value
+		def value (out_context)
 			Faker::Name.name
 		end
 	end
@@ -36,7 +36,7 @@ module Datarator
 			end
 		end
 
-		def value
+		def value (out_context)
 			Faker::Name.first_name
 		end
 	end

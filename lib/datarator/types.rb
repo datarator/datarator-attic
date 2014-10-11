@@ -1,8 +1,12 @@
 module Datarator
 	class Types
 		class << self
-			def value(name)
-				TYPES[name].value
+			def value(out_context)
+				if out_context.empty_indexes[out_context.current_name].include? out_context.row_index
+					out_context.empty_value
+				else
+					TYPES[out_context.current_type].value out_context
+				end
 			end
 
 			def supports?(name)
@@ -20,8 +24,16 @@ module Datarator
 	end
 
 	require_relative 'type_name'
+	require_relative 'type_copy'
 
 	TYPES = {
+		# specific
+		TypeCopy.name => TypeCopy.new,
+
+		#
+		# faker
+		#
+
 		# name
 		TypeNameName.name => TypeNameName.new,
 		TypeNameFirstName.name => TypeNameFirstName.new

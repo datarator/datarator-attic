@@ -28,7 +28,7 @@ module Datarator
 			''
 		end
 
-		def empty (out_context)
+		def empty
 			'NULL'
 		end
 	end

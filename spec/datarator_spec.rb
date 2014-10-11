@@ -1,4 +1,4 @@
-ENV['RACK_ENV'] = 'test'
+# ENV['RACK_ENV'] = 'test'
 
 require 'spec_helper'
 require 'rack/test'
@@ -23,7 +23,7 @@ module Datarator
 		describe '/dump' do
 			context 'having valid json request' do
 				before(:each) do
-					json = '{"template":"csv","document":"foo_document","count":"10","locale":"en","columns":[{"name":"foo_name1","type":"name.first_name"},{"name":"foo_name2","type":"name.first_name","empty_percent":"50"}],"options":{"csv.header":"true","prettyprint":"true"}}'
+					json = '{"template":"csv","document":"foo_document","count":"10","locale":"en","columns":[{"name":"foo_name1","type":"name.first_name"},{"name":"foo_name2","type":"name.first_name","emptyPercent":"50"}],"options":{"csv.header":"true","prettyprint":"true"}}'
 					post_json('/dump', json)
 				end
 
@@ -47,7 +47,7 @@ module Datarator
 
 			context 'having invalid json request data' do
 				before(:each) do
-					json = '{"template":"csv","document":"foo_document","count":"10","locale":"en","columns":[{"name":"foo_name1","type":"non_existing"},{"name":"foo_name2","type":"name.first_name","empty_percent":"50"}],"options":{"csv.header":"true","prettyprint":"true"}}'
+					json = '{"template":"csv","document":"foo_document","count":"10","locale":"en","columns":[{"name":"foo_name1","type":"non_existing"},{"name":"foo_name2","type":"name.first_name","emptyPercent":"50"}],"options":{"csv.header":"true","prettyprint":"true"}}'
 					post_json('/dump', json)
 				end
 

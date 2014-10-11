@@ -41,17 +41,11 @@ module Datarator
 
 			out_context = OutContext.new in_params
 
-			empty_indexes = Hash.new
-			# generate empty indexes per column type
-			in_params.columns.each do | column |
-				empty_indexes[column.name] = EmptyIndex.indexes(out_context.count, column.empty_percent)
-			end
-
-			out_context.escapes = Array.new
-			# set escapes per column type
-			in_params.columns.each do | column |
-				out_context.escapes.push Types.escape? column.type
-			end
+			# begin
+			# 	out_context.validate
+			# rescue Exception => e
+			# 	halt 409, e.message + e.backtrace.inspect
+			# end
 
 			out_context.values = Array.new
 
@@ -60,30 +54,22 @@ module Datarator
 			stream do |out|
 				out << OutTemplates.pre(out_context)
 
-				empty_value = OutTemplates.empty out_context
-
 				# Profile the code
 				# RubyProf.start
 
 				# 0.step(in_params.count, batch) do | row |
 				in_params.count.times do | row |
-					out_context.values.clear
+					# out_context.next_row
 					# vals = Array.new
 					# batch.times do | index |
 					# vals.clear
 					in_params.columns.each do | column |
-						if empty_indexes[column.name].include? row
-							out_context.values.push empty_value
-							# vals.push empty_value
-						else
-							out_context.values.push Types.value column.type
-							# vals.push Types.value column.type
-						end
-						# end
-						# out_context.values.push vals
-						out << OutTemplates.item(out_context)
+						out_context.values.push Types.value out_context
+						out_context.shift_column
 					end
 
+					out << OutTemplates.item(out_context)
+					out_context.shift_row
 				end
 
 				# result = RubyProf.stop

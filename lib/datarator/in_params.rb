@@ -1,5 +1,6 @@
 require 'json'
 require_relative 'types'
+require_relative 'in_column'
 
 module Datarator
 
@@ -19,7 +20,7 @@ module Datarator
 
 				in_params.columns = Array.new
 				data['columns'].each do |column|
-					in_params.columns.push(InColumn.new(column["name"], column["type"], column["empty_percent"]))
+					in_params.columns.push(InColumn.new(column["name"], column["type"], column["emptyPercent"], column["options"]))
 				end
 
 				in_params.options = Hash.new
@@ -49,30 +50,6 @@ module Datarator
 			OutTemplates.validate @template
 		end
 
-	end
-
-	class InColumn
-		attr_accessor :name, :type, :empty_percent
-
-		def initialize(name, type, empty_percent)
-			@name = name
-			@type = type
-
-			if empty_percent.nil?
-				@empty_percent = 0
-			else
-				raise ArgumentError, 'empty_percent has to be integer in interval <0,100>' unless empty_percent.to_i.between?(0,100)
-				@empty_percent = empty_percent.to_i
-			end
-		end
-
-		# def hash
-		# 	[@name, @type, @empty_percent].hash
-		# end
-
-		def ==(other)
-			return self.name == other.name && self.type == other.type && self.empty_percent == empty_percent
-		end
 	end
 
 end

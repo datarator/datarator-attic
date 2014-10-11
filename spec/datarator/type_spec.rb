@@ -6,7 +6,7 @@ module Datarator
 
 		describe '.value' do
 			it 'raises NotImplementedError' do
-				expect{ Type.new.value }.to raise_error(NotImplementedError)
+				expect{ Type.new.value nil }.to raise_error(NotImplementedError)
 			end
 		end
 

@@ -6,7 +6,7 @@ module Datarator
 
 		describe '.value' do
 			it 'returns name' do
-				expect(TypeNameName.new.value).to match(/^[-'. a-zA-Z]+$/)
+				expect(TypeNameName.new.value nil).to match(/^[-'. a-zA-Z]+$/)
 			end
 		end
 
@@ -29,7 +29,7 @@ module Datarator
 
 		describe '.value' do
 			it 'returns first name' do
-				expect(TypeNameFirstName.new.value).to match(/^[- a-zA-Z]+$/)
+				expect(TypeNameFirstName.new.value nil).to match(/^[- a-zA-Z]+$/)
 			end
 		end
 

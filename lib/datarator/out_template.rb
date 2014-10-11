@@ -25,7 +25,7 @@ module Datarator
 			@post.render('context' => out_context)
 		end
 
-		def empty (out_context)
+		def empty
 			@empty.render('context' => out_context)
 		end
 	end
