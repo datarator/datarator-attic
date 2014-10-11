@@ -8,7 +8,7 @@ module Datarator
 		before(:each) do
 			in_params = InParams.new
 			in_params.document = 'table1'
-			in_params.columns = [ InColumn.new("name1", TypeNameName.name, "0", nil), InColumn.new("name2", TypeNameName.name, "0", nil), InColumn.new("name3", TypeNameName.name, "0", nil)]
+			in_params.columns = [ Column.new("name1", TypeNameName.name, "0", nil), Column.new("name2", TypeNameName.name, "0", nil), Column.new("name3", TypeNameName.name, "0", nil)]
 			in_params.count = 1
 			in_params.template = 'csv'
 			@out_context = OutContext.new in_params

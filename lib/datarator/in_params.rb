@@ -1,6 +1,6 @@
 require 'json'
 require_relative 'types'
-require_relative 'in_column'
+require_relative 'column'
 
 module Datarator
 
@@ -20,7 +20,7 @@ module Datarator
 
 				in_params.columns = Array.new
 				data['columns'].each do |column|
-					in_params.columns.push(InColumn.new(column["name"], column["type"], column["emptyPercent"], column["options"]))
+					in_params.columns.push(Column.new(column["name"], column["type"], column["emptyPercent"], column["options"]))
 				end
 
 				in_params.options = Hash.new

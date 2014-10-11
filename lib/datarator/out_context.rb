@@ -1,9 +1,10 @@
 require_relative 'in_params'
 
+
 module Datarator
 
 	class OutContext
-		attr_reader :template, :document, :names, :count, :options, :row_index, :column_index, :empty_indexes, :column_options, :empty_value
+		attr_reader :template, :document, :names, :count, :options, :row_index, :column_index, :empty_indexes, :column_options, :empty_value, :out_columns
 		attr_writer :options # just to make testing simple
 		attr_accessor :values, :escapes
 

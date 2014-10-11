@@ -29,7 +29,7 @@ module Datarator
 
 
 				it 'inits columns property' do
-					expect(@inParams.columns).to eq([ InColumn.new("foo_name1", "foo_type1", "0", nil), InColumn.new("foo_name2", "foo_type2", "50", nil) ])
+					expect(@inParams.columns).to eq([ Column.new("foo_name1", "foo_type1", "0", nil), Column.new("foo_name2", "foo_type2", "50", nil) ])
 				end
 
 				it 'inits options property' do

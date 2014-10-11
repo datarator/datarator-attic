@@ -3,8 +3,10 @@ require_relative 'types'
 
 module Datarator
 
-	class InColumn
-		attr_accessor :name, :type, :empty_percent, :options
+	class Column
+		attr_accessor :name, :type, :empty_percent, :options,
+			# output
+			:value, :escape
 
 		def initialize(name, type, empty_percent, options)
 			@name = name

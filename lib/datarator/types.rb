@@ -24,11 +24,11 @@ module Datarator
 	end
 
 	require_relative 'type_name'
-	require_relative 'type_copy'
+	# require_relative 'type_copy'
 
 	TYPES = {
 		# specific
-		TypeCopy.name => TypeCopy.new,
+		# TypeCopy.name => TypeCopy.new,
 
 		#
 		# faker
