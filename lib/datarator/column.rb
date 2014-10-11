@@ -4,9 +4,10 @@ require_relative 'types'
 module Datarator
 
 	class Column
-		attr_accessor :name, :type, :empty_percent, :options,
-			# output
-			:value, :escape
+		# provided in input
+		attr_reader :name, :type, :empty_percent, :options
+		# output related
+		attr_accessor :value, :escape, :empty_indexes
 
 		def initialize(name, type, empty_percent, options)
 			@name = name

@@ -1,49 +1,40 @@
 require_relative 'in_params'
+require_relative 'empty_index'
 
 
 module Datarator
 
 	class OutContext
-		attr_reader :template, :document, :names, :count, :options, :row_index, :column_index, :empty_indexes, :column_options, :empty_value, :out_columns
+		attr_reader :template, :document, :count, :options, :row_index, :column_index, :empty_value, :columns
 		attr_writer :options # just to make testing simple
-		attr_accessor :values, :escapes
 
 		def initialize(in_params)
 			raise ArgumentError, 'in_params type invalid' unless in_params.is_a?(InParams)
 
-			# initialized globally
 			self.template = in_params.template
 			@document = in_params.document
 			@count = in_params.count
 			@options = in_params.options
 			@row_index = 0
 			@column_index = 0
-			@values = Array.new
-
-			# initialized per column
-			@names = Array.new
-			@types = Array.new
 			@name_to_index = Hash.new
-			@column_options = Array.new
-			@empty_indexes = Hash.new
-			@escapes = Array.new
-			in_params.columns.each_with_index do |column, index|
-				@names.push column.name
-				@types.push column.type
-				@column_options.push column.options
+			@columns = in_params.columns
+			@columns.each_with_index do |column, index|
 				@name_to_index[column.name] = index
 
 				# generate empty indexes per column type
-				@empty_indexes[column.name] = EmptyIndex.indexes(@count, column.empty_percent)
+				column.empty_indexes = EmptyIndex.indexes(@count, column.empty_percent)
 
 				# set escapes per column type
-				@escapes.push Types.escape? column.type
+				column.escape = Types.escape? column.type
 			end
-
 		end
 
 		def shift_row
-			@values.clear
+			# TODO consider tree structure
+			columns.each do | column |
+				column.value = nil
+			end
 			@row_index = row_index + 1
 			@column_index = 0
 		end
@@ -59,12 +50,46 @@ module Datarator
 			index
 		end
 
-		def current_name
-			@names[column_index]
+		#
+		# current prefix ommited
+		#
+		def name
+			@columns[column_index].name
 		end
 
-		def current_type
-			@types[column_index]
+		def type
+			@columns[column_index].type
+		end
+
+		def escape
+			@columns[column_index].escape
+		end
+
+		def empty_value?
+			@columns[column_index].empty_indexes.include? row_index
+		end
+
+		def value
+			@columns[column_index].value
+		end
+
+		def value=(value)
+			@columns[column_index].value = value
+		end
+
+		#
+		# aggregating
+		#
+		def names
+			@columns.map do | column |
+				column.name
+			end
+		end
+
+		def values
+			@columns.map do | column |
+				column.value
+			end
 		end
 
 		def template=(template)

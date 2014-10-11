@@ -15,12 +15,19 @@ module Datarator
 		end
 
 		def item (out_context)
+			values = out_context.values
 			# escape character: ,
-			out_context.values.map! do | value |
+			values.map! do | value |
 				value.include?(",") ? "'#{value}'" : value
 			end
 
-			out_context.values.join(',') + "\n"
+			values.join(',') + "\n"
+			# out = Array.new
+			# out_context.columns do | column |
+			# 	out.push(column.value.include?(",") ? "'#{column.value}'" : column.value)
+			# end
+                        #
+			# out.join(',') + "\n"
 		end
 
 		def post (out_context)

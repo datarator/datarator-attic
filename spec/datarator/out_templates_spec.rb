@@ -57,12 +57,16 @@ module Datarator
 				end
 
 				it 'returns comma separated values' do
-					@out_context.values = [ 'value1', 'value2', 'value3' ]
+					@out_context.columns[0].value = 'value1'
+					@out_context.columns[1].value = 'value2'
+					@out_context.columns[2].value = 'value3'
 					expect(OutTemplates.item(@out_context)).to eq "value1,value2,value3\n"
 				end
 
 				it 'returns comma separated values with escaped commas' do
-					@out_context.values = [ '1,1', 'value2', 'value3' ]
+					@out_context.columns[0].value = '1,1'
+					@out_context.columns[1].value = 'value2'
+					@out_context.columns[2].value = 'value3'
 					expect(OutTemplates.item(@out_context)).to eq "'1,1',value2,value3\n"
 				end
 			end
@@ -73,14 +77,22 @@ module Datarator
 				end
 
 				it 'returns sql inserts with strings escaped' do
-					@out_context.values = [ 'value1', 'value2', 1 ]
-					@out_context.escapes = [ true, true, false ]
+					@out_context.columns[0].value = 'value1'
+					@out_context.columns[1].value = 'value2'
+					@out_context.columns[2].value = 1
+					@out_context.columns[0].escape = true
+					@out_context.columns[1].escape = true
+					@out_context.columns[2].escape = false
 					expect(OutTemplates.item(@out_context)).to eq "INSERT INTO table1 (name1,name2,name3) values ('value1','value2',1);\n"
 				end
 
 				it 'returns sql inserts with escaped character: \'' do
-					@out_context.values = [ 'value1', "foo'bar", 1 ]
-					@out_context.escapes = [ true, true, false ]
+					@out_context.columns[0].value = 'value1'
+					@out_context.columns[1].value = "foo'bar"
+					@out_context.columns[2].value = 1
+					@out_context.columns[0].escape = true
+					@out_context.columns[1].escape = true
+					@out_context.columns[2].escape = false
 					expect(OutTemplates.item(@out_context)).to eq "INSERT INTO table1 (name1,name2,name3) values ('value1','foo\'\'bar',1);\n"
 				end
 			end

@@ -2,11 +2,7 @@ module Datarator
 	class Types
 		class << self
 			def value(out_context)
-				if out_context.empty_indexes[out_context.current_name].include? out_context.row_index
-					out_context.empty_value
-				else
-					TYPES[out_context.current_type].value out_context
-				end
+				out_context.empty_value? ? out_context.empty_value : TYPES[out_context.type].value(out_context)
 			end
 
 			def supports?(name)

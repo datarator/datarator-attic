@@ -11,17 +11,22 @@ module Datarator
 		end
 
 		def item (out_context)
-			# escaping character: '
-			out_context.values.map! do | value |
-				value.is_a?(String) ? value.gsub(/'/, "''") : value
+			values = out_context.columns.map.with_index do | column, idx |
+
+				# escaping character: '
+				if column.value.is_a?(String)
+					column.value = column.value.gsub(/'/, "''")
+				end
+
+				# escaping values that need escaping based on type
+				if column.escape
+					column.value = "'#{column.value}'"
+				end
+
+				column.value
 			end
 
-			# escaping values that need escaping based on type
-			out_context.values.map!.with_index do | value, idx |
-				out_context.escapes[idx] ? "'#{value}'" : value
-			end
-
-			"INSERT INTO #{out_context.document} (#{out_context.names.join(',')}) values (#{out_context.values.join(',')});\n"
+			"INSERT INTO #{out_context.document} (#{out_context.names.join(',')}) values (#{values.join(',')});\n"
 		end
 
 		def post (out_context)

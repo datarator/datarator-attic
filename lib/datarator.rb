@@ -2,12 +2,10 @@
 require 'sinatra'
 
 require_relative "datarator/version"
-require_relative "datarator/empty_index"
 require_relative "datarator/out_templates"
 require_relative "datarator/out_context"
 require_relative "datarator/in_params"
 require_relative "datarator/types"
-require_relative "datarator/empty_index"
 
 require 'ruby-prof'
 
@@ -47,8 +45,6 @@ module Datarator
 			# 	halt 409, e.message + e.backtrace.inspect
 			# end
 
-			out_context.values = Array.new
-
 			# batch = BATCH_SIZE < in_params.count ? BATCH_SIZE : in_params.count
 
 			stream do |out|
@@ -58,13 +54,9 @@ module Datarator
 				# RubyProf.start
 
 				# 0.step(in_params.count, batch) do | row |
-				in_params.count.times do | row |
-					# out_context.next_row
-					# vals = Array.new
-					# batch.times do | index |
-					# vals.clear
-					in_params.columns.each do | column |
-						out_context.values.push Types.value out_context
+				out_context.count.times do | row |
+					out_context.columns.each do | column |
+						out_context.value = Types.value out_context
 						out_context.shift_column
 					end
 
