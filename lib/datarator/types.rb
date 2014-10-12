@@ -19,11 +19,19 @@ module Datarator
 		end
 	end
 
+	require_relative 'type_const'
 	require_relative 'type_name'
 	# require_relative 'type_copy'
 
 	TYPES = {
+		#
 		# specific
+		#
+		TypeConst.name => TypeConst.new,
+
+		#
+		# nested columns
+		#
 		# TypeCopy.name => TypeCopy.new,
 
 		#

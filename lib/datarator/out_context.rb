@@ -77,6 +77,10 @@ module Datarator
 			@columns[column_index].value = value
 		end
 
+		def option
+			@columns[column_index].options
+		end
+
 		#
 		# aggregating
 		#

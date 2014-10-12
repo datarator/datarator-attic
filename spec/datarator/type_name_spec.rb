@@ -21,8 +21,6 @@ module Datarator
 				expect(TypeNameFirstName.new.escape?).to eq true
 			end
 		end
-
-
 	end
 
 	describe TypeNameFirstName do
