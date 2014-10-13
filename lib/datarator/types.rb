@@ -20,6 +20,7 @@ module Datarator
 	end
 
 	require_relative 'type_const'
+	require_relative 'type_row_index'
 	require_relative 'type_name'
 	# require_relative 'type_copy'
 
@@ -28,6 +29,7 @@ module Datarator
 		# specific
 		#
 		TypeConst.name => TypeConst.new,
+		TypeRowIndex.name => TypeRowIndex.new,
 
 		#
 		# nested columns
