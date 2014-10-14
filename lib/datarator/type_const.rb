@@ -1,5 +1,4 @@
 require_relative 'type.rb'
-require 'faker'
 
 module Datarator
 	class TypeConst < Type

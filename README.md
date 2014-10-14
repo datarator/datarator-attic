@@ -41,3 +41,15 @@ Run tests continuously:
 
 	bundle exec guard
 
+Run with thin app server via
+
+	thin start
+
+Run with rack server via
+
+	bundle exec rackup
+
+Run with rack server in background via
+
+	bundle exec rackup -D
+
