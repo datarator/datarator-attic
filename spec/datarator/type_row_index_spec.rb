@@ -28,7 +28,7 @@ module Datarator
 		end
 
 		describe '.escape?' do
-			it 'returns true' do
+			it 'returns false' do
 				expect(TypeRowIndex.new.escape?).to eq false
 			end
 		end
