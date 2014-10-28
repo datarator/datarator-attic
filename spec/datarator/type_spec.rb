@@ -12,9 +12,23 @@ module Datarator
 
 		describe '.escape?' do
 			it 'raises NotImplementedError' do
-				expect{ Type.new.escape? }.to raise_error(NotImplementedError)
+				expect{ Type.new.escape? nil }.to raise_error(NotImplementedError)
 			end
 		end
+
+		# describe '.validate?' do
+		# 	it 'raises NotImplementedError' do
+		# 		expect{ Type.new.validate nil, nil }.to raise_error(NotImplementedError)
+		# 	end
+		# end
+                #
+
+		describe '.nested?' do
+			it 'raises NotImplementedError' do
+				expect{ Type.new.nested? nil }.to raise_error(NotImplementedError)
+			end
+		end
+
 
 	end
 end

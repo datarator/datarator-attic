@@ -2,39 +2,31 @@ require_relative 'out_context'
 
 module Datarator
 
-	# deprecates liquid based solution
-	# due to better performance
 	class OutTemplateCsv
 
 		def pre (out_context)
 			unless out_context.options.nil? or out_context.options['header'].nil? or !out_context.options['header'].eql? 'true'
-				out_context.names.join(',') + "\n"
+				(out_context.columns.map_shallow([]) { | column, args | column.name }).join(',') + "\n"
 			else
 				""
 			end
 		end
 
 		def item (out_context)
-			values = out_context.values
-			# escape character: ,
-			values.map! do | value |
-				value.include?(",") ? "'#{value}'" : value
-			end
-
-			values.join(',') + "\n"
-			# out = Array.new
-			# out_context.columns do | column |
-			# 	out.push(column.value.include?(",") ? "'#{column.value}'" : column.value)
-			# end
-                        #
-			# out.join(',') + "\n"
+			(
+				out_context.columns.map_shallow([ out_context ]) do | column, args | 
+					value = column.value
+					# escape character: ,
+					value.include?(",") ? "'#{value}'" : value
+				end
+			).join(',') + "\n"
 		end
 
 		def post (out_context)
 			''
 		end
 
-		def empty
+		def empty (out_context)
 			''
 		end
 	end

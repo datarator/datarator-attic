@@ -6,18 +6,17 @@ module Datarator
 
 		describe '.value' do
 			before(:each) do
-				in_params = InParams.new
-				in_params.document = 'table1'
-				options = Hash.new
-				options[TypeConst.name] = 'foo_const'
-				in_params.columns = [ Column.new("name1", TypeConst.name, "0", options )]
-				in_params.count = 1
-				in_params.template = 'csv'
-				@out_context = OutContext.new in_params
+				out_context = OutContext.new
+				out_context.count=1
+				columns = Columns.new
+				out_context.columns = columns
+
+				@column = Column.new("name1", TypeConst.name, "0", { "value" => "foo_const"}, nil, out_context)
+				columns.columns = [ @column ]
 			end
 
 			it 'returns constant value' do
-				expect(TypeConst.new.value @out_context ).to eq 'foo_const'
+				expect(TypeConst.new.value @column).to eq 'foo_const'
 			end
 		end
 
@@ -29,7 +28,13 @@ module Datarator
 
 		describe '.escape?' do
 			it 'returns true' do
-				expect(TypeConst.new.escape?).to eq true
+				expect(TypeConst.new.escape? nil).to be true
+			end
+		end
+
+		describe '.nested?' do
+			it 'returns true' do
+				expect(TypeConst.new.nested? nil).to be false
 			end
 		end
 	end

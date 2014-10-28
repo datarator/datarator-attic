@@ -9,13 +9,16 @@ module Datarator
 			end
 		end
 
-		def value(out_context)
-			out_context.row_index
+		def value (column)
+			column.out_context.row_index
 		end
 
-		def escape?
+		def escape? (column)
 			false
 		end
 
+		def nested? (column)
+			false
+		end
 	end
 end

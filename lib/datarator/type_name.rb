@@ -10,8 +10,12 @@ module Datarator
 			end
 		end
 
-		def escape?
+		def escape? (column)
 			true
+		end
+
+		def nested? (column)
+			false
 		end
 	end
 
@@ -23,7 +27,7 @@ module Datarator
 			end
 		end
 
-		def value (out_context)
+		def value (column)
 			Faker::Name.name
 		end
 	end
@@ -36,7 +40,7 @@ module Datarator
 			end
 		end
 
-		def value (out_context)
+		def value (column)
 			Faker::Name.first_name
 		end
 	end

@@ -2,16 +2,19 @@ module Datarator
 
 	class Type
 
-		def value (out_context)
+		def value (column)
 			raise NotImplementedError
 		end
 
-		def escape?
+		def escape? (column)
 			raise NotImplementedError
 		end
 
-		def validate 
-			# TODO handle options validation only once per request (rather than with each and every value)
+		# def validate(column)
+		# 	raise NotImplementedError
+		# end
+
+		def nested? (column)
 			raise NotImplementedError
 		end
 	end

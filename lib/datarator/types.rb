@@ -1,40 +1,53 @@
 module Datarator
 	class Types
 		class << self
-			def value(out_context)
-				out_context.empty_value? ? out_context.empty_value : TYPES[out_context.type].value(out_context)
+			def value(column)
+				column.empty_index? ? column.out_context.empty_value : TYPES[column.type].value(column)
 			end
 
 			def supports?(name)
 				TYPES.has_key?(name)
 			end
 
-			def validate(name)
-				raise "type not supported: #{name}" unless supports? name
+			def validate(type)
+				raise ArgumentError, 'type can\'t be empty' if type.nil? or type.empty?
+				raise ArgumentError, "type not supported: #{type}" unless supports? type
 			end
 
-			def escape? (name)
-				TYPES[name].escape?
+			def nested? (column)
+				TYPES[column.type].nested? column
+			end
+
+			def escape? (column)
+				TYPES[column.type].escape? column
 			end
 		end
 	end
 
 	require_relative 'type_const'
 	require_relative 'type_row_index'
+	require_relative 'type_copy'
+
+	require_relative 'type_list'
+	require_relative 'type_concat'
+
 	require_relative 'type_name'
-	# require_relative 'type_copy'
 
 	TYPES = {
+
 		#
 		# specific
 		#
 		TypeConst.name => TypeConst.new,
 		TypeRowIndex.name => TypeRowIndex.new,
+		TypeCopy.name => TypeCopy.new,
 
 		#
 		# nested columns
 		#
-		# TypeCopy.name => TypeCopy.new,
+		TypeListSeq.name => TypeListSeq.new,
+		TypeListRand.name => TypeListRand.new,
+		TypeConcat.name => TypeConcat.new,
 
 		#
 		# faker

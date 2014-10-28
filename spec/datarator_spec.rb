@@ -51,8 +51,8 @@ module Datarator
 					post_json('/dump', json)
 				end
 
-				it 'returns HTTP error 409' do
-					expect(last_response.status).to eq 409
+				it 'returns HTTP error 400' do
+					expect(last_response.status).to eq 400
 					# TODO check error itself
 				end
 			end

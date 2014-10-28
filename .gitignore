@@ -13,3 +13,5 @@
 *.a
 mkmf.log
 *.swp
+# let's ignore ui for now
+/ui/

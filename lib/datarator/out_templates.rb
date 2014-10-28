@@ -14,7 +14,7 @@ module Datarator
 
 		class << self
 			def validate(name)
-				raise "template not supported: #{name}" unless TEMPLATES.has_key?(name)
+				raise ArgumentError, "template not supported: #{name}" unless TEMPLATES.has_key?(name)
 			end
 
 			def pre (out_context)
@@ -35,9 +35,9 @@ module Datarator
 				TEMPLATES[out_context.template].post(out_context)
 			end
 
-			def empty (template)
+			def empty (out_context)
 				# raise "out_context must be of type OutContext" unless out_context.kind_of? OutContext
-				TEMPLATES[template].empty
+				TEMPLATES[out_context.template].empty out_context
 			end
 		end
 	end

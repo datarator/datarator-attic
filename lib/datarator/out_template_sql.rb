@@ -2,8 +2,6 @@ require_relative 'out_context'
 
 module Datarator
 
-	# deprecates liquid based solution
-	# due to better performance
 	class OutTemplateSql
 
 		def pre (out_context)
@@ -11,29 +9,31 @@ module Datarator
 		end
 
 		def item (out_context)
-			values = out_context.columns.map.with_index do | column, idx |
+			# TODO cache! (somewhere in context probably)
+			names = (out_context.columns.map_shallow([]) { | column, args | column.name })
 
-				# escaping character: '
-				if column.value.is_a?(String)
-					column.value = column.value.gsub(/'/, "''")
+			values = (
+				out_context.columns.map_shallow([ out_context ]) do | column, args | 
+					value = column.value
+
+					# escaping character: '
+					value = value.gsub(/'/, "''") if value.is_a?(String)
+
+					# escaping values that need escaping based on type
+					value = "'#{value}'" if column.escape
+
+					value
 				end
+			)
 
-				# escaping values that need escaping based on type
-				if column.escape
-					column.value = "'#{column.value}'"
-				end
-
-				column.value
-			end
-
-			"INSERT INTO #{out_context.document} (#{out_context.names.join(',')}) values (#{values.join(',')});\n"
+			"INSERT INTO #{out_context.document} (#{names.join(',')}) values (#{values.join(',')});\n"
 		end
 
 		def post (out_context)
 			''
 		end
 
-		def empty
+		def empty (out_context)
 			'NULL'
 		end
 	end

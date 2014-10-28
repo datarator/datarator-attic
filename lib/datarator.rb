@@ -4,7 +4,6 @@ require 'sinatra'
 require_relative "datarator/version"
 require_relative "datarator/out_templates"
 require_relative "datarator/out_context"
-require_relative "datarator/in_params"
 require_relative "datarator/types"
 
 require 'ruby-prof'
@@ -26,18 +25,10 @@ module Datarator
 		post '/dump' do
 			request.body.rewind
 			begin
-				in_params = InParams.from_json request.body.read
+				out_context = OutContext.from_json request.body.read
 			rescue ArgumentError => e
-				halt 400, e.message
+				halt 400, e.message + e.backtrace.inspect
 			end
-
-			begin
-				in_params.validate
-			rescue Exception => e
-				halt 409, e.message + e.backtrace.inspect
-			end
-
-			out_context = OutContext.new in_params
 
 			# begin
 			# 	out_context.validate
@@ -54,12 +45,7 @@ module Datarator
 				# RubyProf.start
 
 				# 0.step(in_params.count, batch) do | row |
-				out_context.count.times do | row |
-					out_context.columns.each do | column |
-						out_context.value = Types.value out_context
-						out_context.shift_column
-					end
-
+				out_context.count.times do #| row |
 					out << OutTemplates.item(out_context)
 					out_context.shift_row
 				end

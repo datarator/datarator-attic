@@ -9,17 +9,20 @@ module Datarator
 			end
 		end
 
-		def value(out_context)
-			out_context.option[TypeConst.name]
+		def value(column)
+			column.options['value']
 		end
 
-		def validate(out_context)
-			raise ArgumentError.new "value not specified for const type column: #{out_context.column}" if out_context.option[TypeConst.name].nil? or out_context.option[TypeConst.name].empty?
-		end
+		# def validate(out_context, column)
+		# 	raise ArgumentError.new "value not specified for const type column: #{out_context.column}" if out_context.option['value'].nil? or out_context.option['value'].empty?
+		# end
 
-		def escape?
+		def escape? (column)
 			true
 		end
 
+		def nested? (column)
+			false
+		end
 	end
 end

@@ -1,105 +1,66 @@
-require_relative 'in_params'
-require_relative 'empty_index'
-
+require_relative 'columns'
+require_relative 'out_templates'
 
 module Datarator
-
 	class OutContext
-		attr_reader :template, :document, :count, :options, :row_index, :column_index, :empty_value, :columns
-		attr_writer :options # just to make testing simple
+		attr_accessor :document, :options, :row_index, :empty_value, :locale #, :column_index
 
-		def initialize(in_params)
-			raise ArgumentError, 'in_params type invalid' unless in_params.is_a?(InParams)
+		attr_reader :template, :count, :columns
 
-			self.template = in_params.template
-			@document = in_params.document
-			@count = in_params.count
-			@options = in_params.options
-			@row_index = 0
-			@column_index = 0
-			@name_to_index = Hash.new
-			@columns = in_params.columns
-			@columns.each_with_index do |column, index|
-				@name_to_index[column.name] = index
+		class << self
+			def from_json (json)
+				raise ArgumentError, 'provided string is not a valid json' unless valid_json? json
 
-				# generate empty indexes per column type
-				column.empty_indexes = EmptyIndex.indexes(@count, column.empty_percent)
+				data = JSON.parse(json)
+				out_context = OutContext.new
+				out_context.template = data['template']
+				out_context.count = data['count'].to_i
+				out_context.locale = data['locale']
+				out_context.document = data['document']
 
-				# set escapes per column type
-				column.escape = Types.escape? column.type
+				out_context.options = Hash.new
+				data['options'].each do |key, value|
+					out_context.options[key] = value
+				end
+
+				out_context.columns = Columns.from_json(out_context, data)
+				out_context
 			end
+
+			def valid_json?(json)
+				begin
+					JSON.parse(json)
+					return true
+				rescue Exception
+					return false
+				end
+			end
+		end
+
+		def initialize()
+			@row_index = 0
 		end
 
 		def shift_row
-			# TODO consider tree structure
-			columns.each do | column |
-				column.value = nil
-			end
-			@row_index = row_index + 1
-			@column_index = 0
+			@columns.each_deep(nil) { | column, args | column.last_value = nil }
+			@row_index += 1
 		end
 
-		def shift_column
-			@column_index = column_index + 1
+		def count=(count)
+			raise ArgumentError, "count has to be positive number" unless count.is_a? Integer and count > 0
+			@count = count.to_i
 		end
 
-		def column_index_for_name(name)
-			raise ArgumentError.new 'name can\'t be empty' if name.nil? or name.empty?
-			index = @name_to_index[name]
-			raise ArgumentError.new 'name can\'t be empty' if index.nil?
-			index
-		end
-
-		#
-		# current prefix ommited
-		#
-		def name
-			@columns[column_index].name
-		end
-
-		def type
-			@columns[column_index].type
-		end
-
-		def escape
-			@columns[column_index].escape
-		end
-
-		def empty_value?
-			@columns[column_index].empty_indexes.include? row_index
-		end
-
-		def value
-			@columns[column_index].value
-		end
-
-		def value=(value)
-			@columns[column_index].value = value
-		end
-
-		def option
-			@columns[column_index].options
-		end
-
-		#
-		# aggregating
-		#
-		def names
-			@columns.map do | column |
-				column.name
-			end
-		end
-
-		def values
-			@columns.map do | column |
-				column.value
-			end
+		def columns=(columns)
+			raise ArgumentError, "columns has to be of type Columns" unless columns.is_a? Columns
+			@columns = columns
 		end
 
 		def template=(template)
+			OutTemplates.validate template
  			@template = template
 			# empty val is affected by template
-			@empty_value = OutTemplates.empty @template
+			@empty_value = OutTemplates.empty self
 		end
 
 		# TODO ?
@@ -110,17 +71,17 @@ module Datarator
 		# 	end
 		# end
 
-		def to_liquid
-			{
-				'template' => @template,
-				'document' => @document,
-				'names' => @names,
-				'values' => @values,
-				'escapes' => @escapes,
-				'count' => @count,
-				'index' => @row_index,
-				'options' => @options
-			}
-		end
+		# def to_liquid
+		# 	{
+		# 		'template' => @template,
+		# 		'document' => @document,
+		# 		'names' => @names,
+		# 		'values' => @values,
+		# 		'escapes' => @escapes,
+		# 		'count' => @count,
+		# 		'index' => @row_index,
+		# 		'options' => @options
+		# 	}
+		# end
 	end
 end

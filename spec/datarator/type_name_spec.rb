@@ -18,9 +18,16 @@ module Datarator
 
 		describe '.escape?' do
 			it 'returns true' do
-				expect(TypeNameFirstName.new.escape?).to eq true
+				expect(TypeNameName.new.escape? nil).to be true
 			end
 		end
+
+		describe '.nested?' do
+			it 'returns false' do
+				expect(TypeNameName.new.nested? nil).to be false
+			end
+		end
+
 	end
 
 	describe TypeNameFirstName do
@@ -39,9 +46,14 @@ module Datarator
 
 		describe '.escape?' do
 			it 'returns true' do
-				expect(TypeNameFirstName.new.escape?).to eq true
+				expect(TypeNameFirstName.new.escape? nil).to be true
 			end
 		end
 
+		describe '.nested?' do
+			it 'returns false' do
+				expect(TypeNameFirstName.new.nested? nil).to be false
+			end
+		end
 	end
 end

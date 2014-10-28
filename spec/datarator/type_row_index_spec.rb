@@ -6,18 +6,21 @@ module Datarator
 
 		describe '.value' do
 			before(:each) do
-				in_params = InParams.new
-				in_params.document = 'table1'
-				in_params.columns = [ Column.new("name1", TypeRowIndex.name, "0", nil )]
-				in_params.count = 1
-				in_params.template = 'csv'
-				@out_context = OutContext.new in_params
+				@out_context = OutContext.new
+				@out_context.count=4
+
+				columns = Columns.new
+				@out_context.columns = columns
+
+				@column1 = Column.new("name1", TypeRowIndex.name, "0", nil, nil, @out_context)
+				columns.columns = [ @column1 ]
 			end
 
 			it 'returns row index starting with 0' do
-				expect(TypeRowIndex.new.value @out_context ).to eq 0
-				@out_context.shift_row
-				expect(TypeRowIndex.new.value @out_context ).to eq 1
+				3.times do | idx |
+					expect(TypeRowIndex.new.value @column1 ).to eq idx
+					@out_context.shift_row
+				end
 			end
 		end
 
@@ -29,8 +32,15 @@ module Datarator
 
 		describe '.escape?' do
 			it 'returns false' do
-				expect(TypeRowIndex.new.escape?).to eq false
+				expect(TypeRowIndex.new.escape? @column1).to be false
 			end
 		end
+
+		describe '.nested?' do
+			it 'returns false' do
+				expect(TypeRowIndex.new.nested? @column1).to be false
+			end
+		end
+
 	end
 end

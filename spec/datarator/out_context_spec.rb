@@ -4,20 +4,109 @@ require 'datarator/out_context'
 module Datarator
 	describe OutContext do
 		before(:each) do
-			in_params = InParams.new
-			in_params.document = 'table1'
-			in_params.columns = [ Column.new("name1", TypeNameFirstName.name, "0", nil), Column.new("name2", TypeNameName.name, "0", nil)]
-			in_params.count = 1
-			in_params.template = 'csv'
-			@out_context = OutContext.new in_params
-			@out_context.columns[0].value = 'foo1'
-			@out_context.columns[1].value = 'foo2'
+			@out_context = OutContext.new
+			@out_context.document = 'table1'
+			@out_context.count=1
+			@out_context.template = 'csv'
+
+			columns = Columns.new
+			@out_context.columns = columns
+
+			@column1 = Column.new("name1", TypeNameName.name, "0", nil, nil, @out_context)
+			# columns.add_column @column1
+			@column2 = Column.new("name2", TypeNameName.name, "50", nil, nil, @out_context)
+			# columns.add_column @column2
+			columns.columns = [ @column1, @column2 ]
 		end
 
-		describe '.shift_column' do
-			it 'increments current column index' do
-				@out_context.shift_column
-				expect(@out_context.column_index).to eq 1
+		describe '.from_json' do
+			context 'having valid json' do
+				before(:each) do
+					json = '{"template":"csv","document":"table1","count":"1","locale":"en","columns":[{"name":"name1","type":"name.name"},{"name":"name2","type":"name.name","emptyPercent":"50"}],"options":{"csv.header":"true","prettyprint":"true"}}'
+					@out_context = OutContext.from_json json
+				end
+
+				it 'sets template property' do
+					expect(@out_context.template).to eq "csv"
+				end
+
+				it 'sets count property' do
+					expect(@out_context.count).to eq 1
+				end
+
+				# it 'sets locale property' do
+				# 	expect(@out_context.locale).to eq "en"
+				# end
+
+				it 'sets document property' do
+					expect(@out_context.document).to eq "table1"
+				end
+
+
+				it 'sets columns property' do
+					expect(@out_context.columns.columns[0]).to eq @column1
+					expect(@out_context.columns.columns[1]).to eq @column2
+				end
+
+				it 'sets options property' do
+					expect(@out_context.options).to eq({ 'csv.header' => 'true', 'prettyprint' => 'true' })
+				end
+			end
+
+			it 'raises ArgumentError for invalid json format' do
+				expect{ OutContext.from_json '{template":"foo"' }.to raise_error(ArgumentError)
+			end
+		end
+
+		describe '.count=' do
+			it 'sets count property' do
+				@out_context.count = 100
+				expect(@out_context.count).to eq 100
+			end
+
+			it 'raises error for non-positive count' do
+				expect{ OutContext.new.count=-1 }.to raise_error(ArgumentError)
+				expect{ OutContext.new.count=0 }.to raise_error(ArgumentError)
+			end
+
+			it 'raises error for non-integer' do
+				expect{ OutContext.new.count="1" }.to raise_error(ArgumentError)
+				expect{ OutContext.new.count=1.1 }.to raise_error(ArgumentError)
+			end
+
+		end
+
+		describe '.columns=' do
+			it 'sets columns' do
+				columns = Columns.new
+				@out_context.columns = columns
+				expect(@out_context.columns).to eq columns
+			end
+
+			it 'raises error for not Columns type' do
+				expect{ OutContext.new.columns="foo" }.to raise_error(ArgumentError)
+			end
+		end
+
+		describe '.template=' do
+			it 'sets template property' do
+				@out_context.template = 'sql'
+				expect(@out_context.template).to eq 'sql'
+			end
+
+			it 'sets empty_value for template' do
+				@out_context.template = 'sql'
+				expect(@out_context.empty_value).to eq 'NULL'
+			end
+
+
+			it 'raises error for unknown column template' do
+				expect{ OutContext.new.template="non_exising" }.to raise_error(ArgumentError)
+			end
+
+			it 'raises error for empty column template' do
+				expect{ OutContext.new.template="" }.to raise_error(ArgumentError)
+				expect{ OutContext.new.template=nil }.to raise_error(ArgumentError)
 			end
 		end
 
@@ -27,80 +116,15 @@ module Datarator
 				expect(@out_context.row_index).to eq 1
 			end
 
-			it 'resets current column index' do
-				@out_context.shift_column
+			it 'clears last_value for all columns' do
+				@out_context.columns.columns[0].value
+				@out_context.columns.columns[1].value
+				expect(@out_context.columns.columns[0].last_value).not_to eq nil
+				expect(@out_context.columns.columns[1].last_value).not_to eq nil
 				@out_context.shift_row
-				expect(@out_context.column_index).to eq 0
-			end
-
-			it 'clears values' do
-				@out_context.shift_row
-				expect(@out_context.columns[0].value).to eq nil
-				expect(@out_context.columns[1].value).to eq nil
+				expect(@out_context.columns.columns[0].last_value).to eq nil
+				expect(@out_context.columns.columns[1].last_value).to eq nil
 			end
 		end
-
-		describe '.name' do
-			it 'returns column name on current column index' do
-				expect(@out_context.name).to eq 'name1'
-				@out_context.shift_column
-				expect(@out_context.name).to eq 'name2'
-			end
-		end
-
-		describe '.type' do
-			it 'returns column type on current column index' do
-				expect(@out_context.type).to eq TypeNameFirstName.name
-				@out_context.shift_column
-				expect(@out_context.type).to eq TypeNameName.name
-			end
-		end
-
-		describe '.value' do
-			it 'returns column value on current column index' do
-				expect(@out_context.value).to eq 'foo1'
-				@out_context.shift_column
-				expect(@out_context.value).to eq 'foo2'
-			end
-		end
-
-		describe '.value=' do
-			it 'assigns column value on current column index' do
-				@out_context.value='foo3'
-				@out_context.shift_column
-				@out_context.value='foo4'
-				expect(@out_context.columns[0].value).to eq 'foo3'
-				expect(@out_context.columns[1].value).to eq 'foo4'
-			end
-		end
-
-		describe '.column_index_for_name' do
-			it 'returns column index for available column name' do
-				expect(@out_context.column_index_for_name 'name1').to eq 0
-				expect(@out_context.column_index_for_name 'name2').to eq 1
-			end
-
-			it 'raises ArgumentError for empty column name' do
-				expect{ @out_context.column_index_for_name nil }.to raise_error(ArgumentError)
-				expect{ @out_context.column_index_for_name '' }.to raise_error(ArgumentError)
-			end
-
-			it 'raises ArgumentError for not found column name' do
-				expect{ @out_context.column_index_for_name 'not_found' }.to raise_error(ArgumentError)
-			end
-		end
-
-		describe '.values' do
-			it 'return agregated column values' do
-				expect(@out_context.values).to eq [ 'foo1', 'foo2' ]
-			end
-		end
-
-		describe '.names' do
-			it 'return agregated column names' do
-				expect(@out_context.names).to eq [ 'name1', 'name2' ]
-			end
-		end
-
 	end
 end
