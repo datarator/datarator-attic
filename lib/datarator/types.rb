@@ -29,7 +29,7 @@ module Datarator
 	require_relative 'type_copy'
 
 	require_relative 'type_list'
-	require_relative 'type_concat'
+	require_relative 'type_join'
 
 	require_relative 'type_name'
 
@@ -47,7 +47,7 @@ module Datarator
 		#
 		TypeListSeq.name => TypeListSeq.new,
 		TypeListRand.name => TypeListRand.new,
-		TypeConcat.name => TypeConcat.new,
+		TypeJoin.name => TypeJoin.new,
 
 		#
 		# faker
