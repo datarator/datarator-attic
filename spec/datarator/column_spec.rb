@@ -83,7 +83,7 @@ module Datarator
 			context 'having column type requiring nesting' do
 				before(:each) do
 					nested = [ Column.new('bar', TypeNameName.name, "0", nil, nil, @out_context) ]
-					@column = Column.new('foo', TypeConcat.name, "0", nil, nested, @out_context)
+					@column = Column.new('foo', TypeJoin.name, "0", nil, nested, @out_context)
 				end
 
 				# it 'raises ArgumentError for missing nesting' do
