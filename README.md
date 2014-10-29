@@ -44,7 +44,7 @@ Enabled via: `"template":"csv"`.
 
 Optional [options](#options) available:
 
-	* `"csv.header":"true"` / `"csv.header":"false"` - whether names of the colums should included (as the 1.st row) or not. By default is `false`.
+* `"csv.header":"true"` / `"csv.header":"false"` - whether names of the colums should included (as the 1.st row) or not. By default is `false`.
 
 For **example**, input JSON:
 
@@ -118,7 +118,7 @@ Generates constant value provided in options.
 
 Mandatory [options](#options) available:
 
-	* `"value":"<value>" - the constant value to generate.
+* `"value":"<value>" - the constant value to generate.
 
 For **example**, input JSON:
 
@@ -150,7 +150,7 @@ Generates the same value as the column referred.
 
 Mandatory [options](#options) available:
 
-	* `"from":"<column_name>" - the column name whose value is to be copied.
+* `"from":"<column_name>" - the column name whose value is to be copied.
 
 For **example**, input JSON:
 
@@ -222,7 +222,7 @@ Joins nested column values with the separator (optionaly) provided.
 
 Optional [options](#options) available:
 
-	* `"separator":"<separator>" - the separator string to be used for joining values.
+* `"separator":"<separator>"` - the separator string to be used for joining values.
 
 For **example** (without separator), input JSON:
 
