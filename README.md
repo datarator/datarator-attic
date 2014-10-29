@@ -118,7 +118,7 @@ Generates constant value provided in options.
 
 Mandatory [options](#options) available:
 
-* `"value":"<value>" - the constant value to generate.
+* `"value":"<value>"` - the constant value to generate.
 
 For **example**, input JSON:
 
@@ -150,7 +150,7 @@ Generates the same value as the column referred.
 
 Mandatory [options](#options) available:
 
-* `"from":"<column_name>" - the column name whose value is to be copied.
+* `"from":"<column_name>"` - the column name whose value is to be copied.
 
 For **example**, input JSON:
 
