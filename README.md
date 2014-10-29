@@ -29,14 +29,14 @@ Stateless DATA geneRATOR, with:
 
 Legend:
 
-* `<template_name>` - name of the output template (see [Output templates](#templates))
+* `<template_name>` - name of the output template (see [Output templates](#output-templates))
 * `<document_name>` - name of the document
 * `<count>` - generated rows count
 * `<locale>` - locale (ignored currently)
 * `<column>` - column to generate (see [Column](#column))
 * `<options>` - options for generation (see [Options](#options))
 
-###<a href="#templates">Output templates</a>
+###Output templates
 
 ####csv
 
@@ -71,9 +71,9 @@ results in:
     	INSERT INTO (name1,name2) values ('value1','value2');
     	INSERT INTO (name1,name2) values ('value1','value2');
 
-###<a href="#options">Options</a>
+###Options
 
-Holds [template](#templates) (if present in root node) or [column](#column) specific options (if present in column node).
+Holds [template](#output-templates) (if present in root node) or [column](#column) specific options (if present in column node).
 
 Options syntax:
 
@@ -84,7 +84,7 @@ Legend:
 * `<name>` - name of the option
 * `<value>` - value of the option
 
-###<a href="#column">Column</a>
+###Column
 
 Column syntax:
 
@@ -101,18 +101,18 @@ Legend:
 Following collumn types are available:
 
 * without column nesting supported:
-	* [`const`](#type_const)
-	* [`row_index`](#type_row_index)
-	* [`copy`](#type_copy)
+	* [`const`](#const)
+	* [`row_index`](#row_index)
+	* [`copy`](#copy)
 	* name generating columns:
-		* [`name.name`](#type_name.name)
-		* [`first_name`](#type_name.first_name)
+		* [`name.name`](#name.name)
+		* [`first_name`](#name.first_name)
 * with column nesting supported:
-	* [`list.seq`](#type_list.seq)
-	* [`list.rand`](#type_list.rand)
-	* [`join`](#type_join)
+	* [`list.seq`](#list.seq)
+	* [`list.rand`](#list.rand)
+	* [`join`](#join)
 
-####<a href="#type_const">const
+####const
 
 Generates constant value provided in options.
 
@@ -128,7 +128,7 @@ results in value:
 
     	value1
 
-####<a href="#type_row_index">row_index
+####row_index
 
 Generates row index of the currently generated row.
 
@@ -144,7 +144,7 @@ results in value:
     	3
     	...
 
-####<a href="#type_copy">copy
+####copy
 
 Generates the same value as the column referred.
 
@@ -160,7 +160,7 @@ results (for columns: `name1` as well as `name2`) in value:
 
     	value1
 
-####<a href="#type_name.name">name.name
+####name.name
 
 Generates the random name value.
 
@@ -172,7 +172,7 @@ could result in value:
 
     	Christophe Bartell
 
-####<a href="#type_name.first_name">name.first_name
+####name.first_name
 
 Generates the random first name value.
 
@@ -184,7 +184,7 @@ could result in value:
 
     	Christophe
 
-####<a href="#type_list.seq">list.seq
+####list.seq
 
 Picks next value in a sequence from the provided nested column values.
 
@@ -200,7 +200,7 @@ For **example**, input JSON:
     	value2
     	...
 
-####<a href="#type_list.rand">list.rand
+####list.rand
 
 Picks random value from the provided nested column values.
 
@@ -216,7 +216,7 @@ For **example**, input JSON:
     	value2
     	...
 
-####<a href="#type_join">join
+####join
 
 Joins nested column values with the separator (optionaly) provided.
 
@@ -240,9 +240,6 @@ For **example** (with separator), input JSON:
 
     	value1, value2
 
-###<a href="#columns">Columns</a>
-
-Holds [template](#templates) specifc (if present in root node) or column specific (if present in column node) options .
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/datarator/fork )
