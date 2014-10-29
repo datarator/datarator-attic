@@ -10,10 +10,10 @@ module Datarator
 
 		def item (out_context)
 			# TODO cache! (somewhere in context probably)
-			names = (out_context.columns.map_shallow([]) { | column, args | column.name })
+			names = (out_context.columns.map_shallow() { | column | column.name })
 
 			values = (
-				out_context.columns.map_shallow([ out_context ]) do | column, args | 
+				out_context.columns.map_shallow() do | column |
 					value = column.value
 
 					# escaping character: '

@@ -42,21 +42,21 @@ module Datarator
 			@column_by_name.store(column.name, column)
 		end
 
-		def each_deep(args, &procedure)
+		def each_deep(&procedure)
 			@columns.each do | column |
-				column.each_deep(args, &procedure)
+				column.each_deep(&procedure)
 			end
 		end
 
-		def each_shallow(args, &procedure)
+		def each_shallow(&procedure)
 			@columns.each do | column |
-				column.each_shallow(args, &procedure)
+				column.each_shallow(&procedure)
 			end
 		end
 
-		def map_shallow(args, &procedure)
+		def map_shallow(&procedure)
 			@columns.map do | column |
-				column.map_shallow(args, &procedure)
+				column.map_shallow(&procedure)
 			end
 		end
 
@@ -75,14 +75,12 @@ module Datarator
 
 			@columns = columns
 			@column_by_name.clear
-			# each_deep([ self ]) { | column, args | args[0].column_by_name = column }
-			each_deep([ ]) { | column, args | column.out_context.columns.column_by_name = column }
+			each_deep() { | column | column.out_context.columns.column_by_name = column }
 
 			# roots relevant only
 
 			# generate empty indexes per column type
-			# each_shallow([ @out_context.count ]) { | column, args | column.empty_indexes = EmptyIndex.indexes(args[0], column.empty_percent) }
-			each_shallow([ ]) { | column, args | column.empty_indexes = EmptyIndex.indexes(column.out_context.count, column.empty_percent) }
+			each_shallow() { | column | column.empty_indexes = EmptyIndex.indexes(column.out_context.count, column.empty_percent) }
 		end
 	end
 end

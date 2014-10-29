@@ -86,21 +86,21 @@ module Datarator
 			@empty_indexes.include? @out_context.row_index
 		end
 
-		def each_deep(args, &procedure)
-			procedure.call(self, args)
+		def each_deep(&procedure)
+			procedure.call(self)
 			unless @nested.nil?
 				@nested.each do | column |
-					column.each_deep(args, &procedure)
+					column.each_deep(&procedure)
 				end
 			end
 		end
 
-		def each_shallow(args, &procedure)
-			procedure.call(self, args)
+		def each_shallow(&procedure)
+			procedure.call(self)
 		end
 
-		def map_shallow(args, &procedure)
-			procedure.call(self, args)
+		def map_shallow(&procedure)
+			procedure.call(self)
 		end
 	end
 end

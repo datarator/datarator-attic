@@ -23,13 +23,14 @@ module Datarator
 		describe '/dump' do
 			context 'having valid json request' do
 				before(:each) do
-					json = '{"template":"csv","document":"foo_document","count":"10","locale":"en","columns":[{"name":"foo_name1","type":"name.first_name"},{"name":"foo_name2","type":"name.first_name","emptyPercent":"50"}],"options":{"csv.header":"true","prettyprint":"true"}}'
+					json = '{"template":"csv","document":"foo_document","count":"1","locale":"en","columns":[{"name":"foo_name1","type":"const", "options":{"value":"foo1"}},{"name":"foo_name2","type":"const","emptyPercent":"50", "options":{"value":"foo2"}}],"options":{"csv.header":"true"}}'
 					post_json('/dump', json)
 				end
 
-				it 'TODO shows web page' do
+				it 'returns generated content' do
 					expect(last_response).to be_ok
-					expect(last_response.body).to match(/^([- a-zA-Z]+,[- a-zA-Z]*\n)+$/m)
+					# expect(last_response.body).to match(/^([- a-zA-Z]+,[- a-zA-Z]*\n)+$/m)
+					expect(last_response.body).to match(/^(foo1,(foo2|)\n)+$/m)
 				end
 			end
 

@@ -42,7 +42,7 @@ module Datarator
 		end
 
 		def shift_row
-			@columns.each_deep(nil) { | column, args | column.last_value = nil }
+			@columns.each_deep() { | column | column.last_value = nil }
 			@row_index += 1
 		end
 
