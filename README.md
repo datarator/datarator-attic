@@ -105,11 +105,11 @@ Following collumn types are available:
 	* [`row_index`](#row_index)
 	* [`copy`](#copy)
 	* name generating columns:
-		* [`name.name`](#name.name)
-		* [`first_name`](#name.first_name)
+		* [`name.name`](#namename)
+		* [`first_name`](#namefirst_name)
 * with column nesting supported:
-	* [`list.seq`](#list.seq)
-	* [`list.rand`](#list.rand)
+	* [`list.seq`](#listseq)
+	* [`list.rand`](#listrand)
 	* [`join`](#join)
 
 ####const
