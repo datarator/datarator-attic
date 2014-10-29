@@ -1,15 +1,18 @@
 language: ruby
 cache: bundler
-
 rvm:
-  # - jruby
-  - 2.0.0
-
-script: 'bundle exec rake'
-
-# notifications:
-#   email:
-#     recipients:
-#       - my@email.com
-#     on_failure: change
-#     on_success: never
+- 2.0.0
+# before_script:
+# - npm install karma
+script:
+- bundle exec rake
+# - pushd ui && karma start --single-run --browsers PhantomJS test/karma/config/unit.js
+#   ; popd
+deploy:
+  provider: rubygems
+  api_key:
+    secure: LncHjVlmOdTD13/1Ba0uKFMguum4l/GqoIBLdFON/1h+NEbQ+TfMfqGVjTHN+XTA3sBmukwHeNK8DRuYcenlkmJeyNayDxvyodTf3hSxPFY9NviG6lH8GWpshru0IpQ1YAiHBnzG8bFxVK17ZsE9LuUBYqCytsjcVSBghXAHgvU=
+  gem: datarator
+  on:
+    tags: true
+    repo: datarator/datarator
