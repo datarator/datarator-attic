@@ -2,17 +2,20 @@ language: ruby
 cache: bundler
 rvm:
 - 2.0.0
-# before_script:
-# - npm install karma
 script:
 - bundle exec rake
-# - pushd ui && karma start --single-run --browsers PhantomJS test/karma/config/unit.js
-#   ; popd
 deploy:
-  provider: rubygems
-  api_key:
-    secure: LncHjVlmOdTD13/1Ba0uKFMguum4l/GqoIBLdFON/1h+NEbQ+TfMfqGVjTHN+XTA3sBmukwHeNK8DRuYcenlkmJeyNayDxvyodTf3hSxPFY9NviG6lH8GWpshru0IpQ1YAiHBnzG8bFxVK17ZsE9LuUBYqCytsjcVSBghXAHgvU=
-  gem: datarator
-  on:
-    tags: true
-    repo: datarator/datarator
+  - provider: rubygems
+    api_key:
+      secure: LncHjVlmOdTD13/1Ba0uKFMguum4l/GqoIBLdFON/1h+NEbQ+TfMfqGVjTHN+XTA3sBmukwHeNK8DRuYcenlkmJeyNayDxvyodTf3hSxPFY9NviG6lH8GWpshru0IpQ1YAiHBnzG8bFxVK17ZsE9LuUBYqCytsjcVSBghXAHgvU=
+    gem: datarator
+    on:
+      tags: true
+      repo: datarator/datarator
+  - provider: heroku
+    api_key:
+      secure: fslycBnFpNvJ6Qh3YavkoxENdkieqvrowjw5bE1tmsUSyYN00b6TKx+osm3Ai1WzJTJ+AyU6wTVi2vKHKMi+bF0wujUXouzHhMmjmw5RuiJTKmVD7Oc7lSBSIPRb2e+MAwa+UhkzC+qU/jl3oOJBtggmAymFw08BopHUfs1i93M=
+    app: datarator
+    on:
+      tags: true
+      repo: datarator/datarator
