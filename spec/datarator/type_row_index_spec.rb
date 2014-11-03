@@ -32,13 +32,13 @@ module Datarator
 
 		describe '.escape?' do
 			it 'returns false' do
-				expect(TypeRowIndex.new.escape? @column1).to be false
+				expect(TypeRowIndex.new.escape? nil).to be false
 			end
 		end
 
 		describe '.nested?' do
 			it 'returns false' do
-				expect(TypeRowIndex.new.nested? @column1).to be false
+				expect(TypeRowIndex.new.nested? nil).to be false
 			end
 		end
 

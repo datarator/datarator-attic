@@ -34,13 +34,13 @@ module Datarator
 
 		describe '.escape?' do
 			it 'returns false' do
-				expect(TypeListSeq.new.escape? @column1).to be true
+				expect(TypeListSeq.new.escape? nil).to be true
 			end
 		end
 
 		describe '.nested?' do
 			it 'returns false' do
-				expect(TypeListSeq.new.nested? @column1).to be true
+				expect(TypeListSeq.new.nested? nil).to be true
 			end
 		end
 
@@ -77,13 +77,13 @@ module Datarator
 
 		describe '.escape?' do
 			it 'returns false' do
-				expect(TypeListSeq.new.escape? @column1).to be true
+				expect(TypeListSeq.new.escape? nil).to be true
 			end
 		end
 
 		describe '.nested?' do
 			it 'returns false' do
-				expect(TypeListSeq.new.nested? @column1).to be true
+				expect(TypeListSeq.new.nested? nil).to be true
 			end
 		end
 
