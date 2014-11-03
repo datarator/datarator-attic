@@ -62,4 +62,10 @@ module Datarator
 	end
 end
 
+# Run the app!
+#
+puts "Datarator starting ..."
+Datarator::Datarator.run!
+
+
 require_relative 'datarator/type_name'

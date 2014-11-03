@@ -5,16 +5,33 @@
 Stateless DATA geneRATOR, with:
 
 * **TODO** web UI as well as
-* HTTP (+JSON) API (sinatra based).
+* HTTP based JSON API.
 
 # Hosting options
 
 * hosted instance - **TODO link**
-* self-hosted - if you want to use your own infrastructure.
+
+* [self-hosted](self-hosted) - if you want to use your own infrastructure.
 
 ## Self-hosted
 
-**TODO** describe installation
+### Build from source & run
+
+1. build from source:
+
+		git clone https://github.com/datarator/datarator.git && \
+		pushd datarator && \
+		gem build datarator.gemspec && \
+		gem install datarator-0.0.1.gem && \
+		popd
+
+2. and run:
+
+		datarator
+
+3. console should contain:
+
+		Datarator starting ...
 
 ##API options
 
@@ -44,11 +61,11 @@ Enabled via: `"template":"csv"`.
 
 Optional [options](#options) available:
 
-* `"csv.header":"true"` / `"csv.header":"false"` - whether names of the colums should included (as the 1.st row) or not. By default is `false`.
+* `"header":"true"` / `"header":"false"` - whether names of the colums should included (as the 1.st row) or not. By default is `false`.
 
 For **example**, input JSON:
 
-    	{"template":"csv","document":"foo_document","count":"3","columns":[{"name":"name1","type":"const", "options":{"value":"value1"}},{"name":"name2","type":"const","options":{"value":"value2"}}],"options":{"csv.header":"true"}}
+    	{"template":"csv","document":"foo_document","count":"3","columns":[{"name":"name1","type":"const", "options":{"value":"value1"}},{"name":"name2","type":"const","options":{"value":"value2"}}],"options":{"header":"true"}}
 
 results in:
 

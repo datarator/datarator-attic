@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+begin
+  require 'datarator.rb'
+rescue LoadError => e
+  require 'rubygems'
+  path = File.expand_path '../../lib', __FILE__
+  p path
+  $:.unshift(path) if File.directory?(path) && !$:.include?(path)
+  require 'datarator.rb'
+end

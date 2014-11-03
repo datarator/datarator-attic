@@ -10,13 +10,15 @@ Gem::Specification.new do |spec|
   spec.version       = Datarator::VERSION
   spec.authors       = ["Peter Butkovic"]
   spec.email         = ["butkovic@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{Stateless DATA geneRATOR.}
+  spec.description   = %q{DATA geneRATOR with: web UI and HTTP based JSON API}
+  spec.homepage      = "https://github.com/datarator/datarator"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  # spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.executables   = ['datarator']
+  spec.default_executable = 'datarator'
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
