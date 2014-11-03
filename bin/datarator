@@ -9,3 +9,8 @@ rescue LoadError => e
   $:.unshift(path) if File.directory?(path) && !$:.include?(path)
   require 'datarator.rb'
 end
+
+# Run the app!
+#
+puts "Datarator starting ..."
+Datarator::Datarator.run!
