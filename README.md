@@ -11,7 +11,7 @@ Stateless DATA geneRATOR, with:
 
 * hosted instance - **TODO link**
 
-* [self-hosted](self-hosted) - if you want to use your own infrastructure.
+* [self-hosted](#self-hosted) - if you want to use your own infrastructure.
 
 ## Self-hosted
 
