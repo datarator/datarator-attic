@@ -10,7 +10,6 @@ Stateless DATA geneRATOR, with:
 # Hosting options
 
 * hosted instance - **TODO link**
-
 * [self-hosted](#self-hosted) - if you want to use your own infrastructure.
 
 ## Self-hosted
@@ -21,6 +20,7 @@ Stateless DATA geneRATOR, with:
 
 		git clone https://github.com/datarator/datarator.git && \
 		pushd datarator && \
+		bundle install && \
 		gem build datarator.gemspec && \
 		gem install datarator-0.0.1.gem && \
 		popd
