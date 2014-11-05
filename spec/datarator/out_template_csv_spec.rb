@@ -70,7 +70,7 @@ module Datarator
 		end
 
 		describe '.options' do
-			it 'returns no options' do
+			it 'returns header option' do
 				expect( OutTemplateCsv.new.options ).to match_array([ OptionHeader.new ])
 			end
 		end
