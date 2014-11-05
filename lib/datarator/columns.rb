@@ -5,7 +5,7 @@ require_relative 'column'
 module Datarator
 	class Columns
 
-		attr_accessor :columns#, :out_context
+		attr_accessor :columns
 
 		class << self
 			def from_json(out_context, data)
