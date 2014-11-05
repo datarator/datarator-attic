@@ -13,7 +13,7 @@ module Datarator
 			true
 		end
 
-		def nested? (column)
+		def nested?
 			true
 		end
 

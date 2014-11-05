@@ -34,7 +34,7 @@ module Datarator
 
 		describe '.nested?' do
 			it 'returns true' do
-				expect(TypeConst.new.nested? nil).to be false
+				expect(TypeConst.new.nested?).to be false
 			end
 		end
 	end

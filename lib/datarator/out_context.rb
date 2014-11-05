@@ -1,11 +1,12 @@
 require_relative 'columns'
+require_relative 'options'
 require_relative 'out_templates'
 
 module Datarator
 	class OutContext
-		attr_accessor :document, :options, :row_index, :empty_value, :locale #, :column_index
+		attr_accessor :document, :row_index, :empty_value, :locale #, :column_index
 
-		attr_reader :template, :count, :columns
+		attr_reader :template, :count, :columns, :options
 
 		class << self
 			def from_json (json)
@@ -18,10 +19,11 @@ module Datarator
 				out_context.locale = data['locale']
 				out_context.document = data['document']
 
-				out_context.options = Hash.new
-				data['options'].each do |key, value|
-					out_context.options[key] = value
-				end
+				# out_context.options = Hash.new
+				# data['options'].each do |key, value|
+				# 	out_context.options[key] = value
+				# end
+				out_context.options = data['options']
 
 				out_context.columns = Columns.from_json(out_context, data)
 				out_context
@@ -63,13 +65,18 @@ module Datarator
 			@empty_value = OutTemplates.empty self
 		end
 
-		# TODO ?
-		# def validate
-		# 	@column_options.each do | column_option |
-                #
-                #
-		# 	end
-		# end
+		def options=(options)
+			@options = {}
+
+			OutTemplates.options(@template).each do | option |
+				# raise ArgumentError, "array of options expected (for template: #{@template})!" unless options.kind_of?(Array)
+				raise ArgumentError, "array of options can't contain nils (for template: #{@template})!" if option.nil?
+				raise ArgumentError, "array of options expected to be of type Option (for template: #{@template})!" unless option.is_a? Option
+				raise ArgumentError, "mandatory option expected, but not found: #{option.class.name} (for template: #{@template})" if option.mandatory? && (options.nil? || options[option.class.name].nil?)
+
+				@options[option.class.name] = Options.value(options, option.class.name)
+			end
+		end
 
 		# def to_liquid
 		# 	{

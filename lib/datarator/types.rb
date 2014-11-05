@@ -15,46 +15,69 @@ module Datarator
 			end
 
 			def nested? (column)
-				TYPES[column.type].nested? column
+				TYPES[column.type].nested?
 			end
 
 			def escape? (column)
 				TYPES[column.type].escape? column
 			end
+
+			def options (type)
+				TYPES[type].options
+			end
+
+			def find_all ()
+				types = []
+				TYPES.each do | key, type |
+					options = []
+					type.options.each do | option |
+						options << { :name => option.class.name, :mandatory => option.mandatory?, :boolean => option.boolean? }
+					end
+
+					types << {
+						:name => type.class.name,
+						:nested => type.nested?,
+						:options => options
+						# TODO :categories => [ "name", "string", "human", ... ]
+					}
+				end
+
+				types
+			end
 		end
+
+		require_relative 'type_const'
+		require_relative 'type_row_index'
+		require_relative 'type_copy'
+
+		require_relative 'type_list'
+		require_relative 'type_join'
+
+		require_relative 'type_name'
+
+		TYPES = {
+
+			#
+			# specific
+			#
+			TypeConst.name => TypeConst.new,
+			TypeRowIndex.name => TypeRowIndex.new,
+			TypeCopy.name => TypeCopy.new,
+
+			#
+			# nested columns
+			#
+			TypeListSeq.name => TypeListSeq.new,
+			TypeListRand.name => TypeListRand.new,
+			TypeJoin.name => TypeJoin.new,
+
+			#
+			# faker
+			#
+
+			# name
+			TypeNameName.name => TypeNameName.new,
+			TypeNameFirstName.name => TypeNameFirstName.new
+		}
 	end
-
-	require_relative 'type_const'
-	require_relative 'type_row_index'
-	require_relative 'type_copy'
-
-	require_relative 'type_list'
-	require_relative 'type_join'
-
-	require_relative 'type_name'
-
-	TYPES = {
-
-		#
-		# specific
-		#
-		TypeConst.name => TypeConst.new,
-		TypeRowIndex.name => TypeRowIndex.new,
-		TypeCopy.name => TypeCopy.new,
-
-		#
-		# nested columns
-		#
-		TypeListSeq.name => TypeListSeq.new,
-		TypeListRand.name => TypeListRand.new,
-		TypeJoin.name => TypeJoin.new,
-
-		#
-		# faker
-		#
-
-		# name
-		TypeNameName.name => TypeNameName.new,
-		TypeNameFirstName.name => TypeNameFirstName.new
-	}
 end

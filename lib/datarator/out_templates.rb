@@ -39,6 +39,27 @@ module Datarator
 				# raise "out_context must be of type OutContext" unless out_context.kind_of? OutContext
 				TEMPLATES[out_context.template].empty out_context
 			end
+
+			def find_all ()
+				templates = []
+				TEMPLATES.each do | key, template |
+					options = []
+					template.options.each do | option |
+						options << { :name => option.class.name, :mandatory => option.mandatory?, :boolean => option.boolean? }
+					end
+
+					templates << {
+						:name => key,
+						:options => options
+					}
+				end
+
+				templates
+			end
+
+			def options (template)
+				TEMPLATES[template].options
+			end
 		end
 	end
 end

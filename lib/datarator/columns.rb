@@ -12,17 +12,26 @@ module Datarator
 				raise ArgumentError, 'expected parsed json data having columns element' if data.nil? or data['columns'].nil?
 				columns = Columns.new #out_context
 				out_context.columns = columns
-				columns.columns = from_json_internal(out_context, data['columns'])
+				columns.columns = from_json_columns(out_context, data['columns'])
 				columns
 			end
 
-			def from_json_internal(out_context, nested)
+			def from_json_columns(out_context, nested)
+				return nil if nested.nil?
+
+				nested.map do |column|
+					Column.new(column["name"], column["type"], column["emptyPercent"], column["options"], from_json_columns(out_context, column['columns']), out_context)
+				end
+			end
+
+			def from_json_options(nested)
 				return nil if nested.nil?
 
 				nested.map do |column|
 					Column.new(column["name"], column["type"], column["emptyPercent"], column["options"], from_json_internal(out_context, column['columns']), out_context)
 				end
 			end
+
 		end
 
 		def initialize()

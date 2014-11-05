@@ -40,7 +40,7 @@ module Datarator
 
 		describe '.nested?' do
 			it 'returns false' do
-				expect(TypeListSeq.new.nested? nil).to be true
+				expect(TypeListSeq.new.nested?).to be true
 			end
 		end
 
@@ -82,8 +82,8 @@ module Datarator
 		end
 
 		describe '.nested?' do
-			it 'returns false' do
-				expect(TypeListSeq.new.nested? nil).to be true
+			it 'returns true' do
+				expect(TypeListSeq.new.nested?).to be true
 			end
 		end
 

@@ -57,6 +57,10 @@ module Datarator
 			end
 		end
 
-
+		describe '.options' do
+			it 'returns no options' do
+				expect( OutTemplate.new.options ).to match_array([])
+			end
+		end
 	end
 end

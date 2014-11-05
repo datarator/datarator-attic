@@ -1,11 +1,12 @@
 require 'json'
 require_relative 'types'
+require_relative 'options'
 
 module Datarator
 
 	class Column
 		# provided in input
-		attr_reader :name, :type, :options, :nested, :empty_percent, :parent, :value
+		attr_reader :name, :type, :options, :nested, :empty_percent
 		# output related
 		attr_accessor :last_value, :empty_indexes, :out_context
 
@@ -14,7 +15,7 @@ module Datarator
 			self.name = name
 			self.type = type
 			self.empty_percent = empty_percent
-			@options = options
+			self.options = options
 			self.nested = nested
 		end
 
@@ -34,7 +35,7 @@ module Datarator
 		def type=(type)
 			Types.validate type
 			@type = type
-		end
+		end 
 
 		def empty_percent=(empty_percent)
 			if empty_percent.nil?
@@ -65,13 +66,26 @@ module Datarator
 			@nested = nested
 		end
 
+		def options=(options)
+			@options = {}
+
+			Types.options(@type).each do | option |
+				raise ArgumentError, "array of options can't contain nils (for type: #{@type})!" if option.nil?
+				raise ArgumentError, "array of options expected to be of type Option (for type: #{@type})!" unless option.is_a? Option
+				raise ArgumentError, "mandatory option expected, but not found: #{option.class.name} (for type: #{@type})" if option.mandatory? && (options.nil? || options[option.class.name].nil?)
+
+				@options[option.class.name] = Options.value(options, option.class.name)
+			end
+		end
+
+
 		# def hash
 		# 	[@name, @type, @empty_percent].hash
 		# end
 
 		def ==(other)
-			#TODO options
-			return self.name == other.name && self.type == other.type && self.empty_percent == empty_percent && self.options == other.options && self.parent == other.parent && self.nested == other.nested
+			# TODO all other vars
+			return self.name == other.name && self.type == other.type && self.empty_percent == other.empty_percent && self.options == other.options && self.nested == other.nested
 		end
 
 		def value()

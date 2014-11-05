@@ -68,6 +68,22 @@ module Datarator
 			end
 		end
 
+		describe '/types' do
+			it 'return json with all templates on get' do
+				get '/types'
+				expect(last_response).to be_ok
+				expect(last_response.body).to eq("[{\"name\":\"const\",\"nested\":false,\"options\":[{\"name\":\"value\",\"mandatory\":true,\"boolean\":false}]},{\"name\":\"row_index\",\"nested\":false,\"options\":[]},{\"name\":\"copy\",\"nested\":false,\"options\":[{\"name\":\"from\",\"mandatory\":true,\"boolean\":false}]},{\"name\":\"list.seq\",\"nested\":true,\"options\":[]},{\"name\":\"list.rand\",\"nested\":true,\"options\":[]},{\"name\":\"join\",\"nested\":true,\"options\":[{\"name\":\"separator\",\"mandatory\":false,\"boolean\":false}]},{\"name\":\"name.name\",\"nested\":false,\"options\":[]},{\"name\":\"name.first_name\",\"nested\":false,\"options\":[]}]")
+			end		end
+
+		describe '/templates' do
+			it 'return json with all templates on get' do
+				get '/templates'
+				expect(last_response).to be_ok
+				expect(last_response.body).to eq('[{"name":"csv","options":[{"name":"header","mandatory":false,"boolean":true}]},{"name":"sql","options":[]}]')
+			end
+		end
+
+
 		def post_json(uri, json)
 		  post(uri, json, { "CONTENT_TYPE" => "application/json" })
 		end

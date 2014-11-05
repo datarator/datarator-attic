@@ -22,7 +22,7 @@ module Datarator
 		describe '.from_json' do
 			context 'having valid json' do
 				before(:each) do
-					json = '{"template":"csv","document":"table1","count":"1","locale":"en","columns":[{"name":"name1","type":"name.name"},{"name":"name2","type":"name.name","emptyPercent":"50"}],"options":{"csv.header":"true","prettyprint":"true"}}'
+					json = '{"template":"csv","document":"table1","count":"1","locale":"en","columns":[{"name":"name1","type":"name.name"},{"name":"name2","type":"name.name","emptyPercent":"50"}],"options":{"header":"true","irrelevant_option":"true"}}'
 					@out_context = OutContext.from_json json
 				end
 
@@ -48,8 +48,8 @@ module Datarator
 					expect(@out_context.columns.columns[1]).to eq @column2
 				end
 
-				it 'sets options property' do
-					expect(@out_context.options).to eq({ 'csv.header' => 'true', 'prettyprint' => 'true' })
+				it 'sets relevant options' do
+					expect(@out_context.options).to eq({ 'header' => true })
 				end
 			end
 

@@ -63,8 +63,8 @@ module Datarator
 		end
 
 		describe '.nested?' do
-			it 'returns false' do
-				expect(TypeJoin.new.nested? nil).to be true
+			it 'returns true' do
+				expect(TypeJoin.new.nested?).to be true
 			end
 		end
 

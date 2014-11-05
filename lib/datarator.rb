@@ -18,6 +18,16 @@ module Datarator
 			"TODO site!"
 		end
 
+		get '/types' do
+			# TODO cache
+			Types.find_all.to_json
+		end
+
+		get '/templates' do
+			# TODO cache
+			OutTemplates.find_all.to_json
+		end
+
 		not_found do
 			halt 404, 'page not found'
 		end

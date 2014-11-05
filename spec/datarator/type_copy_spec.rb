@@ -36,8 +36,8 @@ module Datarator
 		end
 
 		describe '.nested?' do
-			it 'returns the same as referred column' do
-				expect(TypeCopy.new.nested? @column2).to eq TypeConst.new.nested? @column1
+			it 'returns false' do
+				expect(TypeCopy.new.nested?).to be false
 			end
 		end
 	end

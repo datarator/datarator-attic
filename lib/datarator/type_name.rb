@@ -14,7 +14,7 @@ module Datarator
 			true
 		end
 
-		def nested? (column)
+		def nested?
 			false
 		end
 	end

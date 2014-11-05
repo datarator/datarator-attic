@@ -1,8 +1,9 @@
+require_relative 'out_template'
 require_relative 'out_context'
 
 module Datarator
 
-	class OutTemplateSql
+	class OutTemplateSql < OutTemplate
 
 		def pre (out_context)
 			''

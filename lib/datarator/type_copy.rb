@@ -1,4 +1,5 @@
 require_relative 'type.rb'
+require_relative 'option_copy_from.rb'
 
 module Datarator
 
@@ -21,12 +22,18 @@ module Datarator
 			Types.escape? from column
 		end
 
-		def nested? (column)
-			Types.nested? from column
+		def nested?
+			false
 		end
 
 		def from (column)
-			column.out_context.columns.column_by_name(column.options['from'])
+			column.out_context.columns.column_by_name(column.options[OptionCopyFrom.name])
 		end
+
+		def options
+			OPTIONS
+		end
+
+		OPTIONS = [ OptionCopyFrom.new ]
 	end
 end

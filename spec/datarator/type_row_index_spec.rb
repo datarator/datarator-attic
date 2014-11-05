@@ -38,7 +38,7 @@ module Datarator
 
 		describe '.nested?' do
 			it 'returns false' do
-				expect(TypeRowIndex.new.nested? nil).to be false
+				expect(TypeRowIndex.new.nested?).to be false
 			end
 		end
 

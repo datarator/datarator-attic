@@ -1,4 +1,5 @@
 require_relative 'type.rb'
+require_relative 'option_join_separator.rb'
 
 module Datarator
 
@@ -21,15 +22,20 @@ module Datarator
 			).join(separator column)
 		end
 
-		def nested? (column)
+		def nested?
 			true
 		end
 
 		def separator (column)
 			return '' if column.options.nil?
-			separator = column.options['separator']
+			separator = column.options[OptionJoinSeparator.name]
 			separator.nil? ? "" : separator
 		end
 
+		def options
+			OPTIONS
+		end
+
+		OPTIONS = [ OptionJoinSeparator.new ]
 	end
 end

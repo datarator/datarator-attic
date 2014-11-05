@@ -1,4 +1,6 @@
-require_relative 'type.rb'
+require_relative 'type'
+require_relative 'option_const_value'
+require_relative 'options'
 
 module Datarator
 	class TypeConst < Type
@@ -10,19 +12,22 @@ module Datarator
 		end
 
 		def value(column)
-			column.options['value']
+			Options.value(column.options, OptionConstValue.name)
 		end
-
-		# def validate(out_context, column)
-		# 	raise ArgumentError.new "value not specified for const type column: #{out_context.column}" if out_context.option['value'].nil? or out_context.option['value'].empty?
-		# end
 
 		def escape? (column)
 			true
 		end
 
-		def nested? (column)
+		def nested?
 			false
 		end
+
+		def options
+			OPTIONS
+		end
+
+		OPTIONS = [ Options.option(OptionConstValue.name) ]
+
 	end
 end

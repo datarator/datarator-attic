@@ -24,7 +24,7 @@ module Datarator
 
 		describe '.nested?' do
 			it 'returns false' do
-				expect(TypeNameName.new.nested? nil).to be false
+				expect(TypeNameName.new.nested?).to be false
 			end
 		end
 
@@ -52,7 +52,7 @@ module Datarator
 
 		describe '.nested?' do
 			it 'returns false' do
-				expect(TypeNameFirstName.new.nested? nil).to be false
+				expect(TypeNameFirstName.new.nested?).to be false
 			end
 		end
 	end

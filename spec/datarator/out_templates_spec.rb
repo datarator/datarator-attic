@@ -15,4 +15,15 @@ module Datarator
 			end
 		end
 	end
+
+	describe '.find_all' do
+		it 'returns all templates available' do
+			expect( OutTemplates.find_all ).to match_array(
+				[
+					{:name=>"csv", :options=>[{:name=>"header", :mandatory=>false, :boolean=>true}]},
+					{:name=>"sql", :options=>[]}
+				])
+			end
+		end
+
 end
