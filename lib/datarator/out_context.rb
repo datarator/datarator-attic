@@ -18,13 +18,7 @@ module Datarator
 				out_context.count = data['count'].to_i
 				out_context.locale = data['locale']
 				out_context.document = data['document']
-
-				# out_context.options = Hash.new
-				# data['options'].each do |key, value|
-				# 	out_context.options[key] = value
-				# end
 				out_context.options = data['options']
-
 				out_context.columns = Columns.from_json(out_context, data)
 				out_context
 			end
