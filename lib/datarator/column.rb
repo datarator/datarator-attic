@@ -35,7 +35,7 @@ module Datarator
 		def type=(type)
 			Types.validate type
 			@type = type
-		end 
+		end
 
 		def empty_percent=(empty_percent)
 			if empty_percent.nil?
