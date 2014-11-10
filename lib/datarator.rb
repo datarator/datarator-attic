@@ -15,11 +15,14 @@ module Datarator
 
 		# BATCH_SIZE=1000
 
+		set :public_folder, 'ui'
+
 		get '/' do
-			"TODO site!"
+			# redirect 'app/index.html'
+			'TODO site!'
 		end
 
-		get '/types' do
+		get '/api/types' do
 			# TODO cache
 			content_type :json
 			# http://stackoverflow.com/questions/2510792/sinatra-javascript-cross-domain-requests-json
@@ -27,7 +30,7 @@ module Datarator
 			Types.find_all.to_json
 		end
 
-		get '/templates' do
+		get '/api/templates' do
 			# TODO cache
 			content_type :json
 			# http://stackoverflow.com/questions/2510792/sinatra-javascript-cross-domain-requests-json
@@ -35,7 +38,7 @@ module Datarator
 			OutTemplates.find_all.to_json
 		end
 
-		get '/schemas/default' do
+		get '/api/schemas/default' do
 			# TODO cache
 			content_type :json
 			# http://stackoverflow.com/questions/2510792/sinatra-javascript-cross-domain-requests-json
@@ -49,7 +52,7 @@ module Datarator
 			halt 404, 'page not found'
 		end
 
-		post '/schemas' do
+		post '/api/schemas' do
 			request.body.rewind
 			begin
 				out_context = OutContext.from_json request.body.read
