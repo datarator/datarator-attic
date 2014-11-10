@@ -44,6 +44,7 @@ Gem::Specification.new do |spec|
 	spec.add_development_dependency "liquid"
 
 	spec.add_development_dependency "sinatra"
+	spec.add_development_dependency "sinatra-jsonp"
 
 	spec.add_development_dependency "rack-test"
 

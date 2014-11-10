@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 require 'sinatra'
+require "sinatra/jsonp"
 
 require_relative "datarator/version"
 require_relative "datarator/out_templates"
@@ -20,19 +21,35 @@ module Datarator
 
 		get '/types' do
 			# TODO cache
+			content_type :json
+			# http://stackoverflow.com/questions/2510792/sinatra-javascript-cross-domain-requests-json
+			# jsonp Types.find_all.to_json
 			Types.find_all.to_json
 		end
 
 		get '/templates' do
 			# TODO cache
+			content_type :json
+			# http://stackoverflow.com/questions/2510792/sinatra-javascript-cross-domain-requests-json
+			# jsonp OutTemplates.find_all.to_json
 			OutTemplates.find_all.to_json
 		end
+
+		get '/schemas/default' do
+			# TODO cache
+			content_type :json
+			# http://stackoverflow.com/questions/2510792/sinatra-javascript-cross-domain-requests-json
+			# jsonp '{"template":"csv","document":"foo_document","count":"10:w","columns":[{"name":"id","type":"row_index"},{"name":"name","type":"name.first_name"}],"options":{"header":"true"}}'
+
+			'{"template":"csv","document":"foo_document","count":"10:w","columns":[{"name":"id","type":"row_index"},{"name":"name","type":"name.first_name"}],"options":{"header":"true"}}'
+		end
+
 
 		not_found do
 			halt 404, 'page not found'
 		end
 
-		post '/dump' do
+		post '/schemas' do
 			request.body.rewind
 			begin
 				out_context = OutContext.from_json request.body.read
