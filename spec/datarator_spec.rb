@@ -25,7 +25,7 @@ module Datarator
 				get '/api/schemas/default'
 				expect(last_response).to be_ok
 				expect(last_response.header['Content-Type']).to eq 'application/json'
-				expect(last_response.body).to eq '{"template":"csv","document":"foo_document","count":"10:w","columns":[{"name":"id","type":"row_index"},{"name":"name","type":"name.first_name"}],"options":{"header":"true"}}'
+				expect(last_response.body).to eq '{"template":"csv","document":"foo_document","count":"10:w","columns":[{"name":"","type":""},{"name":"","type":""}],"options":{"header":"true"}}'
 			end
 		end
 

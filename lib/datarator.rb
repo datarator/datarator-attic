@@ -24,22 +24,19 @@ module Datarator
 		get '/api/types' do
 			# TODO cache
 			content_type :json
-			# http://stackoverflow.com/questions/2510792/sinatra-javascript-cross-domain-requests-json
 			Types.find_all.to_json
 		end
 
 		get '/api/templates' do
 			# TODO cache
 			content_type :json
-			# http://stackoverflow.com/questions/2510792/sinatra-javascript-cross-domain-requests-json
 			OutTemplates.find_all.to_json
 		end
 
 		get '/api/schemas/default' do
 			# TODO cache
 			content_type :json
-			# http://stackoverflow.com/questions/2510792/sinatra-javascript-cross-domain-requests-json
-			'{"template":"csv","document":"foo_document","count":"10:w","columns":[{"name":"id","type":"row_index"},{"name":"name","type":"name.first_name"}],"options":{"header":"true"}}'
+			'{"template":"csv","document":"foo_document","count":"10:w","columns":[{"name":"","type":""},{"name":"","type":""}],"options":{"header":"true"}}'
 		end
 
 
