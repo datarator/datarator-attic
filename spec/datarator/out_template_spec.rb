@@ -28,6 +28,18 @@ module Datarator
 			end
 		end
 
+		describe '.content_type' do
+			it 'raises NotImplementedError' do
+				expect{ OutTemplate.new.content_type }.to raise_error(NotImplementedError)
+			end
+		end
+
+		describe '.file_ext' do
+			it 'raises NotImplementedError' do
+				expect{ OutTemplate.new.file_ext }.to raise_error(NotImplementedError)
+			end
+		end
+
 		describe '.options' do
 			it 'returns no options' do
 				expect( OutTemplate.new.options ).to match_array([])

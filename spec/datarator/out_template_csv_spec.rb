@@ -56,7 +56,6 @@ module Datarator
 			end
 		end
 
-
 		describe '.post' do
 			it 'returns empty string' do
 				expect(OutTemplateCsv.new.post @out_context).to eq ''
@@ -74,7 +73,17 @@ module Datarator
 				expect( OutTemplateCsv.new.options ).to match_array([ OptionHeader.new ])
 			end
 		end
+
+		describe '.content_type' do
+			it 'returns csv mime type' do
+				expect(OutTemplateCsv.new.content_type ).to eq 'csv/plain'
+			end
+		end
+
+		describe '.file_ext' do
+			it 'returns csv' do
+				expect( OutTemplateCsv.new.file_ext ).to eq 'csv'
+			end
+		end
 	end
-
-
 end

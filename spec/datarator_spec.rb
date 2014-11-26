@@ -38,6 +38,8 @@ module Datarator
 
 				it 'returns generated content' do
 					expect(last_response).to be_ok
+					expect(last_response.headers['Content-Type']).to eq 'csv/plain'
+					expect(last_response.headers['Content-Disposition']).to eq 'attachment; filename=datarator.csv'
 					# expect(last_response.body).to match(/^([- a-zA-Z]+,[- a-zA-Z]*\n)+$/m)
 					expect(last_response.body).to match(/^(foo1,(foo2|)\n)+$/m)
 				end

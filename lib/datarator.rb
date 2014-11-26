@@ -45,9 +45,16 @@ module Datarator
 		end
 
 		post '/api/schemas' do
-			request.body.rewind
+			# TODO test params in specs :json + :outTarget
+			# read param first, fallback to body req
+			json = params[:json]
+			if json.nil?
+				request.body.rewind
+				json = request.body.read
+			end
+
 			begin
-				out_context = OutContext.from_json request.body.read
+				out_context = OutContext.from_json json
 			rescue ArgumentError => e
 				halt 400, e.message + e.backtrace.inspect
 			end
@@ -59,6 +66,19 @@ module Datarator
 			# end
 
 			# batch = BATCH_SIZE < in_params.count ? BATCH_SIZE : in_params.count
+
+			# TODO for binary? => future? 
+			# content_type 'application/download'
+
+			# for in page generation, we need no type stuff
+			if params[:outTarget].nil? || params[:outTarget] == 'file'
+				content_type OutTemplates.content_type(out_context)
+				headers["Content-Disposition"] = "attachment; filename=datarator.#{OutTemplates.file_ext(out_context)}"
+			else
+				# TODO binary types => these can't be plaintext anyway!
+				# for no file download
+				content_type 'text/plain'
+			end
 
 			stream do |out|
 				out << OutTemplates.pre(out_context)

@@ -20,6 +20,14 @@ module Datarator
 			raise NotImplementedError
 		end
 
+		def content_type
+			raise NotImplementedError
+		end
+
+		def file_ext
+			raise NotImplementedError
+		end
+
 		def options
 			[]
 		end

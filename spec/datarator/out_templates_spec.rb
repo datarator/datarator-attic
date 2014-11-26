@@ -23,7 +23,6 @@ module Datarator
 					{:name=>"csv", :options=>[{:name=>"header", :mandatory=>false, :boolean=>true}]},
 					{:name=>"sql", :options=>[]}
 				])
-			end
 		end
-
+	end
 end

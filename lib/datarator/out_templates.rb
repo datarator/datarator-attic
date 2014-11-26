@@ -57,6 +57,14 @@ module Datarator
 				templates
 			end
 
+			def content_type (out_context)
+				TEMPLATES[out_context.template].content_type
+			end
+
+			def file_ext (out_context)
+				TEMPLATES[out_context.template].file_ext
+			end
+
 			def options (template)
 				TEMPLATES[template].options
 			end

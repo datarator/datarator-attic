@@ -59,7 +59,19 @@ module Datarator
 
 		describe '.options' do
 			it 'returns no options' do
-				expect( OutTemplate.new.options ).to match_array([])
+				expect( OutTemplateSql.new.options ).to match_array([])
+			end
+		end
+
+		describe '.content_type' do
+			it 'returns text mime type' do
+				expect(OutTemplateSql.new.content_type ).to eq 'text/plain'
+			end
+		end
+
+		describe '.file_ext' do
+			it 'returns sql' do
+				expect( OutTemplateSql.new.file_ext ).to eq 'sql'
 			end
 		end
 	end

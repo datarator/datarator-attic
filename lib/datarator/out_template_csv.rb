@@ -37,6 +37,14 @@ module Datarator
 			''
 		end
 
+		def content_type
+			'csv/plain'
+		end
+
+		def file_ext
+			'csv'
+		end
+
 		def options
 			OPTIONS
 		end

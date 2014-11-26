@@ -37,5 +37,14 @@ module Datarator
 		def empty (out_context)
 			'NULL'
 		end
+
+		def content_type
+			'text/plain'
+		end
+
+		def file_ext
+			'sql'
+		end
+
 	end
 end
