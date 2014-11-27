@@ -27,7 +27,6 @@ module Datarator
 
 				# raise "out_context must be of type OutContext" unless out_context.kind_of? OutContext
 				TEMPLATES[out_context.template].item(out_context)
-				# out_context.values.join(",") + "\n"
 			end
 
 			def post (out_context)

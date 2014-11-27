@@ -18,7 +18,7 @@ module Datarator
 					value = column.value
 
 					# escaping character: '
-					value = value.gsub(/'/, "''") if value.is_a?(String)
+					value = value.gsub(/'/, "''") if value.is_a? String
 
 					# escaping values that need escaping based on type
 					value = "'#{value}'" if column.escape
