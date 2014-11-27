@@ -36,7 +36,9 @@ module Datarator
 		get '/api/schemas/default' do
 			# TODO cache
 			content_type :json
-			'{"template":"csv","document":"foo_document","count":"10:w","columns":[{"name":"","type":""},{"name":"","type":""}],"options":{"header":"true"}}'
+			# "{\"template\":\"csv\",\"document\":\"foo_document\",\"count\":\"10\",\"columns\":[{\"name\":\"uid\",\"type\":\"#{TypeRowIndex.name}\",{\"name\":\"first_name\",\"type\":\"#{TypeNameFirstName.name}\"},{\"name\":\"last_name\",\"type\":\"#{TypeNameLastName.name}\"}],\"options\":{\"header\":\"true\"}}"
+			# '{"template":"csv","document":"foo_document","count":"10","columns":[{"name":"id","type":"row_number"},{"name":"first_name","type":"name.first_name"},{"name":"last_name","type":"name.last_name"}],"options":{"header":"true"}}'
+			"{\"template\":\"csv\",\"document\":\"foo_document\",\"count\":\"10\",\"columns\":[{\"name\":\"uid\",\"type\":\"#{TypeRowIndex.name}\"},{\"name\":\"first_name\",\"type\":\"#{TypeNameFirstName.name}\"},{\"name\":\"last_name\",\"type\":\"#{TypeNameLastName.name}\"}],\"options\":{\"header\":\"true\"}}"
 		end
 
 
@@ -73,7 +75,7 @@ module Datarator
 			# for in page generation, we need no type stuff
 			if params[:outTarget].nil? || params[:outTarget] == 'file'
 				content_type OutTemplates.content_type(out_context)
-				headers["Content-Disposition"] = "attachment; filename=datarator.#{OutTemplates.file_ext(out_context)}"
+				headers["Content-Disposition"] = "attachment; filename=#{out_context.document}.#{OutTemplates.file_ext(out_context)}"
 			else
 				# TODO binary types => these can't be plaintext anyway!
 				# for no file download

@@ -25,7 +25,7 @@ module Datarator
 				get '/api/schemas/default'
 				expect(last_response).to be_ok
 				expect(last_response.header['Content-Type']).to eq 'application/json'
-				expect(last_response.body).to eq '{"template":"csv","document":"foo_document","count":"10:w","columns":[{"name":"","type":""},{"name":"","type":""}],"options":{"header":"true"}}'
+				expect(last_response.body).to eq "{\"template\":\"csv\",\"document\":\"foo_document\",\"count\":\"10\",\"columns\":[{\"name\":\"uid\",\"type\":\"row_index\"},{\"name\":\"first_name\",\"type\":\"name.first_name\"},{\"name\":\"last_name\",\"type\":\"name.last_name\"}],\"options\":{\"header\":\"true\"}}"
 			end
 		end
 
@@ -39,7 +39,7 @@ module Datarator
 				it 'returns generated content' do
 					expect(last_response).to be_ok
 					expect(last_response.headers['Content-Type']).to eq 'csv/plain'
-					expect(last_response.headers['Content-Disposition']).to eq 'attachment; filename=datarator.csv'
+					expect(last_response.headers['Content-Disposition']).to eq 'attachment; filename=foo_document.csv'
 					# expect(last_response.body).to match(/^([- a-zA-Z]+,[- a-zA-Z]*\n)+$/m)
 					expect(last_response.body).to match(/^(foo1,(foo2|)\n)+$/m)
 				end
@@ -84,7 +84,7 @@ module Datarator
 				get '/api/types'
 				expect(last_response).to be_ok
 				expect(last_response.header['Content-Type']).to eq 'application/json'
-				expect(last_response.body).to eq("[{\"name\":\"const\",\"nested\":false,\"options\":[{\"name\":\"value\",\"mandatory\":true,\"boolean\":false}]},{\"name\":\"row_index\",\"nested\":false,\"options\":[]},{\"name\":\"copy\",\"nested\":false,\"options\":[{\"name\":\"from\",\"mandatory\":true,\"boolean\":false}]},{\"name\":\"list.seq\",\"nested\":true,\"options\":[]},{\"name\":\"list.rand\",\"nested\":true,\"options\":[]},{\"name\":\"join\",\"nested\":true,\"options\":[{\"name\":\"separator\",\"mandatory\":false,\"boolean\":false}]},{\"name\":\"name.name\",\"nested\":false,\"options\":[]},{\"name\":\"name.first_name\",\"nested\":false,\"options\":[]}]")
+				expect(last_response.body).to eq("[{\"name\":\"const\",\"nested\":false,\"options\":[{\"name\":\"value\",\"mandatory\":true,\"boolean\":false}]},{\"name\":\"row_index\",\"nested\":false,\"options\":[]},{\"name\":\"copy\",\"nested\":false,\"options\":[{\"name\":\"from\",\"mandatory\":true,\"boolean\":false}]},{\"name\":\"list.seq\",\"nested\":true,\"options\":[]},{\"name\":\"list.rand\",\"nested\":true,\"options\":[]},{\"name\":\"join\",\"nested\":true,\"options\":[{\"name\":\"separator\",\"mandatory\":false,\"boolean\":false}]},{\"name\":\"name.name\",\"nested\":false,\"options\":[]},{\"name\":\"name.first_name\",\"nested\":false,\"options\":[]},{\"name\":\"name.last_name\",\"nested\":false,\"options\":[]}]")
 			end		end
 
 		describe '/api/templates' do
