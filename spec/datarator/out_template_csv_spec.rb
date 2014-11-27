@@ -7,7 +7,7 @@ module Datarator
 		before(:each) do
 			@out_context = OutContext.new
 			@out_context.document = 'table1'
-			@out_context.count=1
+			@out_context.count = 1
 			@out_context.template = 'csv'
 
 			columns = Columns.new
@@ -44,7 +44,7 @@ module Datarator
 				expect(OutTemplateCsv.new.item @out_context).to eq "value1,value2\n"
 			end
 
-			it 'returns comma separated values with escaped commas' do
+			it 'returns comma separated values with escaped commas in values' do
 				columns = Columns.new
 				@out_context.columns = columns
 
@@ -52,7 +52,18 @@ module Datarator
 				column2 = Column.new("name2", TypeConst.name, "0", { "value" => "value2"}, nil, @out_context)
 				columns.columns = [ column1, column2 ]
 
-				expect(OutTemplateCsv.new.item @out_context).to eq "'1,1',value2\n"
+				expect(OutTemplateCsv.new.item @out_context).to eq "\"1,1\",value2\n"
+			end
+
+			it 'returns comma separated values with escaped doubleqoutes in values' do
+				columns = Columns.new
+				@out_context.columns = columns
+
+				column1 = Column.new("name2", TypeConst.name, "0", { "value" => 'foo"bar'}, nil, @out_context)
+				column2 = Column.new("name2", TypeConst.name, "0", { "value" => "value2"}, nil, @out_context)
+				columns.columns = [ column1, column2 ]
+
+				expect(OutTemplateCsv.new.item @out_context).to eq "\"foo\"\"bar\",value2\n"
 			end
 		end
 

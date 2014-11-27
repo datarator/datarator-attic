@@ -11,20 +11,16 @@ module Datarator
 				(out_context.columns.map_shallow() { | column | column.name }).join(',') + "\n"
 			else
 				''
-			end 
-			# unless out_context.options.nil? or out_context.options['header'].nil? or !out_context.options['header'].eql? 'true'
-			# 	(out_context.columns.map_shallow() { | column | column.name }).join(',') + "\n"
-			# else
-			# 	""
-			# end
+			end
 		end
 
 		def item (out_context)
 			(
 				out_context.columns.map_shallow() do | column |
 					value = column.value
-					# escape character: ,
-					value.include?(",") ? "'#{value}'" : value
+
+					# https://stackoverflow.com/questions/10451842/how-to-escape-comma-and-double-quote-at-same-time-for-csv-file
+					(!value.nil? && (value.to_s.include?(',') || value.to_s.include?('"'))) ? "\"#{value.gsub(/"/,'""')}\"" : value
 				end
 			).join(',') + "\n"
 		end
