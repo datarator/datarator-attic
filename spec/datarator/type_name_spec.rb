@@ -56,4 +56,32 @@ module Datarator
 			end
 		end
 	end
+
+	describe TypeNameLastName do
+
+		describe '.value' do
+			it 'returns last name' do
+				expect(TypeNameLastName.new.value nil).to match(/^[- a-zA-Z]+$/)
+			end
+		end
+
+		describe '.name' do
+			it 'returns a constant: \'name.last_name\'' do
+				expect(TypeNameLastName.name).to eq 'name.last_name'
+			end
+		end
+
+		describe '.escape?' do
+			it 'returns true' do
+				expect(TypeNameLastName.new.escape? nil).to be true
+			end
+		end
+
+		describe '.nested?' do
+			it 'returns false' do
+				expect(TypeNameLastName.new.nested?).to be false
+			end
+		end
+	end
+
 end

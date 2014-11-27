@@ -45,4 +45,16 @@ module Datarator
 		end
 	end
 
+	class TypeNameLastName < TypeName
+
+		class << self
+			def name
+				"#{TypeName.name}.last_name"
+			end
+		end
+
+		def value (column)
+			Faker::Name.last_name
+		end
+	end
 end

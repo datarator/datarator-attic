@@ -77,7 +77,8 @@ module Datarator
 
 			# name
 			TypeNameName.name => TypeNameName.new,
-			TypeNameFirstName.name => TypeNameFirstName.new
+			TypeNameFirstName.name => TypeNameFirstName.new,
+			TypeNameLastName.name => TypeNameLastName.new
 		}
 	end
 end

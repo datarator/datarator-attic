@@ -30,7 +30,8 @@ module Datarator
 						{:name=>"list.rand", :nested=>true, :options=>[]},
 						{:name=>"join", :nested=>true, :options=>[{:name=>"separator", :mandatory=>false, :boolean=>false}]},
 						{:name=>"name.name", :nested=>false, :options=>[]},
-						{:name=>"name.first_name", :nested=>false, :options=>[]}
+						{:name=>"name.first_name", :nested=>false, :options=>[]},
+						{:name=>"name.last_name", :nested=>false, :options=>[]}
 					])
 			end
 		end
