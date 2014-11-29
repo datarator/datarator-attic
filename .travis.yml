@@ -17,7 +17,7 @@ install:
 before_script:
   - if [[ $JOB == *ui* ]]; then bundle exec rackup -D; fi
   # till we can start backend and frontend via one command, let's use the way used in manual tests as well
-  - if [[ $JOB == *ui* ]]; then grunt spinup &; fi
+  - if [[ $JOB == *ui* ]]; then grunt spinup & fi
   # TODO do we need to silence selenium? see: http://andrew.yurisich.com/work/2014/08/30/silence-noisy-selenium-server-output-in-travis-ci/
 script:
   - if [[ $JOB == *ui* ]]; then npm test; fi
