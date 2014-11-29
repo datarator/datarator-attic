@@ -2,8 +2,27 @@ language: ruby
 cache: bundler
 rvm:
 - 2.0.0
+env:
+  global:
+    - 
+  matrix:
+    - JOB=rest
+    - JOB=ui CHROME_BIN="chromium-browser" DISPLAY=":99.0"
+before_install:
+  - if [[ $JOB == *ui* ]]; then sh -e /etc/init.d/xvfb start; fi
+  - if [[ $JOB == *ui* ]]; then npm install -g bower grunt-cli protractor grunt-protractor-runner fi
+install:
+  - if [[ $JOB == *ui* ]]; then bower install; fi
+  - if [[ $JOB == *ui* ]]; then npm install; fi
+before_script:
+  - if [[ $JOB == *ui* ]]; then bundle exec rackup -D; fi
+  # till we can start backend and frontend via one command, let's use the way used in manual tests as well
+  - if [[ $JOB == *ui* ]]; then grunt spinup &; fi
+  # TODO do we need to silence selenium? see: http://andrew.yurisich.com/work/2014/08/30/silence-noisy-selenium-server-output-in-travis-ci/
 script:
-- bundle exec rake
+  - if [[ $JOB == *ui* ]]; then npm test; fi
+  - if [[ $JOB == *rest* ]]; then bundle exec rake; fi
+  - if
 deploy:
   - provider: rubygems
     api_key:
