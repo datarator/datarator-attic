@@ -3,14 +3,12 @@ cache: bundler
 rvm:
 - 2.0.0
 env:
-  global:
-    - 
   matrix:
     - JOB=rest
     - JOB=ui CHROME_BIN="chromium-browser" DISPLAY=":99.0"
 before_install:
   - if [[ $JOB == *ui* ]]; then sh -e /etc/init.d/xvfb start; fi
-  - if [[ $JOB == *ui* ]]; then npm install -g bower grunt-cli protractor grunt-protractor-runner fi
+  - if [[ $JOB == *ui* ]]; then npm install -g bower grunt-cli protractor grunt-protractor-runner; fi
 install:
   - if [[ $JOB == *ui* ]]; then bower install; fi
   - if [[ $JOB == *ui* ]]; then npm install; fi
