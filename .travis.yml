@@ -7,18 +7,19 @@ env:
     - JOB=rest
     - JOB=ui CHROME_BIN="chromium-browser" DISPLAY=":99.0"
 before_install:
-  - if [[ $JOB == *ui* ]]; then sh -e /etc/init.d/xvfb start; fi
   - if [[ $JOB == *ui* ]]; then pushd ui; fi
+  - if [[ $JOB == *ui* ]]; then sh -e /etc/init.d/xvfb start; fi
   - if [[ $JOB == *ui* ]]; then npm install -g bower grunt-cli protractor grunt-protractor-runner; fi
 install:
   - if [[ $JOB == *ui* ]]; then bower install; fi
   - if [[ $JOB == *ui* ]]; then npm install; fi
-  - if [[ $JOB == *rest* ]]; then bundle install --jobs=3 --retry=3 --path=${BUNDLE_PATH:-vendor/bundle}; fi # took over the travis defaults, see: https://travis-ci.org/datarator/datarator/builds/42351889
+  # took over the travis defaults, see: https://travis-ci.org/datarator/datarator/builds/42351889
+  - if [[ $JOB == *rest* ]]; then bundle install --jobs=3 --retry=3 --path=${BUNDLE_PATH:-vendor/bundle}; fi
+  - if [[ $JOB == *ui* ]]; then popd && bundle install --jobs=3 --retry=3 --path=${BUNDLE_PATH:-vendor/bundle} && pushd ui; fi
 before_script:
-  - if [[ $JOB == *ui* ]]; then bundle exec rackup -D; fi
-  # till we can start backend and frontend via one command, let's use the way used in manual tests as well
+  # TODO is real backend a good idea here??? API is clear => for more flexibility, should be mocks provided in the future UI testing
+  - if [[ $JOB == *ui* ]]; popd && then bundle exec rackup -D && pushd ui; fi
   - if [[ $JOB == *ui* ]]; then grunt spinup & fi
-  # TODO do we need to silence selenium? see: http://andrew.yurisich.com/work/2014/08/30/silence-noisy-selenium-server-output-in-travis-ci/
 script:
   - if [[ $JOB == *ui* ]]; then npm test; fi
   - if [[ $JOB == *rest* ]]; then bundle exec rake; fi
