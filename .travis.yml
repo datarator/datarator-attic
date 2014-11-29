@@ -21,7 +21,6 @@ before_script:
 script:
   - if [[ $JOB == *ui* ]]; then npm test; fi
   - if [[ $JOB == *rest* ]]; then bundle exec rake; fi
-  - if
 deploy:
   - provider: rubygems
     api_key:
