@@ -18,7 +18,7 @@ install:
   - if [[ $JOB == *ui* ]]; then popd && bundle install --jobs=3 --retry=3 --path=${BUNDLE_PATH:-vendor/bundle} && pushd ui; fi
 before_script:
   # TODO is real backend a good idea here??? API is clear => for more flexibility, should be mocks provided in the future UI testing
-  - if [[ $JOB == *ui* ]]; then popd && then bundle exec rackup -D && pushd ui; fi
+  - if [[ $JOB == *ui* ]]; then popd && bundle exec rackup -D && pushd ui; fi
   - if [[ $JOB == *ui* ]]; then grunt spinup & fi
 script:
   - if [[ $JOB == *ui* ]]; then npm test; fi
