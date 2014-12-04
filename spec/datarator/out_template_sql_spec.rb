@@ -32,7 +32,7 @@ module Datarator
 				column2 = Column.new("name2", TypeRowIndex.name, "0", nil, nil, @out_context)
 				columns.columns = [ column1, column2 ]
 
-				expect(OutTemplateSql.new.item @out_context).to eq "INSERT INTO table1 (name1,name2) values ('value1',0);\n"
+				expect(OutTemplateSql.new.item @out_context).to eq "INSERT INTO table1 (name1,name2) VALUES ('value1',0);\n"
 			end
 
 			it 'returns sql inserts with escaped character: \'' do
@@ -41,7 +41,7 @@ module Datarator
 				column1 = Column.new("name1", TypeConst.name, "0", { "value" => "foo'bar"}, nil, @out_context)
 				columns.columns = [ column1 ]
 
-				expect(OutTemplateSql.new.item @out_context).to eq "INSERT INTO table1 (name1) values ('foo\'\'bar');\n"
+				expect(OutTemplateSql.new.item @out_context).to eq "INSERT INTO table1 (name1) VALUES ('foo\'\'bar');\n"
 			end
 		end
 

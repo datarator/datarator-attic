@@ -4,9 +4,8 @@ require_relative 'out_templates'
 
 module Datarator
 	class OutContext
-		attr_accessor :document, :row_index, :empty_value, :locale #, :column_index
-
-		attr_reader :template, :count, :columns, :options
+		attr_accessor :document, :row_index, :empty_value, :locale
+		attr_reader :template, :count, :columns, :options, :cache
 
 		class << self
 			def from_json (json)
@@ -35,6 +34,7 @@ module Datarator
 
 		def initialize()
 			@row_index = 0
+			@cache = Hash.new
 		end
 
 		def shift_row

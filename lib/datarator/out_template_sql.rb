@@ -10,9 +10,6 @@ module Datarator
 		end
 
 		def item (out_context)
-			# TODO cache! (somewhere in context probably)
-			names = (out_context.columns.map_shallow() { | column | column.name })
-
 			values = (
 				out_context.columns.map_shallow() do | column |
 					value = column.value
@@ -27,7 +24,17 @@ module Datarator
 				end
 			)
 
-			"INSERT INTO #{out_context.document} (#{names.join(',')}) values (#{values.join(',')});\n"
+			prefix = out_context.cache["sql_prefix"]
+			if (prefix.nil?)
+				names = (out_context.columns.map_shallow() { | column | column.name })
+				prefix = "INSERT INTO #{out_context.document} (#{names.join(',')}) VALUES ("
+				out_context.cache["sql_prefix"] = prefix
+			end
+
+			suffix = ");\n"
+
+			# "INSERT INTO #{out_context.document} (#{names.join(',')}) VALUES (#{values.join(',')});\n"
+			"#{prefix}#{values.join(',')}#{suffix}"
 		end
 
 		def post (out_context)
