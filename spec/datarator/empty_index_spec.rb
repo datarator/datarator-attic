@@ -16,7 +16,7 @@ module Datarator
 			end
 
 			it 'returns all indexes for 100 percent' do
-				expect(EmptyIndex.indexes(10, 100)).to eq((1..10).to_set)
+				expect(EmptyIndex.indexes(10, 100)).to eq((0..9).to_set)
 			end
 
 			it 'returns no index for 0 percent' do

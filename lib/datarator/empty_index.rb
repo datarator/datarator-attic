@@ -9,9 +9,9 @@ module Datarator
 				return Set.new if empty_percent == 0
 				empty_count = overall_count * empty_percent / 100
 
-				return (1..overall_count).to_set if empty_percent == 100 or empty_count == overall_count
+				return (0..overall_count-1).to_set if empty_percent == 100 or empty_count == overall_count
 				# idea found: http://stackoverflow.com/questions/119107/how-do-i-generate-a-list-of-n-unique-random-numbers-in-ruby 
-				(1..overall_count).to_a.shuffle[0..empty_count-1].to_set
+				(0..overall_count-1).to_a.shuffle[0..empty_count-1].to_set
 			end
 
 		end

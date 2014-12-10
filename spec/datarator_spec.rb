@@ -33,7 +33,7 @@ module Datarator
 		describe '/api/schemas' do
 			context 'having valid json request' do
 				before(:each) do
-					json = '{"template":"csv","document":"foo_document","count":"1","locale":"en","columns":[{"name":"foo_name1","type":"const", "options":{"value":"foo1"}},{"name":"foo_name2","type":"const","emptyPercent":"50", "options":{"value":"foo2"}}],"options":{"csv.header":"true"}}'
+					json = '{"template":"csv","document":"foo_document","count":"1","locale":"en","columns":[{"name":"foo_name1","type":"const", "options":{"value":"foo1"}},{"name":"foo_name2","type":"const","emptyPercent":"50", "options":{"value":"foo2"}},{"name":"foo_name3","type":"const","emptyPercent":"100", "options":{"value":"foo3"}}],"options":{"csv.header":"true"}}'
 					post_json('/api/schemas', json)
 				end
 
@@ -42,7 +42,7 @@ module Datarator
 					expect(last_response.headers['Content-Type']).to eq 'csv/plain'
 					expect(last_response.headers['Content-Disposition']).to eq 'attachment; filename=foo_document.csv'
 					# expect(last_response.body).to match(/^([- a-zA-Z]+,[- a-zA-Z]*\n)+$/m)
-					expect(last_response.body).to match(/^(foo1,(foo2|)\n)+$/m)
+					expect(last_response.body).to match(/^(foo1,(foo2|),\n)+$/m)
 				end
 			end
 
