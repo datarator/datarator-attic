@@ -19,7 +19,7 @@ module Datarator
 			# end
 
 			def escape? (column)
-				TYPES[column.type].escape? column
+				!column.empty_index? && TYPES[column.type].escape?(column)
 			end
 
 			def options (type)
