@@ -3,7 +3,7 @@
 # http://sleekd.com/general/configuring-nginx-and-unicorn/
 
 # unicorn -c config/unicorn.rb -E production -D
-rack_env = ENV['RACK_ENV'] || 'production'
+# rack_env = ENV['RACK_ENV'] || 'production'
 
 # Use at least one worker per core if you're on a dedicated server,
 # more will usually help for _short_ waits on databases/caches.

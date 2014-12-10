@@ -14,11 +14,11 @@ module Datarator
 
 		# BATCH_SIZE=1000
 
-		set :public_folder, 'ui'
+		# TODO doesn't work for non-production, as bower_components relative reference is invalid
+		set :public_folder, ENV['RACK_ENV'] == "production" ? 'ui/dist' : 'ui/app'
 
 		get '/' do
-			# redirect 'app/index.html'
-			'TODO site!'
+		    send_file File.join(settings.public_folder, 'index.html')
 		end
 
 		get '/api/types' do
