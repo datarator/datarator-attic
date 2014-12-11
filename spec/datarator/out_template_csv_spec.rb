@@ -17,6 +17,18 @@ module Datarator
 			columns.columns = [ column1, column2 ]
 		end
 
+		describe '.name' do
+			it 'returns a constant: \'csv\'' do
+				expect( OutTemplateCsv.name ).to eq 'csv'
+			end
+		end
+
+		describe '.group' do
+			it 'returns empty group name' do
+				expect( OutTemplateCsv.new.group ).to eq ''
+			end
+		end
+
 		describe '.pre' do
 			context 'having header explicitly disabled' do
 				it 'returns empty string' do

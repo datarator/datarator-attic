@@ -5,6 +5,12 @@ module Datarator
 
 	class OutTemplateSql < OutTemplate
 
+		class << self
+			def name
+				'sql'
+			end
+		end
+
 		def pre (out_context)
 			''
 		end
@@ -26,7 +32,7 @@ module Datarator
 
 			prefix = out_context.cache["sql_prefix"]
 			if (prefix.nil?)
-				names = (out_context.columns.map_shallow() { | column | column.name })
+				names = names(out_context)
 				prefix = "INSERT INTO #{out_context.document} (#{names.join(',')}) VALUES ("
 				out_context.cache["sql_prefix"] = prefix
 			end

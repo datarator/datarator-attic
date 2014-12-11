@@ -28,6 +28,10 @@ module Datarator
 			raise NotImplementedError
 		end
 
+		def group
+			''
+		end
+
 		def options
 			[]
 		end
@@ -55,5 +59,23 @@ module Datarator
 		# def empty
 		# 	@empty.render('context' => out_context)
 		# end
+
+		# TODO ??? unit tests
+		protected
+		def values (out_context)
+			out_context.columns.map_shallow() { | column | column.value }
+		end
+
+
+		# TODO ??? unit tests
+		protected
+		def names (out_context)
+			names = out_context.cache["out_names"]
+			if (names.nil?)
+				names = (out_context.columns.map_shallow() { | column | column.name })
+				out_context.cache["out_names"] = names
+			end
+			names
+		end
 	end
 end

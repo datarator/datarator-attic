@@ -1,6 +1,7 @@
 require_relative 'out_template'
 require_relative 'out_template_csv'
 require_relative 'out_template_sql'
+require_relative 'out_template_liquibase'
 
 module Datarator
 
@@ -8,8 +9,12 @@ module Datarator
 
 		TEMPLATES = {
 			# 'csv' => OutTemplate.new('csv')
-			'csv' => OutTemplateCsv.new(),
-			'sql' => OutTemplateSql.new()
+			OutTemplateCsv.name => OutTemplateCsv.new(),
+			OutTemplateSql.name => OutTemplateSql.new(),
+
+			OutTemplateLiquibaseXml.name => OutTemplateLiquibaseXml.new(),
+			OutTemplateLiquibaseYaml.name => OutTemplateLiquibaseYaml.new(),
+			OutTemplateLiquibaseJson.name => OutTemplateLiquibaseJson.new()
 		}
 
 		class << self
@@ -49,6 +54,7 @@ module Datarator
 
 					templates << {
 						:name => key,
+						:group => template.group,
 						:options => options
 					}
 				end

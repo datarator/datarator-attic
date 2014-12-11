@@ -17,12 +17,23 @@ module Datarator
 			columns.columns = [ Column.new("name1", TypeNameFirstName.name, "0", nil, nil, @out_context), Column.new("name2", TypeNameFirstName.name, "0", nil, nil, @out_context) ]
 		end
 
+		describe '.name' do
+			it 'returns a constant: \'sql\'' do
+				expect( OutTemplateSql.name ).to eq 'sql'
+			end
+		end
+
+		describe '.group' do
+			it 'returns empty group name' do
+				expect( OutTemplateSql.new.group ).to eq ''
+			end
+		end
+
 		describe '.pre' do
 			it 'returns empty string' do
 				expect(OutTemplateSql.new.pre @out_context).to eq ''
 			end
 		end
-
 
 		describe '.item' do
 			it 'returns sql inserts with strings escaped' do

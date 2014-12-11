@@ -46,5 +46,11 @@ module Datarator
 			end
 		end
 
+		describe '.group' do
+			it 'returns empty group name' do
+				expect( OutTemplate.new.group ).to eq ''
+			end
+		end
+
 	end
 end

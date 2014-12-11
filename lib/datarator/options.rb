@@ -28,6 +28,7 @@ module Datarator
 		end
 
 		require_relative 'option_header'
+		require_relative 'option_liquibase_changeset'
 
 		require_relative 'option_const_value'
 		require_relative 'option_copy_from'
@@ -36,6 +37,7 @@ module Datarator
 		OPTIONS = {
 			# template
 			OptionHeader.name => OptionHeader.new,
+			OptionLiquibaseChangeset.name => OptionLiquibaseChangeset.new,
 
 			# type
 			OptionConstValue.name => OptionConstValue.new,

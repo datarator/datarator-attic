@@ -20,8 +20,11 @@ module Datarator
 		it 'returns all templates available' do
 			expect( OutTemplates.find_all ).to match_array(
 				[
-					{:name=>"csv", :options=>[{:name=>"header", :mandatory=>false, :boolean=>true}]},
-					{:name=>"sql", :options=>[]}
+					{:name=>"csv", :group=>"", :options=>[{:name=>"header", :mandatory=>false, :boolean=>true}]},
+					{:name=>"sql", :group=>"", :options=>[]},
+					{:name=>"liquibase.xml", :group=>"liquibase", :options=>[{:name=>"changeset", :mandatory=>false, :boolean=>true}]},
+					{:name=>"liquibase.yaml", :group=>"liquibase", :options=>[{:name=>"changeset", :mandatory=>false, :boolean=>true}]},
+					{:name=>"liquibase.json", :group=>"liquibase", :options=>[{:name=>"changeset", :mandatory=>false, :boolean=>true}]}
 				])
 		end
 	end
