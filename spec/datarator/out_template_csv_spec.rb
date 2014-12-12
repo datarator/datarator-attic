@@ -60,7 +60,7 @@ module Datarator
 				columns = Columns.new
 				@out_context.columns = columns
 
-				column1 = Column.new("name2", TypeConst.name, "0", { "value" => "1,1"}, nil, @out_context)
+				column1 = Column.new("name1", TypeConst.name, "0", { "value" => "1,1"}, nil, @out_context)
 				column2 = Column.new("name2", TypeConst.name, "0", { "value" => "value2"}, nil, @out_context)
 				columns.columns = [ column1, column2 ]
 
@@ -71,7 +71,7 @@ module Datarator
 				columns = Columns.new
 				@out_context.columns = columns
 
-				column1 = Column.new("name2", TypeConst.name, "0", { "value" => 'foo"bar'}, nil, @out_context)
+				column1 = Column.new("name1", TypeConst.name, "0", { "value" => 'foo"bar'}, nil, @out_context)
 				column2 = Column.new("name2", TypeConst.name, "0", { "value" => "value2"}, nil, @out_context)
 				columns.columns = [ column1, column2 ]
 

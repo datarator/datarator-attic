@@ -26,6 +26,11 @@ module Datarator
 			it 'raises ArgumentError for empty column' do
 				expect{ @columns.column_by_name = nil }.to raise_error(ArgumentError)
 			end
+
+			it 'raises ArgumentError for non-unique column name' do
+				column = Column.new("name1", TypeNameFirstName.name, "0", nil, nil, @out_context)
+				expect { @columns.column_by_name = column }.to raise_error(ArgumentError)
+			end
 		end
 
 		describe '.column_by_name' do

@@ -39,6 +39,7 @@ module Datarator
 
 		def column_by_name=(column)
 			raise ArgumentError.new "column has to be of type Column" unless column.is_a? Column
+			raise ArgumentError.new "column name has to be unique" if @column_by_name.has_key? column.name
 			@column_by_name.store(column.name, column)
 		end
 

@@ -57,8 +57,8 @@ module Datarator
 
 			it 'returns sql inserts not-escaping NULLs' do
 				columns = Columns.new
-				columns.columns = [ Column.new("name1", TypeConst.name, "100", { "value" => "value1"}, nil, @out_context) ]
 				@out_context.columns = columns
+				columns.columns = [ Column.new("name1", TypeConst.name, "100", { "value" => "value1"}, nil, @out_context) ]
 				@out_context.template = 'sql'
 
 				expect(OutTemplateSql.new.item @out_context).to eq "INSERT INTO table1 (name1) VALUES (NULL);\n"
