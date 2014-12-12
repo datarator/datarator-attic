@@ -61,9 +61,9 @@ Following collumn types are available:
 
 * [`csv`](#csv)
 * [`sql`](#sql)
-* [`liquibase xml`](#liquibasexml)
-* [`liquibase yaml`](#liquibaseyaml)
-* [`liquibase json`](#liquibasejson)
+* [`liquibase xml`](#liquibase-xml)
+* [`liquibase yaml`](#liquibase-yaml)
+* [`liquibase json`](#liquibase-json)
 
 ####csv
 
