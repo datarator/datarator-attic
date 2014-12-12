@@ -55,8 +55,9 @@ module Datarator
 		def template=(template)
 			OutTemplates.validate template
  			@template = template
-			# empty val is affected by template
-			@empty_value = OutTemplates.empty self
+
+			# empty val is affected by template as well as options
+			reload_empty_value
 		end
 
 		def options=(options)
@@ -70,6 +71,13 @@ module Datarator
 
 				@options[option.class.name] = Options.value(options, option.class.name)
 			end
+
+			# empty val is affected by template as well as options
+			reload_empty_value
+		end
+
+		def reload_empty_value
+			@empty_value = OutTemplates.empty self
 		end
 
 		# def to_liquid

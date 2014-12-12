@@ -49,7 +49,7 @@ module Datarator
 				end
 
 				it 'sets relevant options' do
-					expect(@out_context.options).to eq({ 'header' => true })
+					expect(@out_context.options).to eq({ 'header' => true, 'empty_value' => '' })
 				end
 			end
 

@@ -4,6 +4,16 @@ require 'datarator/options'
 module Datarator
 	describe Options do
 
+		describe '.option' do
+				it 'returns option for known option name' do
+					expect(Options.option(OptionHeader.name)).to be_a(OptionHeader)
+				end
+
+				it 'raises error for unknown option name' do
+					expect{ Options.name('non_existing') }.to raise_error(ArgumentError)
+				end
+		end
+
 		describe '.value' do
 			context 'having optional boolean option explicitly false' do
 				it 'sets to false' do

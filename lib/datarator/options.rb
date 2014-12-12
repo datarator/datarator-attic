@@ -6,7 +6,9 @@ module Datarator
 		class << self
 
 			def option (name)
-				OPTIONS[name]
+				opt = OPTIONS[name]
+				raise ArgumentError, "option: #{name} is unknown" if opt.nil?
+				opt
 			end
 
 			def value (options, name)
@@ -29,6 +31,7 @@ module Datarator
 
 		require_relative 'option_header'
 		require_relative 'option_liquibase_changeset'
+		require_relative 'option_empty_value'
 
 		require_relative 'option_const_value'
 		require_relative 'option_copy_from'
@@ -38,6 +41,7 @@ module Datarator
 			# template
 			OptionHeader.name => OptionHeader.new,
 			OptionLiquibaseChangeset.name => OptionLiquibaseChangeset.new,
+			OptionEmptyValue.name => OptionEmptyValue.new,
 
 			# type
 			OptionConstValue.name => OptionConstValue.new,

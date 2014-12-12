@@ -31,9 +31,12 @@ module Datarator
 		end
 
 		describe '/api/schemas' do
+
+			# TODO ??? introduce more type related tesing
+
 			context 'having valid json request' do
 				before(:each) do
-					json = '{"template":"csv","document":"foo_document","count":"1","locale":"en","columns":[{"name":"foo_name1","type":"const", "options":{"value":"foo1"}},{"name":"foo_name2","type":"const","emptyPercent":"50", "options":{"value":"foo2"}},{"name":"foo_name3","type":"const","emptyPercent":"100", "options":{"value":"foo3"}}],"options":{"csv.header":"true"}}'
+					json = '{"template":"csv","document":"foo_document","count":"1","locale":"en","columns":[{"name":"foo_name1","type":"const", "options":{"value":"foo1"}},{"name":"foo_name2","type":"const","emptyPercent":"100", "options":{"value":"foo2"}}],"options":{"header":"true", "empty_value": "NULL"}}'
 					post_json('/api/schemas', json)
 				end
 
@@ -41,8 +44,7 @@ module Datarator
 					expect(last_response).to be_ok
 					expect(last_response.headers['Content-Type']).to eq 'csv/plain'
 					expect(last_response.headers['Content-Disposition']).to eq 'attachment; filename=foo_document.csv'
-					# expect(last_response.body).to match(/^([- a-zA-Z]+,[- a-zA-Z]*\n)+$/m)
-					expect(last_response.body).to match(/^(foo1,(foo2|),\n)+$/m)
+					expect(last_response.body).to eq "foo_name1,foo_name2\nfoo1,NULL\n"
 				end
 			end
 
@@ -85,7 +87,7 @@ module Datarator
 				get '/api/types'
 				expect(last_response).to be_ok
 				expect(last_response.header['Content-Type']).to eq 'application/json'
-				expect(last_response.body).to eq("[{\"name\":\"const\",\"nested\":false,\"options\":[{\"name\":\"value\",\"mandatory\":true,\"boolean\":false}]},{\"name\":\"row_index\",\"nested\":false,\"options\":[]},{\"name\":\"copy\",\"nested\":false,\"options\":[{\"name\":\"from\",\"mandatory\":true,\"boolean\":false}]},{\"name\":\"list.seq\",\"nested\":true,\"options\":[]},{\"name\":\"list.rand\",\"nested\":true,\"options\":[]},{\"name\":\"join\",\"nested\":true,\"options\":[{\"name\":\"separator\",\"mandatory\":false,\"boolean\":false}]},{\"name\":\"name.name\",\"nested\":false,\"options\":[]},{\"name\":\"name.first_name\",\"nested\":false,\"options\":[]},{\"name\":\"name.last_name\",\"nested\":false,\"options\":[]}]")
+				expect(last_response.body).to eq "[{\"name\":\"const\",\"nested\":false,\"options\":[{\"name\":\"value\",\"mandatory\":true,\"boolean\":false}]},{\"name\":\"row_index\",\"nested\":false,\"options\":[]},{\"name\":\"copy\",\"nested\":false,\"options\":[{\"name\":\"from\",\"mandatory\":true,\"boolean\":false}]},{\"name\":\"list.seq\",\"nested\":true,\"options\":[]},{\"name\":\"list.rand\",\"nested\":true,\"options\":[]},{\"name\":\"join\",\"nested\":true,\"options\":[{\"name\":\"separator\",\"mandatory\":false,\"boolean\":false}]},{\"name\":\"name.name\",\"nested\":false,\"options\":[]},{\"name\":\"name.first_name\",\"nested\":false,\"options\":[]},{\"name\":\"name.last_name\",\"nested\":false,\"options\":[]}]"
 			end		end
 
 		describe '/api/templates' do
@@ -93,7 +95,7 @@ module Datarator
 				get '/api/templates'
 				expect(last_response).to be_ok
 				expect(last_response.header['Content-Type']).to eq 'application/json'
-				expect(last_response.body).to eq("[{\"name\":\"csv\",\"group\":\"\",\"options\":[{\"name\":\"header\",\"mandatory\":false,\"boolean\":true}]},{\"name\":\"sql\",\"group\":\"\",\"options\":[]},{\"name\":\"liquibase.xml\",\"group\":\"liquibase\",\"options\":[{\"name\":\"changeset\",\"mandatory\":false,\"boolean\":true}]},{\"name\":\"liquibase.yaml\",\"group\":\"liquibase\",\"options\":[{\"name\":\"changeset\",\"mandatory\":false,\"boolean\":true}]},{\"name\":\"liquibase.json\",\"group\":\"liquibase\",\"options\":[{\"name\":\"changeset\",\"mandatory\":false,\"boolean\":true}]}]")
+				expect(last_response.body).to eq "[{\"name\":\"csv\",\"group\":\"\",\"options\":[{\"name\":\"empty_value\",\"mandatory\":false,\"boolean\":false},{\"name\":\"header\",\"mandatory\":false,\"boolean\":true}]},{\"name\":\"sql\",\"group\":\"\",\"options\":[]},{\"name\":\"liquibase.xml\",\"group\":\"liquibase\",\"options\":[{\"name\":\"changeset\",\"mandatory\":false,\"boolean\":true}]},{\"name\":\"liquibase.yaml\",\"group\":\"liquibase\",\"options\":[{\"name\":\"changeset\",\"mandatory\":false,\"boolean\":true}]},{\"name\":\"liquibase.json\",\"group\":\"liquibase\",\"options\":[{\"name\":\"changeset\",\"mandatory\":false,\"boolean\":true}]}]"
 			end
 		end
 

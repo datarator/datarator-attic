@@ -1,6 +1,7 @@
 require_relative 'out_template'
 require_relative 'out_context'
 require_relative 'option_header'
+require_relative 'option_empty_value'
 
 module Datarator
 
@@ -34,7 +35,8 @@ module Datarator
 		end
 
 		def empty (out_context)
-			''
+			empty_value = Options.value(out_context.options, OptionEmptyValue.name)
+			empty_value.nil? ? '' : empty_value
 		end
 
 		def content_type
@@ -49,6 +51,9 @@ module Datarator
 			OPTIONS
 		end
 
-		OPTIONS = [ OptionHeader.new ]
+		OPTIONS = [
+			OptionEmptyValue.new,
+			OptionHeader.new
+		]
 	end
 end

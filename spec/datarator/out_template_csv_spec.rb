@@ -86,14 +86,23 @@ module Datarator
 		end
 
 		describe '.empty' do
-			it 'returns empty string' do
+			it 'returns empty string for empty value option ommited' do
 				expect(OutTemplateCsv.new.empty @out_context).to eq ''
 			end
+
+			it 'returns value of empty_value option' do
+				@out_context.options = { 'empty_value' => 'NULL' }
+				expect(OutTemplateCsv.new.empty @out_context).to eq 'NULL'
+
+				@out_context.options = { 'empty_value' => '' }
+				expect(OutTemplateCsv.new.empty @out_context).to eq ''
+			end
+
 		end
 
 		describe '.options' do
 			it 'returns header option' do
-				expect( OutTemplateCsv.new.options ).to match_array([ OptionHeader.new ])
+				expect( OutTemplateCsv.new.options ).to match_array([ OptionHeader.new, OptionEmptyValue.new ])
 			end
 		end
 
