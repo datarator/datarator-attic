@@ -2,9 +2,9 @@
 [![Code Climate](https://codeclimate.com/github/datarator/datarator/badges/gpa.svg)](https://codeclimate.com/github/datarator/datarator)
 # Datarator
 
-Stateless DATA geneRATOR, with:
+(stateless) data generator, with:
 
-* **TODO** web UI as well as
+* web UI as well as
 * HTTP based JSON API.
 
 # Hosting options
@@ -17,6 +17,8 @@ Stateless DATA geneRATOR, with:
 ### Build from source & run
 
 1. build from source:
+
+TODO outdated (as UI was added)
 
 		git clone https://github.com/datarator/datarator.git && \
 		pushd datarator && \
@@ -41,7 +43,7 @@ Stateless DATA geneRATOR, with:
 ## JSON API
 
 ###JSON syntax:
-
+ 
 	{"template":"<template_name>","document":"<document_name>","count":"<count>","locale":"<locale>","columns":[<column>,<column>,...],"options":<options>}
 
 Legend:
@@ -55,6 +57,14 @@ Legend:
 
 ###Output templates
 
+Following collumn types are available:
+
+* [`csv`](#csv)
+* [`sql`](#sql)
+* [`liquibase xml`](#liquibasexml)
+* [`liquibase yaml`](#liquibaseyaml)
+* [`liquibase json`](#liquibasejson)
+
 ####csv
 
 Enabled via: `"template":"csv"`.
@@ -62,17 +72,18 @@ Enabled via: `"template":"csv"`.
 Optional [options](#options) available:
 
 * `"header":"true"` / `"header":"false"` - whether names of the colums should included (as the 1.st row) or not. By default is `false`.
+* `"empty_value":"XYZ"`- empty value. By default is empty string.
 
 For **example**, input JSON:
 
-    	{"template":"csv","document":"foo_document","count":"3","columns":[{"name":"name1","type":"const", "options":{"value":"value1"}},{"name":"name2","type":"const","options":{"value":"value2"}}],"options":{"header":"true"}}
+    	{"template":"csv","document":"foo_document","count":"3","columns":[{"name":"name1","type":"const", "options":{"value":"value1"}},{"name":"name2","type":"const","options":{"value":"value2"}},{"name":"name3","type":"const","emptyPercent":"100","options":{"value":"value2"}}],"options":{"header":"true","empty_value":"NULL"}}
 
 results in:
 
-    	name1,name2
-    	value1,value2
-    	value1,value2
-    	value1,value2
+    	name1,name2,name3
+    	value1,value2,NULL
+    	value1,value2,NULL
+    	value1,value2,NULL
 
 ####sql
 
@@ -87,6 +98,158 @@ results in:
     	INSERT INTO (name1,name2) values ('value1','value2');
     	INSERT INTO (name1,name2) values ('value1','value2');
     	INSERT INTO (name1,name2) values ('value1','value2');
+
+####liquibase xml
+
+Enabled via: `"template":"liquibase.xml"`.
+
+Optional [options](#options) available:
+
+* `"changeset":"true"` / `"changeset":"false"` - whether changeset section should be included or not. By default is `false`.
+
+For **example**, input JSON:
+
+    	{"template":"liquibase.xml","document":"foo_document","count":"3","columns":[{"name":"name1","type":"const", "options":{"value":"value1"}},{"name":"name2","type":"const","options":{"value":"value2"}}],"options":{"changeset":"true"}}
+
+results in:
+
+	<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+	  <changeset author="datarator.io" id="foo_document-1418423861">
+	    <insert tableName="foo_document">
+	      <column name="name1" value="value1"/>
+	      <column name="name2" value="value2"/>
+	    </insert>
+	    <insert tableName="foo_document">
+	      <column name="name1" value="value1"/>
+	      <column name="name2" value="value2"/>
+	    </insert>
+	    <insert tableName="foo_document">
+	      <column name="name1" value="value1"/>
+	      <column name="name2" value="value2"/>
+	    </insert>
+	  </changeset>
+
+####liquibase yaml
+
+Enabled via: `"template":"liquibase.yaml"`.
+
+Optional [options](#options) available:
+
+* `"changeset":"true"` / `"changeset":"false"` - whether changeset section should be included or not. By default is `false`.
+
+For **example**, input JSON:
+
+    	{"template":"liquibase.yaml","document":"foo_document","count":"3","columns":[{"name":"name1","type":"const", "options":{"value":"value1"}},{"name":"name2","type":"const","options":{"value":"value2"}}],"options":{"changeset":"true"}}
+
+results in:
+
+	databaseChangeLog:
+	  - changeset
+	      author: datarator.io
+	      id: foo_document-1418426125
+	      changes:
+		- insert:
+		    tableName: foo_document
+		    columns:
+		      - column:
+			  name: name1
+			  value: value1
+		      - column:
+			  name: name2
+			  value: value2
+		- insert:
+		    tableName: foo_document
+		    columns:
+		      - column:
+			  name: name1
+			  value: value1
+		      - column:
+			  name: name2
+			  value: value2
+		- insert:
+		    tableName: foo_document
+		    columns:
+		      - column:
+			  name: name1
+			  value: value1
+		      - column:
+			  name: name2
+			  value: value2
+
+####liquibase json
+
+Enabled via: `"template":"liquibase.json"`.
+
+Optional [options](#options) available:
+
+* `"changeset":"true"` / `"changeset":"false"` - whether changeset section should be included or not. By default is `false`.
+
+For **example**, input JSON:
+
+    	{"template":"liquibase.json","document":"foo_document","count":"3","columns":[{"name":"name1","type":"const", "options":{"value":"value1"}},{"name":"name2","type":"const","options":{"value":"value2"}}],"options":{"changeset":"true"}}
+
+results in:
+
+    databaseChangeLog: [
+        {
+           "changeset"
+                "author": "datarator.io"
+                "id": foo_document-1418426254"
+                "changes": [
+                    {
+		    	"insert": {
+                            "tableName": "foo_document",
+                            "columns" [
+                                {
+                                    "column": {
+                                        "name": "name1",
+                                        "value": "value1"
+                                        },
+                                    "column": {
+                                        "name": "name2",
+                                        "value": "value2"
+                                        }
+                                    },
+                            ]
+                        }
+                        "insert": {
+                            "tableName": "foo_document",
+                            "columns" [
+                                {
+                                    "column": {
+                                        "name": "name1",
+                                        "value": "value1"
+                                        },
+                                    "column": {
+                                        "name": "name2",
+                                        "value": "value2"
+                                        }
+                                    },
+                            ]
+                        }
+                        "insert": {
+                            "tableName": "foo_document",
+                            "columns" [
+                                {
+                                    "column": {
+                                        "name": "name1",
+                                        "value": "value1"
+                                        },
+                                    "column": {
+                                        "name": "name2",
+                                        "value": "value2"
+                                        }
+                                    },
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
 
 ###Options
 
