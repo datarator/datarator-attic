@@ -125,7 +125,7 @@ module Datarator
 
 		def pre (out_context)
 			if Options.value(out_context.options, OptionLiquibaseChangeset.name)
-				"{\n    databaseChangeLog: [\n        {\n           \"changeset\"\n                \"author\": \"datarator.io\"\n                \"id\": #{out_context.document}-#{Time.now.to_i}\"\n                \"changes\": [\n                    {"
+				"{\n    databaseChangeLog: [\n        {\n           \"changeset\"\n                \"author\": \"datarator.io\"\n                \"id\": #{out_context.document}-#{Time.now.to_i}\"\n                \"changes\": [\n                    {\n"
 			else
 				''
 			end
