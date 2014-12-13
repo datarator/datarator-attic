@@ -86,11 +86,26 @@ module Datarator
 				# Profile the code
 				# RubyProf.start
 
+				batch_size = 1000
+
+				chunk = ''
 				# 0.step(in_params.count, batch) do | row |
-				out_context.count.times do #| row |
-					out << OutTemplates.item(out_context)
+				out_context.count.times do | row |
+
+					# giving response in chunks seems to be more performant
+					# TODO, go for nested loops to get rid of if on every iteration
+					chunk << OutTemplates.item(out_context)
+					if row % batch_size == 0
+						out << chunk
+						chunk = ''
+					end
+
+					# out << OutTemplates.item(out_context)
+
 					out_context.shift_row
 				end
+
+				out << chunk
 
 				# result = RubyProf.stop
 				# Print a flat profile to text
