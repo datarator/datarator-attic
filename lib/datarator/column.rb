@@ -52,8 +52,8 @@ module Datarator
 		end
 
 		def nested=(nested)
-			# raise ArgumentError, "nested columns expected, but not found for: #{name}" if Types.nested?(self) and nested.nil?
-			# raise ArgumentError, "nested columns not expected, but found for: #{name}" if !Types.nested?(self) and !nested.nil?
+			raise ArgumentError, "nested columns expected, but not found for: #{name}" if Types.nested?(self) and nested.nil?
+			raise ArgumentError, "nested columns not expected, but found for: #{name}" if !Types.nested?(self) and !nested.nil?
 
 			unless nested.nil?
 				raise ArgumentError, "nested columns should be nil or array, but was: #{nested.inspect}" unless nested.kind_of?(Array)

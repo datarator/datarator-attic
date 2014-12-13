@@ -14,9 +14,9 @@ module Datarator
 				raise ArgumentError, "type not supported: #{type}" unless supports? type
 			end
 
-			# def nested? (column)
-			# 	TYPES[column.type].nested?
-			# end
+			def nested? (column)
+				TYPES[column.type].nested?
+			end
 
 			def escape? (column)
 				!column.empty_index? && TYPES[column.type].escape?(column)

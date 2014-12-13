@@ -86,9 +86,9 @@ module Datarator
 					@column = Column.new('foo', TypeJoin.name, "0", { "separator" => ","}, nested, @out_context)
 				end
 
-				# it 'raises ArgumentError for missing nesting' do
-				# 	expect{ @column.nested = nil }.to raise_error(ArgumentError)
-				# end
+				it 'raises ArgumentError for missing nesting' do
+					expect{ @column.nested = nil }.to raise_error(ArgumentError)
+				end
 
 				it 'sets nested' do
 					nested = [ Column.new('nested', TypeNameFirstName.name, "0", nil, nil, @out_context) ]
@@ -114,10 +114,10 @@ module Datarator
 					@column = Column.new('foo', TypeNameName.name, "0", nil, nil, @out_context)
 				end
 
-				# it 'raises ArgumentError for nesting present' do
-				# 	nested = [ Column.new('nested', TypeNameFirstName.name, "0", nil, nil, @out_context) ]
-				# 	expect{ @column.nested = nested }.to raise_error(ArgumentError)
-				# end
+				it 'raises ArgumentError for nesting present' do
+					nested = [ Column.new('nested', TypeNameFirstName.name, "0", nil, nil, @out_context) ]
+					expect{ @column.nested = nested }.to raise_error(ArgumentError)
+				end
 			end
 
 		end
