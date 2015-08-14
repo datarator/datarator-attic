@@ -16,9 +16,12 @@
 
 ### Build from source & run
 
-1. build from source:
+1. make sure to have ruby + bundler installed
+	for Ubuntu run:
 
-TODO outdated (as UI was added)
+		sudo apt-get install ruby ruby-dev
+		gem install bundler --user-install
+1. build from source (TODO outdated as UI was added):
 
 		git clone https://github.com/datarator/datarator.git && \
 		pushd datarator && \
@@ -26,12 +29,10 @@ TODO outdated (as UI was added)
 		gem build datarator.gemspec && \
 		gem install datarator-0.0.1.gem && \
 		popd
-
-2. and run:
+1. and run:
 
 		datarator
-
-3. console should contain:
+1. console should contain:
 
 		Datarator starting ...
 
