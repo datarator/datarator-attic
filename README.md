@@ -287,7 +287,10 @@ Following collumn types are available:
 	* [`copy`](#copy)
 	* name generating columns:
 		* [`name.name`](#namename)
-		* [`first_name`](#namefirst_name)
+		* [`name.first_name`](#namefirst_name)
+		* [`name.prefix`](#nameprefix)
+		* [`name.suffix`](#namesuffix)
+		* [`name.title`](#nametitle)
 * with column nesting supported:
 	* [`list.seq`](#listseq)
 	* [`list.rand`](#listrand)
@@ -364,7 +367,56 @@ For **example**, input JSON:
 could result in value:
 
     	Christophe
+    	
+####name.last_name
 
+Generates the random last name value.
+
+For **example**, input JSON:
+
+    	"columns":[{"name":"name1","type":"name.last_name"}]
+
+could result in value:
+
+    	Bartell
+
+####name.prefix
+
+Generates the random name "prefix" value.
+
+For **example**, input JSON:
+
+    	"columns":[{"name":"name1","type":"name.prefix"}]
+
+could result in value:
+
+    	Mr.
+
+####name.suffix
+
+Generates the random name "suffix" value.
+
+For **example**, input JSON:
+
+    	"columns":[{"name":"name1","type":"name.suffix"}]
+
+could result in value:
+
+    	IV
+
+
+####name.title
+
+Generates the random name "title" value.
+
+For **example**, input JSON:
+
+    	"columns":[{"name":"name1","type":"name.title"}]
+
+could result in value:
+
+    	Legacy Creative Director
+  
 ####list.seq
 
 Picks next value in a sequence from the provided nested column values.

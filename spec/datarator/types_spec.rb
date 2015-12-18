@@ -31,7 +31,10 @@ module Datarator
 						{:name=>"join", :nested=>true, :options=>[{:name=>"separator", :mandatory=>false, :boolean=>false}]},
 						{:name=>"name.name", :nested=>false, :options=>[]},
 						{:name=>"name.first_name", :nested=>false, :options=>[]},
-						{:name=>"name.last_name", :nested=>false, :options=>[]}
+						{:name=>"name.last_name", :nested=>false, :options=>[]},
+						{:name=>"name.prefix", :nested=>false, :options=>[]},
+						{:name=>"name.suffix", :nested=>false, :options=>[]},
+						{:name=>"name.title", :nested=>false, :options=>[]}
 					])
 			end
 		end

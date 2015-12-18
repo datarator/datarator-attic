@@ -57,4 +57,43 @@ module Datarator
 			Faker::Name.last_name
 		end
 	end
+
+	class TypeNamePrefix < TypeName
+
+		class << self
+			def name
+				"#{TypeName.name}.prefix"
+			end
+		end
+
+		def value (column)
+			Faker::Name.prefix
+		end
+	end
+
+	class TypeNameSuffix < TypeName
+
+		class << self
+			def name
+				"#{TypeName.name}.suffix"
+			end
+		end
+
+		def value (column)
+			Faker::Name.suffix
+		end
+	end
+
+	class TypeNameTitle < TypeName
+
+		class << self
+			def name
+				"#{TypeName.name}.title"
+			end
+		end
+
+		def value (column)
+			Faker::Name.title
+		end
+	end
 end
