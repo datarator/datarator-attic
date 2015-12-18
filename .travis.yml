@@ -2,12 +2,6 @@ language: ruby
 cache: bundler
 rvm:
 - 2.0.0
-# probably we don't need these
-# install:
-#   # took over the travis defaults, see: https://travis-ci.org/datarator/datarator/builds/42351889
-#   - bundle install --jobs=3 --retry=3 --path=${BUNDLE_PATH:-vendor/bundle}
-# script:
-#   - bundle exec rake
 deploy:
   - provider: rubygems
     api_key:
