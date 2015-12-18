@@ -2,28 +2,12 @@ language: ruby
 cache: bundler
 rvm:
 - 2.0.0
-env:
-  matrix:
-    - JOB=rest
-    - JOB=ui CHROME_BIN="chromium-browser" DISPLAY=":99.0"
-before_install:
-  - if [[ $JOB == *ui* ]]; then pushd ui; fi
-  - if [[ $JOB == *ui* ]]; then sh -e /etc/init.d/xvfb start; fi
-  - if [[ $JOB == *ui* ]]; then npm install -g npm@2; fi
-  - if [[ $JOB == *ui* ]]; then npm install -g bower grunt-cli; fi
-install:
-  - if [[ $JOB == *ui* ]]; then npm install; fi
-  - if [[ $JOB == *ui* ]]; then bower install; fi
-  # took over the travis defaults, see: https://travis-ci.org/datarator/datarator/builds/42351889
-  - if [[ $JOB == *rest* ]]; then bundle install --jobs=3 --retry=3 --path=${BUNDLE_PATH:-vendor/bundle}; fi
-  - if [[ $JOB == *ui* ]]; then popd && bundle install --jobs=3 --retry=3 --path=${BUNDLE_PATH:-vendor/bundle} && pushd ui; fi
-before_script:
-  # TODO is real backend a good idea here??? API is clear => for more flexibility, should be mocks provided in the future UI testing
-  - if [[ $JOB == *ui* ]]; then popd && bundle exec rackup -D && pushd ui; fi
-  - if [[ $JOB == *ui* ]]; then grunt spinup & fi
-script:
-  - if [[ $JOB == *ui* ]]; then npm test; fi
-  - if [[ $JOB == *rest* ]]; then bundle exec rake; fi
+# probably we don't need these
+# install:
+#   # took over the travis defaults, see: https://travis-ci.org/datarator/datarator/builds/42351889
+#   - bundle install --jobs=3 --retry=3 --path=${BUNDLE_PATH:-vendor/bundle}
+# script:
+#   - bundle exec rake
 deploy:
   - provider: rubygems
     api_key:
