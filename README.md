@@ -58,7 +58,7 @@ Legend:
 
 ###Output templates
 
-Following collumn types are available:
+Following output templates are available:
 
 * [`csv`](#csv)
 * [`sql`](#sql)
