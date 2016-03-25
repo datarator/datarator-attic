@@ -6,7 +6,7 @@ require_relative "datarator/out_templates"
 require_relative "datarator/out_context"
 require_relative "datarator/types"
 
-require 'ruby-prof'
+# require 'ruby-prof'
 
 module Datarator
 
