@@ -3,8 +3,6 @@ lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'datarator/version'
 
-
-
 Gem::Specification.new do |spec|
 	spec.name          = "datarator"
 	spec.version       = Datarator::VERSION
@@ -23,9 +21,9 @@ Gem::Specification.new do |spec|
 
 	spec.add_development_dependency "bundler", "~> 1.7"
 	spec.add_development_dependency "rake", "~> 10.0"
-	spec.add_development_dependency "rspec", "~> 3.4.0"
-	spec.add_development_dependency "guard", "~> 2.13.0"
-	spec.add_development_dependency "guard-rspec", "~> 4.6.4"
+	spec.add_development_dependency "rspec", "~> 3.4"
+	spec.add_development_dependency "guard", "~> 2.13"
+	spec.add_development_dependency "guard-rspec", "~> 4.6"
 	# anyone running mac out there?
 	spec.add_development_dependency "rspec-nc", "~> 0.2.1"
 
@@ -36,10 +34,10 @@ Gem::Specification.new do |spec|
 	spec.add_development_dependency "rack-test", "~> 0.6.3"
 	spec.add_development_dependency "ruby-prof", "~> 0.15.9"
 
-	spec.add_dependency "faker", "~> 1.6.3"
-	spec.add_dependency "json", "~> 1.8.3"
+	spec.add_dependency "faker", "~> 1.6"
+	spec.add_dependency "json", "~> 1.8"
 	# not in use (for now)
 	# spec.add_dependency "liquid", "~> 3.0.3"
-	spec.add_dependency "sinatra", "~> 1.4.7"
-	spec.add_dependency "unicorn", "~> 5.0.1"
+	spec.add_dependency "sinatra", "~> 1.4"
+	spec.add_dependency "unicorn", "~> 5.0"
 end
