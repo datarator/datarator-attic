@@ -1,5 +1,5 @@
 require 'yaml'
-require 'liquid'
+# require 'liquid'
 
 module Datarator
 
