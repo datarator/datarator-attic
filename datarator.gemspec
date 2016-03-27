@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
 	spec.authors       = ["Peter Butkovic"]
 	spec.email         = ["butkovic@gmail.com"]
 	spec.summary       = %q{Stateless DATA geneRATOR.}
-	spec.description   = %q{DATA geneRATOR with: web UI and HTTP based JSON API}
+	spec.description   = %q{DATA geneRATOR with: HTTP based JSON API}
 	spec.homepage      = "https://github.com/datarator/datarator"
 	spec.license       = "MIT"
 
