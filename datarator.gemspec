@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
 	spec.add_development_dependency "rack-test", "~> 0.6.3"
 	spec.add_development_dependency "ruby-prof", "~> 0.15.9"
 
-	spec.add_dependency "faker", "~> 1.6"
+	spec.add_dependency "faker", "~> 1.6.3"
 	spec.add_dependency "json", "~> 1.8"
 	# not in use (for now)
 	# spec.add_dependency "liquid", "~> 3.0.3"
