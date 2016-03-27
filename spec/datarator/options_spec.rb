@@ -49,16 +49,16 @@ module Datarator
 
 			context 'having optional string option explicitly set' do
 				it 'sets to value set' do
-					expect(Options.value({ 'separator' => ','}, OptionJoinSeparator.name)).to eq ','
+					expect(Options.value({ 'separator' => ','}, OptionSeparator.name)).to eq ','
 				end
 			end
 
 
 			context 'having optional string option not explicitly set' do
-				it 'sets to \'\'' do
-					expect(Options.value(nil, OptionJoinSeparator.name)).to eq ''
-					expect(Options.value({}, OptionJoinSeparator.name)).to eq ''
-					expect(Options.value({ 'other_option' => 'aaa' }, OptionJoinSeparator.name)).to eq ''
+				it 'sets to nil' do
+					expect(Options.value(nil, OptionSeparator.name)).to eq nil
+					expect(Options.value({}, OptionSeparator.name)).to eq nil
+					expect(Options.value({ 'other_option' => 'aaa' }, OptionSeparator.name)).to eq nil
 				end
 			end
 		end

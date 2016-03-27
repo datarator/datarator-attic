@@ -2,6 +2,7 @@ require_relative 'out_template'
 require_relative 'out_context'
 require_relative 'option_header'
 require_relative 'option_empty_value'
+require_relative 'option_separator'
 
 module Datarator
 
@@ -15,7 +16,7 @@ module Datarator
 
 		def pre (out_context)
 			if Options.value(out_context.options, OptionHeader.name)
-				names(out_context).join(',') + "\n"
+				names(out_context).join(separator out_context) + "\n"
 			else
 				''
 			end
@@ -27,7 +28,7 @@ module Datarator
 					# https://stackoverflow.com/questions/10451842/how-to-escape-comma-and-double-quote-at-same-time-for-csv-file
 					(!value.nil? && (value.to_s.include?(',') || value.to_s.include?('"'))) ? "\"#{value.gsub(/"/,'""')}\"" : value
 				end
-			).join(',') + "\n"
+			).join(separator out_context) + "\n"
 		end
 
 		def post (out_context)
@@ -37,6 +38,11 @@ module Datarator
 		def empty (out_context)
 			empty_value = Options.value(out_context.options, OptionEmptyValue.name)
 			empty_value.nil? ? '' : empty_value
+		end
+
+		def separator (out_context)
+			separator_value = Options.value(out_context.options, OptionSeparator.name)
+			separator_value.nil? ? ',' : separator_value
 		end
 
 		def content_type
@@ -52,8 +58,9 @@ module Datarator
 		end
 
 		OPTIONS = [
-			OptionEmptyValue.new,
-			OptionHeader.new
+			Options.option(OptionHeader.name),
+			Options.option(OptionEmptyValue.name),
+			Options.option(OptionSeparator.name)
 		]
 	end
 end

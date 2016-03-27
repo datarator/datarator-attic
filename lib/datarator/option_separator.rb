@@ -2,7 +2,7 @@ require_relative 'option.rb'
 
 module Datarator
 
-	class OptionJoinSeparator < Option
+	class OptionSeparator < Option
 		class << self
 			def name
 				'separator'
@@ -16,5 +16,6 @@ module Datarator
 		def boolean?
 			false
 		end
+
 	end
 end

@@ -73,7 +73,8 @@ Enabled via: `"template":"csv"`.
 Optional [options](#options) available:
 
 * `"header":"true"` / `"header":"false"` - whether names of the colums should included (as the 1.st row) or not. By default is `false`.
-* `"empty_value":"XYZ"`- empty value. By default is empty string.
+* `"empty_value":"<empty value>"`- empty value. By default is empty string.
+* `"separator":"<separator>"` - the separator string to be used for joining values.
 
 For **example**, input JSON:
 

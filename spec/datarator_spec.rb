@@ -96,7 +96,7 @@ module Datarator
         get '/api/templates'
         expect(last_response).to be_ok
         expect(last_response.header['Content-Type']).to eq 'application/json'
-        expect(last_response.body).to eq "[{\"name\":\"csv\",\"group\":\"\",\"options\":[{\"name\":\"empty_value\",\"mandatory\":false,\"boolean\":false},{\"name\":\"header\",\"mandatory\":false,\"boolean\":true}]},{\"name\":\"sql\",\"group\":\"\",\"options\":[]},{\"name\":\"liquibase.xml\",\"group\":\"liquibase\",\"options\":[{\"name\":\"changeset\",\"mandatory\":false,\"boolean\":true}]},{\"name\":\"liquibase.yaml\",\"group\":\"liquibase\",\"options\":[{\"name\":\"changeset\",\"mandatory\":false,\"boolean\":true}]},{\"name\":\"liquibase.json\",\"group\":\"liquibase\",\"options\":[{\"name\":\"changeset\",\"mandatory\":false,\"boolean\":true}]}]"
+        expect(last_response.body).to eq "[{\"name\":\"csv\",\"group\":\"\",\"options\":[{\"name\":\"header\",\"mandatory\":false,\"boolean\":true},{\"name\":\"empty_value\",\"mandatory\":false,\"boolean\":false},{\"name\":\"separator\",\"mandatory\":false,\"boolean\":false}]},{\"name\":\"sql\",\"group\":\"\",\"options\":[]},{\"name\":\"liquibase.xml\",\"group\":\"liquibase\",\"options\":[{\"name\":\"changeset\",\"mandatory\":false,\"boolean\":true}]},{\"name\":\"liquibase.yaml\",\"group\":\"liquibase\",\"options\":[{\"name\":\"changeset\",\"mandatory\":false,\"boolean\":true}]},{\"name\":\"liquibase.json\",\"group\":\"liquibase\",\"options\":[{\"name\":\"changeset\",\"mandatory\":false,\"boolean\":true}]}]"
       end
     end
 

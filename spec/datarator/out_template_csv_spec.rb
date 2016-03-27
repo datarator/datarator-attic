@@ -100,9 +100,24 @@ module Datarator
 
 		end
 
+		describe '.separator' do
+			it 'for unspecified separator returns ","' do
+				expect(OutTemplateCsv.new.separator @out_context).to eq ','
+			end
+
+			it 'for any specified separator returns the specified one' do
+				@out_context.options = { 'separator' => ';' }
+				expect(OutTemplateCsv.new.separator @out_context).to eq ';'
+
+				@out_context.options = { 'separator' => '' }
+				expect(OutTemplateCsv.new.separator @out_context).to eq ''
+			end
+
+		end
+
 		describe '.options' do
 			it 'returns header option' do
-				expect( OutTemplateCsv.new.options ).to match_array([ OptionHeader.new, OptionEmptyValue.new ])
+				expect( OutTemplateCsv.new.options ).to match_array([ OptionHeader.new, OptionEmptyValue.new, OptionSeparator.new ])
 			end
 		end
 
