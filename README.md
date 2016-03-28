@@ -1,16 +1,20 @@
 [![Travis](https://travis-ci.org/datarator/datarator.png?branch=master)](https://travis-ci.org/datarator/datarator) [![Coverage Status](https://coveralls.io/repos/datarator/datarator/badge.png?branch=master)](https://coveralls.io/r/datarator/datarator?branch=master)
 [![Code Climate](https://codeclimate.com/github/datarator/datarator/badges/gpa.svg)](https://codeclimate.com/github/datarator/datarator)
+[![](https://badge.imagelayers.io/datarator/datarator:latest.svg)](https://imagelayers.io/?images=datarator/datarator:latest 'Get your own badge on imagelayers.io')
+
 # Datarator
 
 (stateless) data generator, with:
 
-* web UI as well as
+<!-- * web UI as well as -->
 * HTTP based JSON API.
 
 # Hosting options
 
-* hosted instance - **TODO link**
+<!-- * hosted instance - **TODO link** -->
 * [self-hosted](#self-hosted) - if you want to use your own infrastructure.
+* [dockerized pre-built](#dockerized pre-built) - using pre-built docker image (from dockerhub).
+* [dockerized self-built](#dockerized self-built) - using self-built docker image.
 
 ## Self-hosted
 
@@ -40,6 +44,27 @@
 
 * `<server-url>` - web UI - to be used for occasional usage or to create JSON interactively or
 * POST: `<server-url>/dump` - HTTP JSON API - for reproducable test data.
+
+## Dockerized pre-built
+
+1. run via:
+
+	docker run -p 9292:9292 --rm --name datarator datarator/datarator:edge
+2. test sample:
+
+	curl -h "content-type: application/json" -x post -d '{"template":"csv","document":"foo_document","count":"1","columns":[{"name":"greeting","type":"const", "options":{"value":"hello"}},{"name":"from","type":"const","options":{"value":"from"}},{"name":"server","type":"const","options":{"value":"datarator"}}],"options":{"header":"false", "separator": " "}}' http://127.0.0.1:9292/api/schemas
+
+## Dockerized self-built
+
+1. build docker image:
+
+	docker build -t datarator:edge .
+1. run docker container via:
+
+	docker run -p 9292:9292 --rm --name datarator datarator:edge
+1. test sample:
+
+	curl -h "content-type: application/json" -x post -d '{"template":"csv","document":"foo_document","count":"1","columns":[{"name":"greeting","type":"const", "options":{"value":"hello"}},{"name":"from","type":"const","options":{"value":"from"}},{"name":"server","type":"const","options":{"value":"datarator"}}],"options":{"header":"false", "separator": " "}}' http://127.0.0.1:9292/api/schemas
 
 ## JSON API
 
