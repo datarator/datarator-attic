@@ -1,6 +1,6 @@
 /Gemfile.lock
 /coverage/
-/spec/reports/
+/spec/
 *.bundle
 *.so
 *.o
@@ -8,4 +8,7 @@
 mkmf.log
 *.swp
 *.gem
-/.idea/
+/bin/
+/.*/
+/.*
+

@@ -10,32 +10,38 @@
 if ENV['RACK_ENV'] == "production"
 	worker_processes 4
 else
-	worker_processes 1
+	worker_processes 2
 end
 
 # Help ensure your application will always spawn in the symlinked
 # "current" directory that Capistrano sets up.
 # https://stackoverflow.com/questions/1937744/how-to-get-the-current-working-directorys-absolute-path-from-irb
-working_directory = Dir.pwd
- 
+if ENV['RACK_ENV'] == "production"
+	workdir = "/usr/local/share/datarator"
+else
+	workdir = Dir.pwd
+end
+
 # listen on both a Unix domain socket and a TCP port,
 # we use a shorter backlog for quicker failover when busy
 if ENV['RACK_ENV'] == "production"
-	listen "#{working_directory}/tmp/sockets/unicorn.sock", :backlog => 64 
+	listen "/tmp/unicorn.sock", :backlog => 64 
+else
+	listen 9292, :tcp_nopush => true # same port as used by webrick
 end
-listen 9292, :tcp_nopush => true # same port as used by webrick
 
-# nuke workers after 30 seconds instead of 60 seconds (the default)
-timeout 30
+# nuke workers after 5 seconds instead of 60 seconds (the default)
+timeout 5
 
 # feel free to point this anywhere accessible on the filesystem
-pid "#{working_directory}/tmp/pids/unicorn.pid"
+# pid "#{workdir}/tmp/pids/unicorn.pid"
+pid "#{workdir}/tmp/unicorn.pid"
 
 # By default, the Unicorn logger will write to stderr.
 # Additionally, ome applications/frameworks log to stderr or stdout,
 # so prevent them from going to /dev/null when daemonized here:
-stderr_path "#{working_directory}/log/unicorn.stderr.log"
-stdout_path "#{working_directory}/log/unicorn.stdout.log"
+stderr_path "#{workdir}/log/unicorn.stderr.log"
+stdout_path "#{workdir}/log/unicorn.stdout.log"
 
 # combine Ruby 2.0.0dev or REE with "preload_app true" for memory savings
 # http://rubyenterpriseedition.com/faq.html#adapt_apps_for_cow
