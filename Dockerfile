@@ -5,7 +5,14 @@ MAINTAINER Peter Butkovic <butkovic@gmail.com>
 ENV DATARATOR_HOME=/usr/local/share/datarator \
 	PATH=/root/.gem/ruby/2.2.0/bin:$PATH
 
-COPY . $DATARATOR_HOME
+RUN mkdir -p $DATARATOR_HOME
+
+COPY ./Gemfile $DATARATOR_HOME
+COPY ./*.gemspec $DATARATOR_HOME
+COPY ./LICENSE.txt $DATARATOR_HOME
+COPY ./README.md $DATARATOR_HOME
+COPY ./bin $DATARATOR_HOME/bin
+COPY ./lib $DATARATOR_HOME/lib
 
 RUN apk --update upgrade && \
 	apk add ca-certificates ruby && \

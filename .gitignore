@@ -7,5 +7,4 @@
 *.a
 mkmf.log
 *.swp
-*.gem
 /.idea/
