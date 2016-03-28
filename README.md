@@ -1,6 +1,6 @@
 [![Travis](https://travis-ci.org/datarator/datarator.png?branch=master)](https://travis-ci.org/datarator/datarator) [![Coverage Status](https://coveralls.io/repos/datarator/datarator/badge.png?branch=master)](https://coveralls.io/r/datarator/datarator?branch=master)
 [![Code Climate](https://codeclimate.com/github/datarator/datarator/badges/gpa.svg)](https://codeclimate.com/github/datarator/datarator)
-[![](https://badge.imagelayers.io/datarator/datarator:latest.svg)](https://imagelayers.io/?images=datarator/datarator:latest 'Get your own badge on imagelayers.io')
+[![](https://badge.imagelayers.io/datarator/datarator:edge.svg)](https://imagelayers.io/?images=datarator/datarator:edge 'Get your own badge on imagelayers.io')
 
 # Datarator
 
