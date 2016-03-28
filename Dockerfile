@@ -13,8 +13,8 @@ RUN apk --update upgrade && \
 	apk add ruby-dev ruby-rdoc ruby-irb ruby-bundler ruby-io-console && \
 # add native ext build deps
 	apk add build-base linux-headers && \
-# http server + client
-	apk add nginx curl && \
+# add nginx
+	apk add nginx && \
 	cd $DATARATOR_HOME && \
 # build + install datarator
 	bundle install --without development test && \
