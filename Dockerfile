@@ -2,11 +2,9 @@ FROM alpine:3.3
 
 MAINTAINER Peter Butkovic <butkovic@gmail.com>
 
-	ENV DATARATOR_HOME /usr/local/share/datarator
+ENV DATARATOR_HOME /usr/local/share/datarator
 
-	RUN mkdir -p $DATARATOR_HOME
-
-	COPY . $DATARATOR_HOME
+COPY . $DATARATOR_HOME
 
 RUN apk --update upgrade && \
 	apk add ca-certificates ruby && \
