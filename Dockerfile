@@ -2,11 +2,11 @@ FROM alpine:3.3
 
 MAINTAINER Peter Butkovic <butkovic@gmail.com>
 
-ENV DATARATOR_HOME /usr/local/share/datarator
+	ENV DATARATOR_HOME /usr/local/share/datarator
 
-RUN mkdir -p $DATARATOR_HOME
+	RUN mkdir -p $DATARATOR_HOME
 
-COPY . $DATARATOR_HOME
+	COPY . $DATARATOR_HOME
 
 RUN apk --update upgrade && \
 	apk add ca-certificates ruby && \
@@ -18,6 +18,7 @@ RUN apk --update upgrade && \
 	apk add nginx && \
 	cd $DATARATOR_HOME && \
 # build + install datarator
+	gem install bundler && \
 	bundle install --without development && \
 	gem build datarator.gemspec && \
 	gem install datarator-0.0.1.gem && \
