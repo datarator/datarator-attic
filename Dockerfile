@@ -2,16 +2,11 @@ FROM alpine:3.3
 
 MAINTAINER Peter Butkovic <butkovic@gmail.com>
 
-ENV DATARATOR_HOME=/usr/local/share/datarator
+ENV DATARATOR_HOME /usr/local/share/datarator
 
 RUN mkdir -p $DATARATOR_HOME
 
-COPY Gemfile $DATARATOR_HOME
-COPY datarator.gemspec $DATARATOR_HOME
-COPY LICENSE.txt $DATARATOR_HOME
-COPY README.md $DATARATOR_HOME
-COPY bin $DATARATOR_HOME/bin
-COPY lib $DATARATOR_HOME/lib
+COPY . $DATARATOR_HOME
 
 RUN apk --update upgrade && \
 	apk add ca-certificates ruby && \

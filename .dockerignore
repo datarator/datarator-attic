@@ -1,0 +1,12 @@
+/Gemfile.lock
+/coverage
+/spec
+*.bundle
+*.so
+*.o
+*.a
+mkmf.log
+*.swp
+/.*
+/tmp
+/log
