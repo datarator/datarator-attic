@@ -318,6 +318,9 @@ Following column types are available:
 		* [`name.suffix`](#namesuffix)
 		* [`name.title`](#nametitle)
 	* [`bitcoin.address`](#bitcoinaddress)
+	* credit card:
+	 	* [`credit_card.number`](#credit_cardnumber)
+	 	* [`credit_card.type`](#credit_cardtype)
 * with column nesting supported:
 	* [`list.seq`](#listseq)
 	* [`list.rand`](#listrand)
@@ -454,6 +457,30 @@ For **example**, input JSON:
 could result in value:
 
     	1HUoGjmgChmnxxYhz87YytV4gVjfPaExmh
+
+####credit_card.number
+
+Generates the random credit card number value.
+
+For **example**, input JSON:
+
+    	"columns":[{"name":"foo","type":"credit_card.number"}]
+
+could result in value:
+
+    	1212-1221-1121-1234
+
+####credit_card.type
+
+Generates the random credit card type value.
+
+For **example**, input JSON:
+
+    	"columns":[{"name":"foo","type":"credit_card.type"}]
+
+could result in value:
+
+    	visa
 
 ####list.seq
 

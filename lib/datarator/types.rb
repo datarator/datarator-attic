@@ -55,6 +55,7 @@ module Datarator
 
     require_relative 'type_name'
     require_relative 'type_bitcoin'
+    require_relative 'type_credit_card'
 
     TYPES = {
 
@@ -85,7 +86,12 @@ module Datarator
         TypeNameTitle.name => TypeNameTitle.new,
 
 	# bitcoin
-	BitcoinAddress.name => BitcoinAddress.new
+	BitcoinAddress.name => BitcoinAddress.new,
+
+	# credit card
+	TypeCreditCardNumber.name => TypeCreditCardNumber.new,
+	TypeCreditCardType.name => TypeCreditCardType.new
+
     }
   end
 end
