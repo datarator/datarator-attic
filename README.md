@@ -305,18 +305,19 @@ Legend:
 * `<options>` - (optional) column options (see [Options](#options))
 
 
-Following collumn types are available:
+Following column types are available:
 
 * without column nesting supported:
 	* [`const`](#const)
 	* [`row_index`](#row_index)
 	* [`copy`](#copy)
-	* name generating columns:
+	* name:
 		* [`name.name`](#namename)
 		* [`name.first_name`](#namefirst_name)
 		* [`name.prefix`](#nameprefix)
 		* [`name.suffix`](#namesuffix)
 		* [`name.title`](#nametitle)
+	* [`bitcoin.address`](#bitcoinaddress)
 * with column nesting supported:
 	* [`list.seq`](#listseq)
 	* [`list.rand`](#listrand)
@@ -430,7 +431,6 @@ could result in value:
 
     	IV
 
-
 ####name.title
 
 Generates the random name "title" value.
@@ -442,7 +442,19 @@ For **example**, input JSON:
 could result in value:
 
     	Legacy Creative Director
-  
+
+####bitcoin.address
+
+Generates the random bitcoin address value.
+
+For **example**, input JSON:
+
+    	"columns":[{"name":"foo","type":"bitcoin.address"}]
+
+could result in value:
+
+    	1HUoGjmgChmnxxYhz87YytV4gVjfPaExmh
+
 ####list.seq
 
 Picks next value in a sequence from the provided nested column values.

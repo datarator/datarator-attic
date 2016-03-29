@@ -34,7 +34,8 @@ module Datarator
 						{:name=>"name.last_name", :nested=>false, :options=>[]},
 						{:name=>"name.prefix", :nested=>false, :options=>[]},
 						{:name=>"name.suffix", :nested=>false, :options=>[]},
-						{:name=>"name.title", :nested=>false, :options=>[]}
+						{:name=>"name.title", :nested=>false, :options=>[]},
+						{:name=>"bitcoin.address", :nested=>false, :options=>[]}
 					])
 			end
 		end

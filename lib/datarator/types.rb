@@ -54,6 +54,7 @@ module Datarator
     require_relative 'type_join'
 
     require_relative 'type_name'
+    require_relative 'type_bitcoin'
 
     TYPES = {
 
@@ -81,7 +82,10 @@ module Datarator
         TypeNameLastName.name => TypeNameLastName.new,
         TypeNamePrefix.name => TypeNamePrefix.new,
         TypeNameSuffix.name => TypeNameSuffix.new,
-        TypeNameTitle.name => TypeNameTitle.new
+        TypeNameTitle.name => TypeNameTitle.new,
+
+	# bitcoin
+	BitcoinAddress.name => BitcoinAddress.new
     }
   end
 end
