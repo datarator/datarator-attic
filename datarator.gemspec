@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
 	spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
 	spec.require_paths = ["lib"]
 
-	spec.add_development_dependency "bundler", "~> 1.7"
+	# spec.add_development_dependency "bundler", "~> 1.7"
 	spec.add_development_dependency "rake", "~> 10.0"
 	spec.add_development_dependency "rspec", "~> 3.4"
 	spec.add_development_dependency "guard", "~> 2.13"
@@ -34,10 +34,10 @@ Gem::Specification.new do |spec|
 	spec.add_development_dependency "rack-test", "~> 0.6.3"
 	spec.add_development_dependency "ruby-prof", "~> 0.15.9"
 
-	spec.add_dependency "faker", "~> 1.6.3"
-	spec.add_dependency "json", "~> 1.8"
+	spec.add_runtime_dependency "faker", "~> 1.6.3"
+	spec.add_runtime_dependency "json", "~> 1.8"
 	# not in use (for now)
 	# spec.add_dependency "liquid", "~> 3.0.3"
-	spec.add_dependency "sinatra", "~> 1.4"
-	spec.add_dependency "unicorn", "~> 5.0"
+	spec.add_runtime_dependency "sinatra", "~> 1.4"
+	spec.add_runtime_dependency "unicorn", "~> 5.0"
 end

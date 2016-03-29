@@ -2,17 +2,16 @@ FROM alpine:3.3
 
 MAINTAINER Peter Butkovic <butkovic@gmail.com>
 
-ENV DATARATOR_HOME=/usr/local/share/datarator \
-	PATH=/root/.gem/ruby/2.2.0/bin:$PATH
+ENV DATARATOR_HOME=/usr/local/share/datarator
 
 RUN mkdir -p $DATARATOR_HOME
 
-COPY ./Gemfile $DATARATOR_HOME
-COPY ./*.gemspec $DATARATOR_HOME
-COPY ./LICENSE.txt $DATARATOR_HOME
-COPY ./README.md $DATARATOR_HOME
-COPY ./bin $DATARATOR_HOME/bin
-COPY ./lib $DATARATOR_HOME/lib
+COPY Gemfile $DATARATOR_HOME
+COPY datarator.gemspec $DATARATOR_HOME
+COPY LICENSE.txt $DATARATOR_HOME
+COPY README.md $DATARATOR_HOME
+COPY bin $DATARATOR_HOME/bin
+COPY lib $DATARATOR_HOME/lib
 
 RUN apk --update upgrade && \
 	apk add ca-certificates ruby && \
@@ -24,7 +23,7 @@ RUN apk --update upgrade && \
 	apk add nginx && \
 	cd $DATARATOR_HOME && \
 # build + install datarator
-	bundle install --without development test && \
+	bundle install --without development && \
 	gem build datarator.gemspec && \
 	gem install datarator-0.0.1.gem && \
 # remove native ext build deps
