@@ -318,6 +318,9 @@ Following column types are available:
 		* [`name.suffix`](#namesuffix)
 		* [`name.title`](#nametitle)
 	* [`bitcoin.address`](#bitcoinaddress)
+	* code:
+	 	* [`code.ean`](#codeean)
+	 	* [`code.isbn`](#codeisbn)
 	* credit card:
 	 	* [`credit_card.number`](#credit_cardnumber)
 	 	* [`credit_card.type`](#credit_cardtype)
@@ -457,6 +460,30 @@ For **example**, input JSON:
 could result in value:
 
     	1HUoGjmgChmnxxYhz87YytV4gVjfPaExmh
+
+####code.ean
+
+Generates the random ean code value.
+
+For **example**, input JSON:
+
+    	"columns":[{"name":"foo","type":"code.ean"}]
+
+could result in value:
+
+    	4600051000057
+
+####code.isbn
+
+Generates the random isbn code value.
+
+For **example**, input JSON:
+
+    	"columns":[{"name":"foo","type":"code.isbn"}]
+
+could result in value:
+
+    	759021701-8
 
 ####credit_card.number
 
