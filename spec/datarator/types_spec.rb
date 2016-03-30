@@ -38,6 +38,8 @@ module Datarator
 						{:name=>"bitcoin.address", :nested=>false, :options=>[]},
 						{:name=>"code.isbn", :nested=>false, :options=>[]},
 						{:name=>"code.ean", :nested=>false, :options=>[]},
+						{:name=>"color.hex", :nested=>false, :options=>[]},
+						{:name=>"color.name", :nested=>false, :options=>[]},
 						{:name=>"credit_card.number", :nested=>false, :options=>[]},
 						{:name=>"credit_card.type", :nested=>false, :options=>[]}
 					])

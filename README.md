@@ -321,6 +321,9 @@ Following column types are available:
 	* code:
 	 	* [`code.ean`](#codeean)
 	 	* [`code.isbn`](#codeisbn)
+	* color:
+	 	* [`color.hex`](#colorhex)
+	 	* [`color.name`](#colorname)
 	* credit card:
 	 	* [`credit_card.number`](#credit_cardnumber)
 	 	* [`credit_card.type`](#credit_cardtype)
@@ -484,6 +487,30 @@ For **example**, input JSON:
 could result in value:
 
     	759021701-8
+
+####color.hex
+
+Generates the random hex color value.
+
+For **example**, input JSON:
+
+    	"columns":[{"name":"foo","type":"color.hex"}]
+
+could result in value:
+
+    	#31a785
+
+####color.name
+
+Generates the random color name value.
+
+For **example**, input JSON:
+
+    	"columns":[{"name":"foo","type":"color.name"}]
+
+could result in value:
+
+    	red
 
 ####credit_card.number
 
