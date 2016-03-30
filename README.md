@@ -70,7 +70,16 @@
 
 ###JSON syntax:
  
-	{"template":"<template_name>","document":"<document_name>","count":"<count>","locale":"<locale>","columns":[<column>,<column>,...],"options":<options>}
+ ```javascript
+{
+	"template": "<template_name>",
+	"document": "<document_name>",
+	"count": "<count>",
+	"locale": "<locale>",
+	"columns": [ < column > , < column > , ...],
+	"options": < options >
+}
+```
 
 Legend:
 
@@ -102,9 +111,37 @@ Optional [options](#options) available:
 * `"separator":"<separator>"` - the separator string to be used for joining values.
 
 For **example**, input JSON:
-
-    	{"template":"csv","document":"foo_document","count":"3","columns":[{"name":"name1","type":"const", "options":{"value":"value1"}},{"name":"name2","type":"const","options":{"value":"value2"}},{"name":"name3","type":"const","emptyPercent":"100","options":{"value":"value2"}}],"options":{"header":"true","empty_value":"NULL"}}
-
+```javascript
+{
+	"template": "csv",
+	"document": "foo_document",
+	"count": "3",
+	"columns": [{
+		"name": "name1",
+		"type": "const",
+		"options": {
+			"value": "value1"
+		}
+	}, {
+		"name": "name2",
+		"type": "const",
+		"options": {
+			"value": "value2"
+		}
+	}, {
+		"name": "name3",
+		"type": "const",
+		"emptyPercent": "100",
+		"options": {
+			"value": "value2"
+		}
+	}],
+	"options": {
+		"header": "true",
+		"empty_value": "NULL"
+	}
+}
+```
 results in:
 
     	name1,name2,name3
@@ -117,15 +154,32 @@ results in:
 Enabled via: `"template":"sql"`.
 
 For **example**, input JSON:
-
-    	{"template":"sql","document":"foo_document","count":"3","columns":[{"name":"name1","type":"const", "options":{"value":"value1"}},{"name":"name2","type":"const","options":{"value":"value2"}}]}
-
+```javascript
+{
+	"template": "sql",
+	"document": "foo_document",
+	"count": "3",
+	"columns": [{
+		"name": "name1",
+		"type": "const",
+		"options": {
+			"value": "value1"
+		}
+	}, {
+		"name": "name2",
+		"type": "const",
+		"options": {
+			"value": "value2"
+		}
+	}]
+}
+```
 results in:
-
+```sql
     	INSERT INTO (name1,name2) values ('value1','value2');
     	INSERT INTO (name1,name2) values ('value1','value2');
     	INSERT INTO (name1,name2) values ('value1','value2');
-
+```
 ####liquibase xml
 
 Enabled via: `"template":"liquibase.xml"`.
@@ -135,11 +189,31 @@ Optional [options](#options) available:
 * `"changeset":"true"` / `"changeset":"false"` - whether changeset section should be included or not. By default is `false`.
 
 For **example**, input JSON:
-
-    	{"template":"liquibase.xml","document":"foo_document","count":"3","columns":[{"name":"name1","type":"const", "options":{"value":"value1"}},{"name":"name2","type":"const","options":{"value":"value2"}}],"options":{"changeset":"true"}}
-
+```javascript
+{
+	"template": "liquibase.xml",
+	"document": "foo_document",
+	"count": "3",
+	"columns": [{
+		"name": "name1",
+		"type": "const",
+		"options": {
+			"value": "value1"
+		}
+	}, {
+		"name": "name2",
+		"type": "const",
+		"options": {
+			"value": "value2"
+		}
+	}],
+	"options": {
+		"changeset": "true"
+	}
+}
+```
 results in:
-
+```xml
 	<databaseChangeLog
 	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
 	  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -159,7 +233,7 @@ results in:
 	      <column name="name2" value="value2"/>
 	    </insert>
 	  </changeset>
-
+```
 ####liquibase yaml
 
 Enabled via: `"template":"liquibase.yaml"`.
@@ -169,11 +243,31 @@ Optional [options](#options) available:
 * `"changeset":"true"` / `"changeset":"false"` - whether changeset section should be included or not. By default is `false`.
 
 For **example**, input JSON:
-
-    	{"template":"liquibase.yaml","document":"foo_document","count":"3","columns":[{"name":"name1","type":"const", "options":{"value":"value1"}},{"name":"name2","type":"const","options":{"value":"value2"}}],"options":{"changeset":"true"}}
-
+```javascript
+{
+	"template": "liquibase.yaml",
+	"document": "foo_document",
+	"count": "3",
+	"columns": [{
+		"name": "name1",
+		"type": "const",
+		"options": {
+			"value": "value1"
+		}
+	}, {
+		"name": "name2",
+		"type": "const",
+		"options": {
+			"value": "value2"
+		}
+	}],
+	"options": {
+		"changeset": "true"
+	}
+}
+```
 results in:
-
+```yaml
 	databaseChangeLog:
 	  - changeset
 	      author: datarator.io
@@ -206,7 +300,7 @@ results in:
 		      - column:
 			  name: name2
 			  value: value2
-
+```
 ####liquibase json
 
 Enabled via: `"template":"liquibase.json"`.
@@ -216,11 +310,31 @@ Optional [options](#options) available:
 * `"changeset":"true"` / `"changeset":"false"` - whether changeset section should be included or not. By default is `false`.
 
 For **example**, input JSON:
-
-    	{"template":"liquibase.json","document":"foo_document","count":"3","columns":[{"name":"name1","type":"const", "options":{"value":"value1"}},{"name":"name2","type":"const","options":{"value":"value2"}}],"options":{"changeset":"true"}}
-
+```javascript
+{
+	"template": "liquibase.json",
+	"document": "foo_document",
+	"count": "3",
+	"columns": [{
+		"name": "name1",
+		"type": "const",
+		"options": {
+			"value": "value1"
+		}
+	}, {
+		"name": "name2",
+		"type": "const",
+		"options": {
+			"value": "value2"
+		}
+	}],
+	"options": {
+		"changeset": "true"
+	}
+}
+```
 results in:
-
+```javascript
     databaseChangeLog: [
         {
            "changeset"
@@ -277,7 +391,7 @@ results in:
                 ]
             }
         ]
-
+```
 ###Options
 
 Holds [template](#output-templates) (if present in root node) or [column](#column) specific options (if present in column node).
@@ -294,8 +408,14 @@ Legend:
 ###Column
 
 Column syntax:
-
-    	{"name":"<name>","type":"<type>","emptyPercent":"<emptyPercent>","options":<options>}
+```javascript
+{
+	"name": "<name>",
+	"type": "<type>",
+	"emptyPercent": "<emptyPercent>",
+	"options": < options >
+}
+```
 
 Legend:
 
@@ -341,9 +461,15 @@ Mandatory [options](#options) available:
 * `"value":"<value>"` - the constant value to generate.
 
 For **example**, input JSON:
-
-    	"columns":[{"name":"name1","type":"const", "options":{"value":"value1"}}]
-
+```javascript
+"columns": [{
+	"name": "name1",
+	"type": "const",
+	"options": {
+		"value": "value1"
+	}
+}]
+```
 results in value:
 
     	value1
@@ -353,9 +479,12 @@ results in value:
 Generates row index of the currently generated row.
 
 For **example**, input JSON:
-
-    	"columns":[{"name":"name1","type":"row_index"}]
-
+```javascript
+"columns": [{
+	"name": "name1",
+	"type": "row_index"
+}]
+```
 results in value:
 
     	0
@@ -373,8 +502,21 @@ Mandatory [options](#options) available:
 * `"from":"<column_name>"` - the column name whose value is to be copied.
 
 For **example**, input JSON:
-
-    	"columns":[{"name":"name1","type":"const", "options":{"value":"value1"}}, {"name":"name2","type":"copy", "options":{"from":"name1"}}]
+```javascript
+"columns": [{
+	"name": "name1",
+	"type": "const",
+	"options": {
+		"value": "value1"
+	}
+}, {
+	"name": "name2",
+	"type": "copy",
+	"options": {
+		"from": "name1"
+	}
+}]
+```
 
 results (for columns: `name1` as well as `name2`) in value:
 
@@ -385,9 +527,12 @@ results (for columns: `name1` as well as `name2`) in value:
 Generates the random name value.
 
 For **example**, input JSON:
-
-    	"columns":[{"name":"name1","type":"name.name"}]
-
+```javascript
+"columns": [{
+	"name": "name1",
+	"type": "name.name"
+}]
+```
 could result in value:
 
     	Christophe Bartell
@@ -397,9 +542,12 @@ could result in value:
 Generates the random first name value.
 
 For **example**, input JSON:
-
-    	"columns":[{"name":"name1","type":"name.first_name"}]
-
+```javascript
+"columns": [{
+	"name": "name1",
+	"type": "name.first_name"
+}]
+```
 could result in value:
 
     	Christophe
@@ -409,9 +557,12 @@ could result in value:
 Generates the random last name value.
 
 For **example**, input JSON:
-
-    	"columns":[{"name":"name1","type":"name.last_name"}]
-
+```javascript
+"columns": [{
+	"name": "name1",
+	"type": "name.last_name"
+}]
+```
 could result in value:
 
     	Bartell
@@ -421,9 +572,12 @@ could result in value:
 Generates the random name "prefix" value.
 
 For **example**, input JSON:
-
-    	"columns":[{"name":"name1","type":"name.prefix"}]
-
+```javascript
+"columns": [{
+	"name": "name1",
+	"type": "name.prefix"
+}]
+```
 could result in value:
 
     	Mr.
@@ -433,9 +587,12 @@ could result in value:
 Generates the random name "suffix" value.
 
 For **example**, input JSON:
-
-    	"columns":[{"name":"name1","type":"name.suffix"}]
-
+```javascript
+"columns": [{
+	"name": "name1",
+	"type": "name.suffix"
+}]
+```
 could result in value:
 
     	IV
@@ -445,8 +602,12 @@ could result in value:
 Generates the random name "title" value.
 
 For **example**, input JSON:
-
-    	"columns":[{"name":"name1","type":"name.title"}]
+```javascript
+"columns": [{
+	"name": "name1",
+	"type": "name.title"
+}]
+```
 
 could result in value:
 
@@ -457,8 +618,12 @@ could result in value:
 Generates the random bitcoin address value.
 
 For **example**, input JSON:
-
-    	"columns":[{"name":"foo","type":"bitcoin.address"}]
+```javascript
+"columns": [{
+	"name": "foo",
+	"type": "bitcoin.address"
+}]
+```
 
 could result in value:
 
@@ -469,8 +634,12 @@ could result in value:
 Generates the random ean code value.
 
 For **example**, input JSON:
-
-    	"columns":[{"name":"foo","type":"code.ean"}]
+```javascript
+"columns": [{
+	"name": "foo",
+	"type": "code.ean"
+}]
+```
 
 could result in value:
 
@@ -481,8 +650,12 @@ could result in value:
 Generates the random isbn code value.
 
 For **example**, input JSON:
-
-    	"columns":[{"name":"foo","type":"code.isbn"}]
+```javascript
+"columns": [{
+	"name": "foo",
+	"type": "code.isbn"
+}]
+```
 
 could result in value:
 
@@ -493,9 +666,12 @@ could result in value:
 Generates the random hex color value.
 
 For **example**, input JSON:
-
-    	"columns":[{"name":"foo","type":"color.hex"}]
-
+```javascript
+"columns": [{
+	"name": "foo",
+	"type": "color.hex"
+}]
+```
 could result in value:
 
     	#31a785
@@ -505,8 +681,12 @@ could result in value:
 Generates the random color name value.
 
 For **example**, input JSON:
-
-    	"columns":[{"name":"foo","type":"color.name"}]
+```javascript
+"columns": [{
+	"name": "foo",
+	"type": "color.name"
+}]
+```
 
 could result in value:
 
@@ -517,8 +697,12 @@ could result in value:
 Generates the random credit card number value.
 
 For **example**, input JSON:
-
-    	"columns":[{"name":"foo","type":"credit_card.number"}]
+```javascript
+"columns": [{
+	"name": "foo",
+	"type": "credit_card.number"
+}]
+```
 
 could result in value:
 
@@ -529,8 +713,12 @@ could result in value:
 Generates the random credit card type value.
 
 For **example**, input JSON:
-
-    	"columns":[{"name":"foo","type":"credit_card.type"}]
+```javascript
+"columns": [{
+	"name": "foo",
+	"type": "credit_card.type"
+}]
+```
 
 could result in value:
 
@@ -541,8 +729,25 @@ could result in value:
 Picks next value in a sequence from the provided nested column values.
 
 For **example**, input JSON:
-
-    	"columns":[{"name":"name1","type":"list.seq","columns":[{"name":"name1","type":"const", "options":{"value":"value1"}},{"name":"name2","type":"const", "options":{"value":"value2"}}]}]
+```javascript
+"columns": [{
+	"name": "name1",
+	"type": "list.seq",
+	"columns": [{
+		"name": "name1",
+		"type": "const",
+		"options": {
+			"value": "value1"
+		}
+	}, {
+		"name": "name2",
+		"type": "const",
+		"options": {
+			"value": "value2"
+		}
+	}]
+}]
+```
 
  results in values:
 
@@ -557,8 +762,25 @@ For **example**, input JSON:
 Picks random value from the provided nested column values.
 
 For **example**, input JSON:
-
-    	"columns":[{"name":"name1","type":"list.seq","columns":[{"name":"name1","type":"const", "options":{"value":"value1"}},{"name":"name2","type":"const", "options":{"value":"value2"}}]}]
+```javascript
+"columns": [{
+	"name": "name1",
+	"type": "list.seq",
+	"columns": [{
+		"name": "name1",
+		"type": "const",
+		"options": {
+			"value": "value1"
+		}
+	}, {
+		"name": "name2",
+		"type": "const",
+		"options": {
+			"value": "value2"
+		}
+	}]
+}]
+```
 
  could result in values:
 
@@ -577,17 +799,52 @@ Optional [options](#options) available:
 * `"separator":"<separator>"` - the separator string to be used for joining values.
 
 For **example** (without separator), input JSON:
-
-    	"columns":[{"name":"name1","type":"join","columns":[{"name":"name1","type":"const", "options":{"value":"value1"}},{"name":"name2","type":"const", "options":{"value":"value2"}}]}]
+```javascript
+"columns": [{
+	"name": "name1",
+	"type": "join",
+	"columns": [{
+		"name": "name1",
+		"type": "const",
+		"options": {
+			"value": "value1"
+		}
+	}, {
+		"name": "name2",
+		"type": "const",
+		"options": {
+			"value": "value2"
+		}
+	}]
+}]
+```
 
  would result in value:
 
     	value1value2
 
 For **example** (with separator), input JSON:
-
-    	"columns":[{"name":"name1","type":"join","columns":[{"name":"name1","type":"const", "options":{"value":"value1"}},{"name":"name2","type":"const", "options":{"value":"value2"}}]},"options":{"separator":", "}]
-
+```javascript
+"columns": [{
+	"name": "name1",
+	"type": "join",
+	"columns": [{
+		"name": "name1",
+		"type": "const",
+		"options": {
+			"value": "value1"
+		}
+	}, {
+		"name": "name2",
+		"type": "const",
+		"options": {
+			"value": "value2"
+		}
+	}]
+}, "options": {
+	"separator": ", "
+}]
+```
  would result in value:
 
     	value1, value2
