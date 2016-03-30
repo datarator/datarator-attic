@@ -3,7 +3,7 @@ require 'faker'
 
 module Datarator
 
-	class Bitcoin < Type
+	class TypeBitcoin < Type
 		class << self
 			def name
 				'bitcoin'
@@ -19,11 +19,11 @@ module Datarator
 		end
 	end
 
-	class BitcoinAddress < Bitcoin
+	class TypeBitcoinAddress < TypeBitcoin
 
 		class << self
 			def name
-				"#{Bitcoin.name}.address"
+				"#{TypeBitcoin.name}.address"
 			end
 		end
 

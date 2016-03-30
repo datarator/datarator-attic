@@ -86,7 +86,7 @@ module Datarator
         TypeNameTitle.name => TypeNameTitle.new,
 
 	# bitcoin
-	BitcoinAddress.name => BitcoinAddress.new,
+	TypeBitcoinAddress.name => TypeBitcoinAddress.new,
 
 	# credit card
 	TypeCreditCardNumber.name => TypeCreditCardNumber.new,
