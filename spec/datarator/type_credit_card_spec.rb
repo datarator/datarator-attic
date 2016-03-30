@@ -34,7 +34,9 @@ module Datarator
 
 		describe '.value' do
 			it 'returns credit card type' do
-				expect(TypeCreditCardType.new.value nil).to match(/^[_a-zA-Z-]+$/)
+				# temporary solution, till merged: https://github.com/stympy/faker/pull/537
+				# expect(TypeCreditCardType.new.value nil).to match(/^[_a-zA-Z-]+$/)
+				expect(TypeCreditCardType.new.value nil).to match(/^['_a-zA-Z-]+$/)
 			end
 		end
 
