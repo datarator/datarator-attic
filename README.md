@@ -438,6 +438,10 @@ Following column types are available:
 		* [`name.suffix`](#namesuffix)
 		* [`name.title`](#nametitle)
 	* [`bitcoin.address`](#bitcoinaddress)
+	* book:
+		* [`book.name`](#bookname)
+		* [`book.publisher`](#bookpublisher)
+		* [`book.genre`](#bookgenre)
 	* code:
 	 	* [`code.ean`](#codeean)
 	 	* [`code.isbn`](#codeisbn)
@@ -628,6 +632,54 @@ For **example**, input JSON:
 could result in value:
 
     	1HUoGjmgChmnxxYhz87YytV4gVjfPaExmh
+
+####book.name
+
+Generates the random book name value.
+
+For **example**, input JSON:
+```javascript
+"columns": [{
+	"name": "foo",
+	"type": "book.name"
+}]
+```
+
+could result in value:
+
+    	The Odd Sister
+
+####book.publisher
+
+Generates the random book publisher value.
+
+For **example**, input JSON:
+```javascript
+"columns": [{
+	"name": "foo",
+	"type": "book.publisher"
+}]
+```
+
+could result in value:
+
+    	Opus Reader
+
+####book.genre
+
+Generates the random book genre value.
+
+For **example**, input JSON:
+```javascript
+"columns": [{
+	"name": "foo",
+	"type": "book.genre"
+}]
+```
+
+could result in value:
+
+    	Mystery
 
 ####code.ean
 
