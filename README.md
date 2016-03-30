@@ -339,7 +339,7 @@ results in:
         {
            "changeset"
                 "author": "datarator.io"
-                "id": foo_document-1418426254"
+                "id": "foo_document-1418426254"
                 "changes": [
                     {
 		    	"insert": {
