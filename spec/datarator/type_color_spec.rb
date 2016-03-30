@@ -33,7 +33,7 @@ module Datarator
 
 		describe '.value' do
 			it 'returns color name' do
-				expect(TypeColorName.new.value nil).to match(/^[a-z]+$/)
+				expect(TypeColorName.new.value nil).to match(/^[a-z ]+$/)
 			end
 		end
 
