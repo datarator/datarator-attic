@@ -5,9 +5,5 @@ spec
 *.so
 *.o
 *.a
-mkmf.log
-*.swp
 .*
-tmp
-log
 vendor

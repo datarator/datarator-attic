@@ -20,11 +20,11 @@ RUN apk --update upgrade && \
 	bundle install --without development && \
 	gem build datarator.gemspec && \
 	gem install datarator-0.0.1.gem && \
-	gem uninstall bundler && \
 # remove native ext build deps
 	apk del build-base linux-headers && \
 # remove gem build deps
 	apk del ruby-dev ruby-rdoc ruby-irb ruby-bundler ruby-io-console && \
+	gem uninstall bundler && \
 # clean apk cache
 	rm -rf /var/cache/apk/*
 
