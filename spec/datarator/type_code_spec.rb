@@ -33,7 +33,7 @@ module Datarator
 
 		describe '.value' do
 			it 'returns isbn code' do
-				expect(TypeCodeIsbn.new.value nil).to match(/^[0-9-]+$/)
+				expect(TypeCodeIsbn.new.value nil).to match(/^[A-Z0-9-]+$/)
 			end
 		end
 
