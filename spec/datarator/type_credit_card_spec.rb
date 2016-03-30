@@ -34,7 +34,7 @@ module Datarator
 
 		describe '.value' do
 			it 'returns credit card type' do
-				expect(TypeCreditCardType.new.value nil).to match(/^[a-zA-Z-]+$/)
+				expect(TypeCreditCardType.new.value nil).to match(/^[_a-zA-Z-]+$/)
 			end
 		end
 
