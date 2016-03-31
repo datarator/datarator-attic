@@ -1,5 +1,5 @@
-require_relative 'type.rb'
-require_relative 'option_copy_from.rb'
+require_relative 'type'
+require_relative 'option_copy_from'
 
 module Datarator
 
