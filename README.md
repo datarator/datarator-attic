@@ -779,7 +779,7 @@ could result in value:
 
 ####regexp
 
-Generates the random string matching specified regeular expression.
+Generates the random string matching specified regular expression.
 
 Mandatory [options](#options) available:
 
