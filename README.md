@@ -451,6 +451,7 @@ Following column types are available:
 	* credit card:
 	 	* [`credit_card.number`](#credit_cardnumber)
 	 	* [`credit_card.type`](#credit_cardtype)
+	* [`regexp`](#regexp)
 * with column nesting supported:
 	* [`list.seq`](#listseq)
 	* [`list.rand`](#listrand)
@@ -775,6 +776,33 @@ For **example**, input JSON:
 could result in value:
 
     	visa
+
+####regexp
+
+Generates the random string matching specified regeular expression.
+
+Mandatory [options](#options) available:
+
+* `"pattern":"<pattern>"` - the pattern to match.
+
+Optional [options](#options) available:
+
+* `"escape": true|false` - whether to escape (quote) result or not (used for specfific output formats only).
+
+For **example**, input JSON:
+```javascript
+"columns": [{
+	"name": "foo",
+	"type": "regexp",
+	"options": {
+		"pattern": "[0-9]{1,4}"
+	}
+}]
+```
+
+could result in value:
+
+    	720
 
 ####list.seq
 

@@ -60,6 +60,8 @@ module Datarator
     require_relative 'type_color'
     require_relative 'type_credit_card'
 
+    require_relative 'type_regexp'
+
     TYPES = {
 
         #
@@ -106,8 +108,12 @@ module Datarator
 
 	# credit card
 	TypeCreditCardNumber.name => TypeCreditCardNumber.new,
-	TypeCreditCardType.name => TypeCreditCardType.new
+	TypeCreditCardType.name => TypeCreditCardType.new,
 
+ 	#
+        # regexp-examples
+        #
+	TypeRegexp.name => TypeRegexp.new
     }
   end
 end

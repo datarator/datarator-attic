@@ -44,7 +44,8 @@ module Datarator
 						{:name=>"color.hex", :nested=>false, :options=>[]},
 						{:name=>"color.name", :nested=>false, :options=>[]},
 						{:name=>"credit_card.number", :nested=>false, :options=>[]},
-						{:name=>"credit_card.type", :nested=>false, :options=>[]}
+						{:name=>"credit_card.type", :nested=>false, :options=>[]},
+						{:name=>"regexp", :nested=>false, :options=>[{:name=>"pattern", :mandatory=>true, :boolean=>false}, {:name=>"escape", :mandatory=>false, :boolean=>true}]}
 					])
 			end
 		end

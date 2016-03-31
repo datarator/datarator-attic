@@ -14,7 +14,7 @@ module Datarator
 			def value (options, name)
 				opt = option name
 				if !opt.mandatory? && (options.nil? || options[name].nil?)
-					return opt.boolean? ? false : nil
+					return nil
 				end
 
 				if opt.boolean?
@@ -31,6 +31,8 @@ module Datarator
 
 		require_relative 'option_const_value'
 		require_relative 'option_copy_from'
+		require_relative 'option_regexp_pattern'
+		require_relative 'option_escape'
 
 		require_relative 'option_separator'
 
@@ -43,7 +45,9 @@ module Datarator
 			# type
 			OptionConstValue.name => OptionConstValue.new,
 			OptionCopyFrom.name => OptionCopyFrom.new,
-			
+			OptionRegexpPattern.name => OptionRegexpPattern.new,
+			OptionEscape.name => OptionEscape.new,
+
 			# mixed = template + type
 			OptionSeparator.name => OptionSeparator.new
 		}

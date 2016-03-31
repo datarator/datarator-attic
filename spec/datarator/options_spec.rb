@@ -34,10 +34,10 @@ module Datarator
 			end
 
 			context 'having optional boolean option not explicitly set' do
-				it 'sets to false' do
-					expect(Options.value(nil, OptionHeader.name)).to be false
-					expect(Options.value({}, OptionHeader.name)).to be false
-					expect(Options.value({ 'other_option' => 'aaa' }, OptionHeader.name)).to be false
+				it 'sets to nil' do
+					expect(Options.value(nil, OptionHeader.name)).to eq nil
+					expect(Options.value({}, OptionHeader.name)).to eq nil
+					expect(Options.value({ 'other_option' => 'aaa' }, OptionHeader.name)).to eq nil
 				end
 			end
 
