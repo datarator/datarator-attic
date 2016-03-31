@@ -2,7 +2,8 @@ FROM alpine:3.3
 
 MAINTAINER Peter Butkovic <butkovic@gmail.com>
 
-ENV DATARATOR_HOME /usr/local/share/datarator
+ENV DATARATOR_HOME=/usr/local/share/datarator \
+	RACK_ENV=production
 
 COPY . $DATARATOR_HOME
 
@@ -34,4 +35,5 @@ WORKDIR $DATARATOR_HOME
 
 EXPOSE 9292
 
-CMD unicorn -c config/unicorn.rb -E production -D && nginx -g "daemon off;"
+# CMD unicorn -c config/unicorn.rb -E production -D && nginx -g "daemon off;"
+CMD puma -d -C config/puma.rb -e ${RACK_ENV:-development} && nginx -g "daemon off;"

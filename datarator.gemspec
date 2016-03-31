@@ -40,5 +40,8 @@ Gem::Specification.new do |spec|
 	# not in use (for now)
 	# spec.add_dependency "liquid", "~> 3.0.3"
 	spec.add_runtime_dependency "sinatra", "~> 1.4"
-	spec.add_runtime_dependency "unicorn", "~> 5.0"
+	#
+	# let's use puma (as heroku guys recommend)
+	# spec.add_runtime_dependency "unicorn", "~> 5.0"
+	spec.add_runtime_dependency "puma", "~> 3.2"
 end
