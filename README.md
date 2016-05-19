@@ -4,7 +4,7 @@
 
 # Datarator
 
-(stateless) data generator, with HTTP based JSON API.
+Stateless data generator with HTTP based JSON API.
 
 # Running
 
@@ -12,12 +12,12 @@
 
 * Using official immage:
 
-	docker run -p 9292:9292 --rm --name datarator datarator/datarator:edge
+		docker run -p 9292:9292 --rm --name datarator datarator/datarator:edge
 
 * or building docker image locally:
 
-	docker build -t datarator:edge . && \
-	docker run -p 9292:9292 --rm --name datarator datarator:edge
+		docker build -t datarator:edge . && \
+		docker run -p 9292:9292 --rm --name datarator datarator:edge
 
 ## Build & Run
 
