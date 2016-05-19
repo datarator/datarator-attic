@@ -4,28 +4,30 @@
 
 # Datarator
 
-(stateless) data generator, with:
+(stateless) data generator, with HTTP based JSON API.
 
-<!-- * web UI as well as -->
-* HTTP based JSON API.
+# Running
 
-# Hosting options
+## Run dockerized
 
-<!-- * hosted instance - **TODO link** -->
-* [self-hosted](#self-hosted) - if you want to use your own infrastructure.
-* [dockerized pre-built](#dockerized pre-built) - using pre-built docker image (from dockerhub).
-* [dockerized self-built](#dockerized self-built) - using self-built docker image.
+* Using official immage:
 
-## Self-hosted
+	docker run -p 9292:9292 --rm --name datarator datarator/datarator:edge
 
-### Build from source & run
+* or building docker image locally:
+
+	docker build -t datarator:edge . && \
+	docker run -p 9292:9292 --rm --name datarator datarator:edge
+
+## Build & Run
 
 1. make sure to have ruby + bundler installed
 	for Ubuntu run:
 
 		sudo apt-get install ruby ruby-dev
 		gem install bundler --user-install
-1. build from source (TODO outdated as UI was added):
+
+1. build from source:
 
 		git clone https://github.com/datarator/datarator.git && \
 		pushd datarator && \
@@ -33,42 +35,22 @@
 		gem build datarator.gemspec && \
 		gem install datarator-0.0.1.gem && \
 		popd
+
 1. and run:
 
 		datarator
+
 1. console should contain:
 
 		Datarator starting ...
 
-##API options
+# Use
 
-* `<server-url>` - web UI - to be used for occasional usage or to create JSON interactively or
-* POST: `<server-url>/dump` - HTTP JSON API - for reproducable test data.
+	curl -H "content-type: application/json" -X POST -d '{"template":"csv","document":"foo_document","count":"1","columns":[{"name":"greeting","type":"const", "options":{"value":"hello"}},{"name":"from","type":"const","options":{"value":"from"}},{"name":"server","type":"const","options":{"value":"datarator"}}],"options":{"header":"false", "separator": " "}}' http://127.0.0.1:9292/api/schemas
 
-## Dockerized pre-built
+# JSON API
 
-1. run via:
-
-	docker run -p 9292:9292 --rm --name datarator datarator/datarator:edge
-2. test sample:
-
-	curl -h "content-type: application/json" -x post -d '{"template":"csv","document":"foo_document","count":"1","columns":[{"name":"greeting","type":"const", "options":{"value":"hello"}},{"name":"from","type":"const","options":{"value":"from"}},{"name":"server","type":"const","options":{"value":"datarator"}}],"options":{"header":"false", "separator": " "}}' http://127.0.0.1:9292/api/schemas
-
-## Dockerized self-built
-
-1. build docker image:
-
-	docker build -t datarator:edge .
-1. run docker container via:
-
-	docker run -p 9292:9292 --rm --name datarator datarator:edge
-1. test sample:
-
-	curl -h "content-type: application/json" -x post -d '{"template":"csv","document":"foo_document","count":"1","columns":[{"name":"greeting","type":"const", "options":{"value":"hello"}},{"name":"from","type":"const","options":{"value":"from"}},{"name":"server","type":"const","options":{"value":"datarator"}}],"options":{"header":"false", "separator": " "}}' http://127.0.0.1:9292/api/schemas
-
-## JSON API
-
-###JSON syntax:
+##JSON syntax:
  
  ```javascript
 {
@@ -90,7 +72,7 @@ Legend:
 * `<column>` - column to generate (see [Column](#column))
 * `<options>` - options for generation (see [Options](#options))
 
-###Output templates
+##Output templates
 
 Following output templates are available:
 
@@ -100,7 +82,7 @@ Following output templates are available:
 * [`liquibase yaml`](#liquibase-yaml)
 * [`liquibase json`](#liquibase-json)
 
-####csv
+###csv
 
 Enabled via: `"template":"csv"`.
 
@@ -149,7 +131,7 @@ results in:
     	value1,value2,NULL
     	value1,value2,NULL
 
-####sql
+###sql
 
 Enabled via: `"template":"sql"`.
 
@@ -180,7 +162,7 @@ results in:
     	INSERT INTO (name1,name2) values ('value1','value2');
     	INSERT INTO (name1,name2) values ('value1','value2');
 ```
-####liquibase xml
+###liquibase xml
 
 Enabled via: `"template":"liquibase.xml"`.
 
@@ -234,7 +216,7 @@ results in:
 	    </insert>
 	  </changeset>
 ```
-####liquibase yaml
+###liquibase yaml
 
 Enabled via: `"template":"liquibase.yaml"`.
 
@@ -392,7 +374,7 @@ results in:
             }
         ]
 ```
-###Options
+##Options
 
 Holds [template](#output-templates) (if present in root node) or [column](#column) specific options (if present in column node).
 
@@ -405,7 +387,7 @@ Legend:
 * `<name>` - name of the option
 * `<value>` - value of the option
 
-###Column
+##Column
 
 Column syntax:
 ```javascript
@@ -457,7 +439,7 @@ Following column types are available:
 	* [`list.rand`](#listrand)
 	* [`join`](#join)
 
-####const
+###const
 
 Generates constant value provided in options.
 
@@ -479,7 +461,7 @@ results in value:
 
     	value1
 
-####row_index
+###row_index
 
 Generates row index of the currently generated row.
 
@@ -498,7 +480,7 @@ results in value:
     	3
     	...
 
-####copy
+###copy
 
 Generates the same value as the column referred.
 
@@ -527,7 +509,7 @@ results (for columns: `name1` as well as `name2`) in value:
 
     	value1
 
-####name.name
+###name.name
 
 Generates the random name value.
 
@@ -542,7 +524,7 @@ could result in value:
 
     	Christophe Bartell
 
-####name.first_name
+###name.first_name
 
 Generates the random first name value.
 
@@ -557,7 +539,7 @@ could result in value:
 
     	Christophe
     	
-####name.last_name
+###name.last_name
 
 Generates the random last name value.
 
@@ -572,7 +554,7 @@ could result in value:
 
     	Bartell
 
-####name.prefix
+###name.prefix
 
 Generates the random name "prefix" value.
 
@@ -587,7 +569,7 @@ could result in value:
 
     	Mr.
 
-####name.suffix
+###name.suffix
 
 Generates the random name "suffix" value.
 
@@ -602,7 +584,7 @@ could result in value:
 
     	IV
 
-####name.title
+###name.title
 
 Generates the random name "title" value.
 
@@ -618,7 +600,7 @@ could result in value:
 
     	Legacy Creative Director
 
-####bitcoin.address
+###bitcoin.address
 
 Generates the random bitcoin address value.
 
@@ -634,7 +616,7 @@ could result in value:
 
     	1HUoGjmgChmnxxYhz87YytV4gVjfPaExmh
 
-####book.name
+###book.name
 
 Generates the random book name value.
 
@@ -650,7 +632,7 @@ could result in value:
 
     	The Odd Sister
 
-####book.publisher
+###book.publisher
 
 Generates the random book publisher value.
 
@@ -666,7 +648,7 @@ could result in value:
 
     	Opus Reader
 
-####book.genre
+###book.genre
 
 Generates the random book genre value.
 
@@ -682,7 +664,7 @@ could result in value:
 
     	Mystery
 
-####code.ean
+###code.ean
 
 Generates the random ean code value.
 
@@ -698,7 +680,7 @@ could result in value:
 
     	4600051000057
 
-####code.isbn
+###code.isbn
 
 Generates the random isbn code value.
 
@@ -714,7 +696,7 @@ could result in value:
 
     	759021701-8
 
-####color.hex
+###color.hex
 
 Generates the random hex color value.
 
@@ -729,7 +711,7 @@ could result in value:
 
     	#31a785
 
-####color.name
+###color.name
 
 Generates the random color name value.
 
@@ -745,7 +727,7 @@ could result in value:
 
     	red
 
-####credit_card.number
+###credit_card.number
 
 Generates the random credit card number value.
 
@@ -761,7 +743,7 @@ could result in value:
 
     	1212-1221-1121-1234
 
-####credit_card.type
+###credit_card.type
 
 Generates the random credit card type value.
 
@@ -777,7 +759,7 @@ could result in value:
 
     	visa
 
-####regexp
+###regexp
 
 Generates the random string matching specified regular expression.
 
@@ -804,7 +786,7 @@ could result in value:
 
     	720
 
-####list.seq
+###list.seq
 
 Picks next value in a sequence from the provided nested column values.
 
@@ -837,7 +819,7 @@ For **example**, input JSON:
     	value2
     	...
 
-####list.rand
+###list.rand
 
 Picks random value from the provided nested column values.
 
@@ -870,7 +852,7 @@ For **example**, input JSON:
     	value2
     	...
 
-####join
+###join
 
 Joins nested column values with the separator (optionaly) provided.
 
