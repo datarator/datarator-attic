@@ -7,3 +7,5 @@ spec
 *.a
 .*
 vendor
+scripts
+

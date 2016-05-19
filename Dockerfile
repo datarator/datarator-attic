@@ -13,8 +13,8 @@ RUN apk --update upgrade && \
 	apk add ruby-dev ruby-rdoc ruby-irb ruby-bundler ruby-io-console && \
 # add native ext build deps
 	apk add build-base linux-headers && \
-# add nginx
-	apk add nginx && \
+# add nginx + DOS prevention
+	apk add nginx fail2ban && \
 	cd $DATARATOR_HOME && \
 # build + install datarator
 	gem install bundler && \
@@ -29,7 +29,7 @@ RUN apk --update upgrade && \
 # clean apk cache
 	rm -rf /var/cache/apk/*
 
-COPY config/nginx.conf /etc/nginx/nginx.conf
+COPY docker/ /
 
 WORKDIR $DATARATOR_HOME
 

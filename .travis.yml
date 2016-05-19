@@ -9,7 +9,7 @@ rvm:
 script:
   - bundle install --jobs=3 --retry=3 --path=${BUNDLE_PATH:-vendor/bundle}
   - docker build -t datarator/datarator:edge .
-  - ./docker_test_run.sh
+  - ./scripts/travis/docker_test_run.sh
   # for tagged releases => deploy latest + tag versions as well
   - if [[ ! -z "$TRAVIS_TAG" ]]; then docker tag datarator/datarator:edge datarator/datarator:latest && docker tag datarator/datarator:edge datarator/datarator:$TRAVIS_TAG ; fi
 

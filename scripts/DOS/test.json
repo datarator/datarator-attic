@@ -1,0 +1,1 @@
+{"template":"csv","document":"foo_document","count":"10000","columns":[{"name":"book","type":"book.name"},{"name":"color","type":"color.name"},{"name":"author","type":"name.name"}, {"name":"isbn","type":"code.isbn"}]}
