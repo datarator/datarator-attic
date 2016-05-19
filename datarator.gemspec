@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
 	spec.require_paths = ["lib"]
 
 	# spec.add_development_dependency "bundler", "~> 1.7"
-	spec.add_development_dependency "rake", "~> 10.0"
+	spec.add_development_dependency "rake", "~> 11.1"
 	spec.add_development_dependency "rspec", "~> 3.4"
 	spec.add_development_dependency "guard", "~> 2.13"
 	spec.add_development_dependency "guard-rspec", "~> 4.6"
@@ -43,5 +43,5 @@ Gem::Specification.new do |spec|
 	#
 	# let's use puma (as heroku guys recommend)
 	# spec.add_runtime_dependency "unicorn", "~> 5.0"
-	spec.add_runtime_dependency "puma", "~> 3.2"
+	spec.add_runtime_dependency "puma", "~> 3.4"
 end
