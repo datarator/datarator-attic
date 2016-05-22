@@ -45,6 +45,10 @@ module Datarator
 						{:name=>"color.name", :nested=>false, :options=>[]},
 						{:name=>"credit_card.number", :nested=>false, :options=>[]},
 						{:name=>"credit_card.type", :nested=>false, :options=>[]},
+						{:name=>"number.binary", :nested=>false, :options=>[{:name=>"max", :mandatory=>false, :boolean=>false}, {:name=>"min", :mandatory=>false, :boolean=>false}]},
+						{:name=>"number.decimal", :nested=>false, :options=>[{:name=>"max", :mandatory=>false, :boolean=>false}, {:name=>"min", :mandatory=>false, :boolean=>false}]},
+						{:name=>"number.hexadecimal", :nested=>false, :options=>[{:name=>"max", :mandatory=>false, :boolean=>false}, {:name=>"min", :mandatory=>false, :boolean=>false}]},
+						{:name=>"number.octal", :nested=>false, :options=>[{:name=>"max", :mandatory=>false, :boolean=>false}, {:name=>"min", :mandatory=>false, :boolean=>false}]},
 						{:name=>"regexp", :nested=>false, :options=>[{:name=>"pattern", :mandatory=>true, :boolean=>false}, {:name=>"escape", :mandatory=>false, :boolean=>true}]}
 					])
 			end

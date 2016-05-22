@@ -59,6 +59,7 @@ module Datarator
     require_relative 'type_code'
     require_relative 'type_color'
     require_relative 'type_credit_card'
+    require_relative 'type_number'
 
     require_relative 'type_regexp'
 
@@ -109,6 +110,11 @@ module Datarator
 	# credit card
 	TypeCreditCardNumber.name => TypeCreditCardNumber.new,
 	TypeCreditCardType.name => TypeCreditCardType.new,
+
+	TypeNumberBinary.name => TypeNumberBinary.new,
+	TypeNumberDecimal.name => TypeNumberDecimal.new,
+	TypeNumberHexadecimal.name => TypeNumberHexadecimal.new,
+	TypeNumberOctal.name => TypeNumberOctal.new,
 
  	#
         # regexp-examples

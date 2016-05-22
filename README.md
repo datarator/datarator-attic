@@ -433,6 +433,11 @@ Following column types are available:
 	* credit card:
 	 	* [`credit_card.number`](#credit_cardnumber)
 	 	* [`credit_card.type`](#credit_cardtype)
+	* number:
+		* [`number.binary`](#number_binary)
+		* [`number.decimal`](#number_decimal)
+		* [`number.hexadecimal`](#number_hexadecimal)
+		* [`number.octal`](#number_octal)
 	* [`regexp`](#regexp)
 * with column nesting supported:
 	* [`list.seq`](#listseq)
@@ -758,6 +763,106 @@ For **example**, input JSON:
 could result in value:
 
     	visa
+
+###number.binary
+
+Generates the random binary number.
+
+Optional [options](#options) available:
+
+* `"max":"<max>"` - the maxiumum value (by default is 10).
+* `"min":"<min>"` - the minimum value (by default is 0).
+
+For **example**, input JSON:
+```javascript
+"columns": [{
+	"name": "foo",
+	"type": "number.binary",
+	"options": {
+		"min": 1,
+		"max": 10
+	}
+}]
+```
+
+could result in value:
+
+    	10
+
+###number.decimal
+
+Generates the random decimal number.
+
+Optional [options](#options) available:
+
+* `"max":"<max>"` - the maxiumum value (by default is 10).
+* `"min":"<min>"` - the minimum value (by default is 0).
+
+For **example**, input JSON:
+```javascript
+"columns": [{
+	"name": "foo",
+	"type": "number.decimal",
+	"options": {
+		"min": 1,
+		"max": 10
+	}
+}]
+```
+
+could result in value:
+
+    	2
+
+###number.hexadecimal
+
+Generates the random hexadecimal number.
+
+Optional [options](#options) available:
+
+* `"max":"<max>"` - the maxiumum value (by default is 10).
+* `"min":"<min>"` - the minimum value (by default is 0).
+
+For **example**, input JSON:
+```javascript
+"columns": [{
+	"name": "foo",
+	"type": "number.hexadecimal",
+	"options": {
+		"min": 1,
+		"max": 10
+	}
+}]
+```
+could result in value:
+
+    	A
+
+###number.octal
+
+Generates the random octal number.
+
+Optional [options](#options) available:
+
+* `"max":"<max>"` - the maxiumum value (by default is 10).
+* `"min":"<min>"` - the minimum value (by default is 0).
+
+For **example**, input JSON:
+```javascript
+"columns": [{
+	"name": "foo",
+	"type": "number.octal",
+	"options": {
+		"min": 1,
+		"max": 10
+	}
+}]
+```
+
+
+could result in value:
+
+    	2
 
 ###regexp
 
