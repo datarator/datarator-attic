@@ -31,11 +31,18 @@ module Datarator
 
 		private
 		def number (base, column)
-			number_in_range(base, Options.value(column.options, OptionNumberMin.name).to_i, Options.value(column.options, OptionNumberMax.name).to_i)
+			min = Options.value(column.options, OptionNumberMin.name)
+			max = Options.value(column.options, OptionNumberMax.name)
+
+			# min/max defaults
+			min = 1 if min.nil?
+			max = 10 if max.nil?
+
+			number_in_range(base, min.to_i, max.to_i)
 		end
 
 		private
-		def number_in_range (base, min, max) # defaults for min + max
+		def number_in_range (base, min, max)
 			(min + rand(max-min)).to_s(base)
 		end
 	end

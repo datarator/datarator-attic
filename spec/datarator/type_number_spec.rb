@@ -6,7 +6,7 @@ module Datarator
 	describe TypeNumberBinary do
 
 		describe '.value' do
-			it 'returns binary number for min value specified' do
+			it 'returns binary number more than min, for min value specified' do
 				out_context = OutContext.new
 				out_context.count=1
 				columns = Columns.new
@@ -18,7 +18,7 @@ module Datarator
 				expect(TypeNumberBinary.new.value(@column).to_i(2)).to be >= 1
 			end
 
-			it 'returns binary number for max value specified' do
+			it 'returns binary number less than max, for max value specified' do
 				out_context = OutContext.new
 				out_context.count=1
 				columns = Columns.new
@@ -30,7 +30,7 @@ module Datarator
 				expect(TypeNumberBinary.new.value(@column).to_i(2)).to be <= 10
 			end
 
-			it 'returns binary number for value range specified' do
+			it 'returns binary number between min and max, for value range specified' do
 				out_context = OutContext.new
 				out_context.count=1
 				columns = Columns.new
@@ -41,6 +41,19 @@ module Datarator
 
 				expect(TypeNumberBinary.new.value(@column).to_i(2)).to be >= 1
 				expect(TypeNumberBinary.new.value(@column).to_i(2)).to be <= 2
+			end
+
+			it 'returns binary number in range <1, 10> for no min/max value specified' do
+				out_context = OutContext.new
+				out_context.count=1
+				columns = Columns.new
+				out_context.columns = columns
+
+				@column = Column.new("name1", TypeNumberBinary.name, "0", {}, nil, out_context)
+				columns.columns = [ @column ]
+
+				expect(TypeNumberBinary.new.value(@column).to_i(2)).to be >= 0
+				expect(TypeNumberBinary.new.value(@column).to_i(2)).to be <= 10
 			end
 
 		end
@@ -67,7 +80,7 @@ module Datarator
 	describe TypeNumberDecimal do
 
 		describe '.value' do
-			it 'returns decimal number for min value specified' do
+			it 'returns decimal number more than min, for min value specified' do
 				out_context = OutContext.new
 				out_context.count=1
 				columns = Columns.new
@@ -79,7 +92,7 @@ module Datarator
 				expect(TypeNumberDecimal.new.value(@column).to_i).to be >= 1
 			end
 
-			it 'returns decimal number for max value specified' do
+			it 'returns decimal number less than max, for max value specified' do
 				out_context = OutContext.new
 				out_context.count=1
 				columns = Columns.new
@@ -91,7 +104,7 @@ module Datarator
 				expect(TypeNumberDecimal.new.value(@column).to_i).to be <= 10
 			end
 
-			it 'returns decimal number for value range specified' do
+			it 'returns decimal number between min and max, for value range specified' do
 				out_context = OutContext.new
 				out_context.count=1
 				columns = Columns.new
@@ -104,6 +117,18 @@ module Datarator
 				expect(TypeNumberDecimal.new.value(@column).to_i).to be <= 2
 			end
 
+			it 'returns decimal number in range <1, 10> for no min/max value specified' do
+				out_context = OutContext.new
+				out_context.count=1
+				columns = Columns.new
+				out_context.columns = columns
+
+				@column = Column.new("name1", TypeNumberDecimal.name, "0", {}, nil, out_context)
+				columns.columns = [ @column ]
+
+				expect(TypeNumberDecimal.new.value(@column).to_i(10)).to be >= 0
+				expect(TypeNumberDecimal.new.value(@column).to_i(10)).to be <= 10
+			end
 		end
 
 		describe '.name' do
@@ -128,7 +153,7 @@ module Datarator
 	describe TypeNumberHexadecimal do
 
 		describe '.value' do
-			it 'returns hexadecimal number for min value specified' do
+			it 'returns hexadecimal number more than min, for min value specified' do
 				out_context = OutContext.new
 				out_context.count=1
 				columns = Columns.new
@@ -140,7 +165,7 @@ module Datarator
 				expect(TypeNumberHexadecimal.new.value(@column).to_i(16)).to be >= 1
 			end
 
-			it 'returns hexadecimal number for max value specified' do
+			it 'returns hexadecimal number less than max, for max value specified' do
 				out_context = OutContext.new
 				out_context.count=1
 				columns = Columns.new
@@ -152,7 +177,7 @@ module Datarator
 				expect(TypeNumberHexadecimal.new.value(@column).to_i(16)).to be <= 10
 			end
 
-			it 'returns hexadecimal number for value range specified' do
+			it 'returns hexadecimal number between min and max, for value range specified' do
 				out_context = OutContext.new
 				out_context.count=1
 				columns = Columns.new
@@ -164,6 +189,20 @@ module Datarator
 				expect(TypeNumberHexadecimal.new.value(@column).to_i(16)).to be >= 1
 				expect(TypeNumberHexadecimal.new.value(@column).to_i(16)).to be <= 2
 			end
+
+			it 'returns hexadecimal number in range <1, 10> for no min/max value specified' do
+				out_context = OutContext.new
+				out_context.count=1
+				columns = Columns.new
+				out_context.columns = columns
+
+				@column = Column.new("name1", TypeNumberHexadecimal.name, "0", {}, nil, out_context)
+				columns.columns = [ @column ]
+
+				expect(TypeNumberHexadecimal.new.value(@column).to_i(16)).to be >= 0
+				expect(TypeNumberHexadecimal.new.value(@column).to_i(16)).to be <= 10
+			end
+
 
 		end
 
@@ -189,7 +228,7 @@ module Datarator
 	describe TypeNumberOctal do
 
 		describe '.value' do
-			it 'returns octal number for min value specified' do
+			it 'returns octal number more than min, for min value specified' do
 				out_context = OutContext.new
 				out_context.count=1
 				columns = Columns.new
@@ -201,7 +240,7 @@ module Datarator
 				expect(TypeNumberOctal.new.value(@column).to_i(8)).to be >= 1
 			end
 
-			it 'returns octal number for max value specified' do
+			it 'returns octal number less than max, for max value specified' do
 				out_context = OutContext.new
 				out_context.count=1
 				columns = Columns.new
@@ -213,7 +252,7 @@ module Datarator
 				expect(TypeNumberOctal.new.value(@column).to_i(8)).to be <= 10
 			end
 
-			it 'returns octal number for value range specified' do
+			it 'returns octal number between min and max, for value range specified' do
 				out_context = OutContext.new
 				out_context.count=1
 				columns = Columns.new
@@ -225,6 +264,20 @@ module Datarator
 				expect(TypeNumberOctal.new.value(@column).to_i(8)).to be >= 1
 				expect(TypeNumberOctal.new.value(@column).to_i(8)).to be <= 2
 			end
+
+			it 'returns octal number in range <1, 10> for no min/max value specified' do
+				out_context = OutContext.new
+				out_context.count=1
+				columns = Columns.new
+				out_context.columns = columns
+
+				@column = Column.new("name1", TypeNumberOctal.name, "0", {}, nil, out_context)
+				columns.columns = [ @column ]
+
+				expect(TypeNumberOctal.new.value(@column).to_i(8)).to be >= 0
+				expect(TypeNumberOctal.new.value(@column).to_i(8)).to be <= 10
+			end
+
 
 		end
 
