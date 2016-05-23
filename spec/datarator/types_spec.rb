@@ -39,6 +39,7 @@ module Datarator
 						{:name=>"book.name", :nested=>false, :options=>[]},
 						{:name=>"book.publisher", :nested=>false, :options=>[]},
 						{:name=>"book.genre", :nested=>false, :options=>[]},
+						{:name=>"boolean", :nested=>false, :options=>[{:name=>"true_ratio", :mandatory=>false, :boolean=>false}]},
 						{:name=>"code.isbn", :nested=>false, :options=>[]},
 						{:name=>"code.ean", :nested=>false, :options=>[]},
 						{:name=>"color.hex", :nested=>false, :options=>[]},

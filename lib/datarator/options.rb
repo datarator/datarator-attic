@@ -29,6 +29,7 @@ module Datarator
 		require_relative 'option_liquibase_changeset'
 		require_relative 'option_empty_value'
 
+		require_relative 'option_boolean_true_ratio'
 		require_relative 'option_const_value'
 		require_relative 'option_copy_from'
 		require_relative 'option_regexp_pattern'
@@ -45,6 +46,7 @@ module Datarator
 			OptionEmptyValue.name => OptionEmptyValue.new,
 
 			# type
+			OptionBooleanTrueRatio.name => OptionBooleanTrueRatio.new,
 			OptionConstValue.name => OptionConstValue.new,
 			OptionCopyFrom.name => OptionCopyFrom.new,
 			OptionRegexpPattern.name => OptionRegexpPattern.new,

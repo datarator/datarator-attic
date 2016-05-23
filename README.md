@@ -424,6 +424,7 @@ Following column types are available:
 		* [`book.name`](#bookname)
 		* [`book.publisher`](#bookpublisher)
 		* [`book.genre`](#bookgenre)
+	* [`boolean`](#boolean)
 	* code:
 	 	* [`code.ean`](#codeean)
 	 	* [`code.isbn`](#codeisbn)
@@ -668,6 +669,29 @@ For **example**, input JSON:
 could result in value:
 
     	Mystery
+
+###boolean
+
+Generates the random boolean.
+
+Optional [options](#options) available:
+
+* `"true_ratio":"<true_ratio>"` - the true ratio (in range: <0,1>)
+
+For **example**, input JSON:
+```javascript
+"columns": [{
+	"name": "foo",
+	"type": "boolean",
+	"options": {
+		"true_ratio": 0.5
+	}
+}]
+```
+
+could result in value:
+
+    	true
 
 ###code.ean
 

@@ -56,6 +56,7 @@ module Datarator
     require_relative 'type_name'
     require_relative 'type_bitcoin'
     require_relative 'type_book'
+    require_relative 'type_boolean'
     require_relative 'type_code'
     require_relative 'type_color'
     require_relative 'type_credit_card'
@@ -98,6 +99,9 @@ module Datarator
 	TypeBookName.name => TypeBookName.new,
 	TypeBookPublisher.name => TypeBookPublisher.new,
 	TypeBookGenre.name => TypeBookGenre.new,
+
+	# boolean
+	TypeBoolean.name => TypeBoolean.new,
 
 	# code
 	TypeCodeIsbn.name => TypeCodeIsbn.new,
