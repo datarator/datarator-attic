@@ -35,7 +35,7 @@ module Datarator
 			max = Options.value(column.options, OptionNumberMax.name)
 
 			# min/max defaults
-			min = 1 if min.nil?
+			min = 0 if min.nil?
 			max = 10 if max.nil?
 
 			number_in_range(base, min.to_i, max.to_i)
