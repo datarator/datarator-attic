@@ -27,12 +27,13 @@ Gem::Specification.new do |spec|
 	# anyone running mac out there?
 	spec.add_development_dependency "rspec-nc", "~> 0.2.1"
 
-	spec.add_development_dependency "pry", "~> 0.10.3"
-	spec.add_development_dependency "pry-remote", "~> 0.1.8"
-	spec.add_development_dependency "pry-nav", "~> 0.2.4"
 	spec.add_development_dependency "coveralls", "~> 0.8.13"
 	spec.add_development_dependency "rack-test", "~> 0.6.3"
 	spec.add_development_dependency "ruby-prof", "~> 0.15.9"
+
+	# for debugging purposes in vscode (https://marketplace.visualstudio.com/items?itemName=rebornix.Ruby)
+	spec.add_development_dependency "ruby-debug-ide", "~> 0.6.0"
+	spec.add_development_dependency "debase", "~> 0.2.1"	
 
 	spec.add_runtime_dependency "faker", "~> 1.6.3"
 	spec.add_runtime_dependency "regexp-examples", "~> 1.2"
