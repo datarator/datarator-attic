@@ -6,13 +6,9 @@ require_relative "datarator/out_templates"
 require_relative "datarator/out_context"
 require_relative "datarator/types"
 
-# require 'ruby-prof'
-
 module Datarator
 
 	class Datarator < Sinatra::Application
-
-		# BATCH_SIZE=1000
 
 		# TODO doesn't work for non-production, as bower_components relative reference is invalid
 		set :public_folder, ENV['RACK_ENV'] == "production" ? 'ui/dist' : 'ui/app'
@@ -83,13 +79,9 @@ module Datarator
 			stream do |out|
 				out << OutTemplates.pre(out_context)
 
-				# Profile the code
-				# RubyProf.start
-
 				batch_size = 1000
 
 				chunk = ''
-				# 0.step(in_params.count, batch) do | row |
 				out_context.count.times do | row |
 
 					# giving response in chunks seems to be more performant
@@ -100,18 +92,10 @@ module Datarator
 						chunk = ''
 					end
 
-					# out << OutTemplates.item(out_context)
-
 					out_context.shift_row
 				end
 
 				out << chunk
-
-				# result = RubyProf.stop
-				# Print a flat profile to text
-				# printer = RubyProf::FlatPrinter.new(result)
-				# printer.print(STDOUT)
-
 				out << OutTemplates.post(out_context)
 			end
 
