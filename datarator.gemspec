@@ -32,8 +32,15 @@ Gem::Specification.new do |spec|
 	spec.add_development_dependency "ruby-prof", "~> 0.15.9"
 
 	# for debugging purposes in vscode (https://marketplace.visualstudio.com/items?itemName=rebornix.Ruby)
+	# to install in vscode press: 'F1', afterwards type 'ext install ruby' 
 	spec.add_development_dependency "ruby-debug-ide", "~> 0.6.0"
 	spec.add_development_dependency "debase", "~> 0.2.1"	
+	# linters (https://github.com/rubyide/vscode-ruby)
+	spec.add_development_dependency "rubocop", "~> 0.40"
+	spec.add_development_dependency "ruby-lint", "~> 2.2"
+	spec.add_development_dependency "reek", "~> 4.0"
+	spec.add_development_dependency "fasterer", "~> 0.3"
+	spec.add_development_dependency "debride", "~> 1.6"
 
 	spec.add_runtime_dependency "faker", "~> 1.6.3"
 	spec.add_runtime_dependency "regexp-examples", "~> 1.2"

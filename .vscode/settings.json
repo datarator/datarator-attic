@@ -1,0 +1,12 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    // https://github.com/rubyide/vscode-ruby
+    "ruby.lint": {
+        "reek": true,
+        "rubocop": false,
+        "ruby": true, //Runs ruby -wc
+        "fasterer": true,
+        "debride": true,
+        "ruby-lint": true
+    }
+}
