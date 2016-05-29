@@ -2,39 +2,35 @@ require_relative 'type'
 require_relative 'option_separator'
 
 module Datarator
+  class TypeJoin < Type
+    class << self
+      def name
+        'join'
+      end
+    end
 
-	class TypeJoin < Type
-		class << self
-			def name
-				'join'
-			end
-		end
+    def escape?(_column)
+      true
+    end
 
-		def escape? (column)
-			true
-		end
+    def value(column)
+      column.nested.map(&:value)
+            .join(separator(column))
+    end
 
-		def value (column)
-			(
-				column.nested.map do | nested |
-					nested.value
-				end
-			).join(separator column)
-		end
+    def nested?
+      true
+    end
 
-		def nested?
-			true
-		end
+    def separator(column)
+      separator = column.options[OptionSeparator.name]
+      separator.nil? ? '' : separator
+    end
 
-		def separator (column)
-			separator = column.options[OptionSeparator.name]
-			separator.nil? ? '' : separator
-		end
+    def options
+      OPTIONS
+    end
 
-		def options
-			OPTIONS
-		end
-
-		OPTIONS = [ OptionSeparator.new ]
-	end
+    OPTIONS = [OptionSeparator.new].freeze
+  end
 end

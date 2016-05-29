@@ -2,38 +2,36 @@ require_relative 'type'
 require_relative 'option_copy_from'
 
 module Datarator
+  class TypeCopy < Type
+    class << self
+      def name
+        'copy'
+      end
+    end
 
-	class TypeCopy < Type
+    def value(column)
+      (from column).last_value
+    end
 
-		class << self
-			def name
-				'copy'
-			end
-		end
+    # def validate(out_context, column)
+    # end
 
-		def value (column)
-			(from column).last_value
-		end
+    def escape?(column)
+      Types.escape? from column
+    end
 
-		# def validate(out_context, column)
-		# end
+    def nested?
+      false
+    end
 
-		def escape? (column)
-			Types.escape? from column
-		end
+    def from(column)
+      column.out_context.columns.column_by_name(column.options[OptionCopyFrom.name])
+    end
 
-		def nested?
-			false
-		end
+    def options
+      OPTIONS
+    end
 
-		def from (column)
-			column.out_context.columns.column_by_name(column.options[OptionCopyFrom.name])
-		end
-
-		def options
-			OPTIONS
-		end
-
-		OPTIONS = [ OptionCopyFrom.new ]
-	end
+    OPTIONS = [OptionCopyFrom.new].freeze
+  end
 end

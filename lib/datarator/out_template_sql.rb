@@ -2,62 +2,59 @@ require_relative 'out_template'
 require_relative 'out_context'
 
 module Datarator
+  class OutTemplateSql < OutTemplate
+    class << self
+      def name
+        'sql'
+      end
+    end
 
-	class OutTemplateSql < OutTemplate
+    def pre(_out_context)
+      ''
+    end
 
-		class << self
-			def name
-				'sql'
-			end
-		end
+    def item(out_context)
+      values = (
+        out_context.columns.map_shallow do |column|
+          value = column.value
 
-		def pre (out_context)
-			''
-		end
+          # escaping character: '
+          value = value.gsub(/'/, "''") if value.is_a? String
 
-		def item (out_context)
-			values = (
-				out_context.columns.map_shallow() do | column |
-					value = column.value
+          # escaping values that need escaping based on type
+          value = "'#{value}'" if column.escape
 
-					# escaping character: '
-					value = value.gsub(/'/, "''") if value.is_a? String
+          value
+        end
+      )
 
-					# escaping values that need escaping based on type
-					value = "'#{value}'" if column.escape
+      prefix = out_context.cache['sql_prefix']
+      if prefix.nil?
+        names = names(out_context)
+        prefix = "INSERT INTO #{out_context.document} (#{names.join(',')}) VALUES ("
+        out_context.cache['sql_prefix'] = prefix
+      end
 
-					value
-				end
-			)
+      suffix = ");\n"
 
-			prefix = out_context.cache["sql_prefix"]
-			if (prefix.nil?)
-				names = names(out_context)
-				prefix = "INSERT INTO #{out_context.document} (#{names.join(',')}) VALUES ("
-				out_context.cache["sql_prefix"] = prefix
-			end
+      # "INSERT INTO #{out_context.document} (#{names.join(',')}) VALUES (#{values.join(',')});\n"
+      "#{prefix}#{values.join(',')}#{suffix}"
+    end
 
-			suffix = ");\n"
+    def post(_out_context)
+      ''
+    end
 
-			# "INSERT INTO #{out_context.document} (#{names.join(',')}) VALUES (#{values.join(',')});\n"
-			"#{prefix}#{values.join(',')}#{suffix}"
-		end
+    def empty(_out_context)
+      'NULL'
+    end
 
-		def post (out_context)
-			''
-		end
+    def content_type
+      'text/plain'
+    end
 
-		def empty (out_context)
-			'NULL'
-		end
-
-		def content_type
-			'text/plain'
-		end
-
-		def file_ext
-			'sql'
-		end
-
-	end
+    def file_ext
+      'sql'
+    end
+  end
 end

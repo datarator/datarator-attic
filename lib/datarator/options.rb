@@ -1,61 +1,57 @@
 require_relative 'option'
 
 module Datarator
-	class Options
+  class Options
+    class << self
+      def option(name)
+        opt = OPTIONS[name]
+        raise ArgumentError, "option: #{name} is unknown" if opt.nil?
+        opt
+      end
 
-		class << self
+      def value(options, name)
+        opt = option name
+        return nil if !opt.mandatory? && (options.nil? || options[name].nil?)
 
-			def option (name)
-				opt = OPTIONS[name]
-				raise ArgumentError, "option: #{name} is unknown" if opt.nil?
-				opt
-			end
+        if opt.boolean?
+          return options[name] == true || options[name].is_a?(String) && options[name].casecmp('true').zero?
+        end
 
-			def value (options, name)
-				opt = option name
-				if !opt.mandatory? && (options.nil? || options[name].nil?)
-					return nil
-				end
+        options[name]
+      end
+    end
 
-				if opt.boolean?
-					return options[name] == true || options[name].is_a?(String) && options[name].downcase == 'true'
-				end
+    require_relative 'option_header'
+    require_relative 'option_liquibase_changeset'
+    require_relative 'option_empty_value'
 
-				options[name]
-			end
-		end
+    require_relative 'option_boolean_true_ratio'
+    require_relative 'option_const_value'
+    require_relative 'option_copy_from'
+    require_relative 'option_regexp_pattern'
+    require_relative 'option_escape'
+    require_relative 'option_number_max'
+    require_relative 'option_number_min'
 
-		require_relative 'option_header'
-		require_relative 'option_liquibase_changeset'
-		require_relative 'option_empty_value'
+    require_relative 'option_separator'
 
-		require_relative 'option_boolean_true_ratio'
-		require_relative 'option_const_value'
-		require_relative 'option_copy_from'
-		require_relative 'option_regexp_pattern'
-		require_relative 'option_escape'
-		require_relative 'option_number_max'
-		require_relative 'option_number_min'
+    OPTIONS = {
+      # template
+      OptionHeader.name => OptionHeader.new,
+      OptionLiquibaseChangeset.name => OptionLiquibaseChangeset.new,
+      OptionEmptyValue.name => OptionEmptyValue.new,
 
-		require_relative 'option_separator'
+      # type
+      OptionBooleanTrueRatio.name => OptionBooleanTrueRatio.new,
+      OptionConstValue.name => OptionConstValue.new,
+      OptionCopyFrom.name => OptionCopyFrom.new,
+      OptionRegexpPattern.name => OptionRegexpPattern.new,
+      OptionEscape.name => OptionEscape.new,
+      OptionNumberMax.name => OptionNumberMax.new,
+      OptionNumberMin.name => OptionNumberMin.new,
 
-		OPTIONS = {
-			# template
-			OptionHeader.name => OptionHeader.new,
-			OptionLiquibaseChangeset.name => OptionLiquibaseChangeset.new,
-			OptionEmptyValue.name => OptionEmptyValue.new,
-
-			# type
-			OptionBooleanTrueRatio.name => OptionBooleanTrueRatio.new,
-			OptionConstValue.name => OptionConstValue.new,
-			OptionCopyFrom.name => OptionCopyFrom.new,
-			OptionRegexpPattern.name => OptionRegexpPattern.new,
-			OptionEscape.name => OptionEscape.new,
-			OptionNumberMax.name => OptionNumberMax.new,
-			OptionNumberMin.name => OptionNumberMin.new,
-
-			# mixed = template + type
-			OptionSeparator.name => OptionSeparator.new
-		}
-	end
+      # mixed = template + type
+      OptionSeparator.name => OptionSeparator.new
+    }.freeze
+  end
 end

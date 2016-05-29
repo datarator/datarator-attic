@@ -12,7 +12,7 @@ module Datarator
       Datarator
     end
 
-    # TODO site not working for non-production env
+    # TODO: site not working for non-production env
     # describe '/' do
     # 	it 'return web page on get' do
     # 		get '/'
@@ -26,13 +26,12 @@ module Datarator
         get '/api/schemas/default'
         expect(last_response).to be_ok
         expect(last_response.header['Content-Type']).to eq 'application/json'
-        expect(last_response.body).to eq "{\"template\":\"csv\",\"document\":\"foo_document\",\"count\":10,\"columns\":[{\"name\":\"uid\",\"type\":\"row_index\",\"emptyPercent\": 0},{\"name\":\"first_name\",\"type\":\"name.first_name\",\"emptyPercent\": 0},{\"name\":\"last_name\",\"type\":\"name.last_name\",\"emptyPercent\": 0}],\"options\":{\"header\":\"true\"}}"
+        expect(last_response.body).to eq '{"template":"csv","document":"foo_document","count":10,"columns":[{"name":"uid","type":"row_index","emptyPercent": 0},{"name":"first_name","type":"name.first_name","emptyPercent": 0},{"name":"last_name","type":"name.last_name","emptyPercent": 0}],"options":{"header":"true"}}'
       end
     end
 
     describe '/api/schemas' do
-
-      # TODO ??? introduce more type related tesing
+      # TODO: ??? introduce more type related tesing
 
       context 'having valid json request' do
         before(:each) do
@@ -56,7 +55,7 @@ module Datarator
 
         it 'returns HTTP error 400' do
           expect(last_response.status).to eq 400
-          # TODO check error itself
+          # TODO: check error itself
         end
       end
 
@@ -68,10 +67,9 @@ module Datarator
 
         it 'returns HTTP error 400' do
           expect(last_response.status).to eq 400
-          # TODO check error itself
+          # TODO: check error itself
         end
       end
-
     end
 
     describe '/non_existing' do
@@ -88,7 +86,7 @@ module Datarator
         expect(last_response).to be_ok
         expect(last_response.header['Content-Type']).to eq 'application/json'
         # does it really mae sense to update with each type update?
-	# expect(last_response.body).to eq "[{\"name\":\"const\",\"nested\":false,\"options\":[{\"name\":\"value\",\"mandatory\":true,\"boolean\":false}]},{\"name\":\"row_index\",\"nested\":false,\"options\":[]},{\"name\":\"copy\",\"nested\":false,\"options\":[{\"name\":\"from\",\"mandatory\":true,\"boolean\":false}]},{\"name\":\"list.seq\",\"nested\":true,\"options\":[]},{\"name\":\"list.rand\",\"nested\":true,\"options\":[]},{\"name\":\"join\",\"nested\":true,\"options\":[{\"name\":\"separator\",\"mandatory\":false,\"boolean\":false}]},{\"name\":\"name.name\",\"nested\":false,\"options\":[]},{\"name\":\"name.first_name\",\"nested\":false,\"options\":[]},{\"name\":\"name.last_name\",\"nested\":false,\"options\":[]},{\"name\":\"name.prefix\",\"nested\":false,\"options\":[]},{\"name\":\"name.suffix\",\"nested\":false,\"options\":[]},{\"name\":\"name.title\",\"nested\":false,\"options\":[]},{\"name\":\"bitcoin.address\",\"nested\":false,\"options\":[]},{\"name\":\"book.name\",\"nested\":false,\"options\":[]},{\"name\":\"book.publisher\",\"nested\":false,\"options\":[]},{\"name\":\"book.genre\",\"nested\":false,\"options\":[]},{\"name\":\"code.isbn\",\"nested\":false,\"options\":[]},{\"name\":\"code.ean\",\"nested\":false,\"options\":[]},{\"name\":\"color.hex\",\"nested\":false,\"options\":[]},{\"name\":\"color.name\",\"nested\":false,\"options\":[]},{\"name\":\"credit_card.number\",\"nested\":false,\"options\":[]},{\"name\":\"credit_card.type\",\"nested\":false,\"options\":[]},{\"name\":\"regexp\",\"nested\":false,\"options\":[{\"name\":\"pattern\",\"mandatory\":true,\"boolean\":false},{\"name\":\"escape\",\"mandatory\":false,\"boolean\":true}]}]"
+        # expect(last_response.body).to eq "[{\"name\":\"const\",\"nested\":false,\"options\":[{\"name\":\"value\",\"mandatory\":true,\"boolean\":false}]},{\"name\":\"row_index\",\"nested\":false,\"options\":[]},{\"name\":\"copy\",\"nested\":false,\"options\":[{\"name\":\"from\",\"mandatory\":true,\"boolean\":false}]},{\"name\":\"list.seq\",\"nested\":true,\"options\":[]},{\"name\":\"list.rand\",\"nested\":true,\"options\":[]},{\"name\":\"join\",\"nested\":true,\"options\":[{\"name\":\"separator\",\"mandatory\":false,\"boolean\":false}]},{\"name\":\"name.name\",\"nested\":false,\"options\":[]},{\"name\":\"name.first_name\",\"nested\":false,\"options\":[]},{\"name\":\"name.last_name\",\"nested\":false,\"options\":[]},{\"name\":\"name.prefix\",\"nested\":false,\"options\":[]},{\"name\":\"name.suffix\",\"nested\":false,\"options\":[]},{\"name\":\"name.title\",\"nested\":false,\"options\":[]},{\"name\":\"bitcoin.address\",\"nested\":false,\"options\":[]},{\"name\":\"book.name\",\"nested\":false,\"options\":[]},{\"name\":\"book.publisher\",\"nested\":false,\"options\":[]},{\"name\":\"book.genre\",\"nested\":false,\"options\":[]},{\"name\":\"code.isbn\",\"nested\":false,\"options\":[]},{\"name\":\"code.ean\",\"nested\":false,\"options\":[]},{\"name\":\"color.hex\",\"nested\":false,\"options\":[]},{\"name\":\"color.name\",\"nested\":false,\"options\":[]},{\"name\":\"credit_card.number\",\"nested\":false,\"options\":[]},{\"name\":\"credit_card.type\",\"nested\":false,\"options\":[]},{\"name\":\"regexp\",\"nested\":false,\"options\":[{\"name\":\"pattern\",\"mandatory\":true,\"boolean\":false},{\"name\":\"escape\",\"mandatory\":false,\"boolean\":true}]}]"
       end
     end
 
@@ -97,13 +95,12 @@ module Datarator
         get '/api/templates'
         expect(last_response).to be_ok
         expect(last_response.header['Content-Type']).to eq 'application/json'
-        expect(last_response.body).to eq "[{\"name\":\"csv\",\"group\":\"\",\"options\":[{\"name\":\"header\",\"mandatory\":false,\"boolean\":true},{\"name\":\"empty_value\",\"mandatory\":false,\"boolean\":false},{\"name\":\"separator\",\"mandatory\":false,\"boolean\":false}]},{\"name\":\"sql\",\"group\":\"\",\"options\":[]},{\"name\":\"liquibase.xml\",\"group\":\"liquibase\",\"options\":[{\"name\":\"changeset\",\"mandatory\":false,\"boolean\":true}]},{\"name\":\"liquibase.yaml\",\"group\":\"liquibase\",\"options\":[{\"name\":\"changeset\",\"mandatory\":false,\"boolean\":true}]},{\"name\":\"liquibase.json\",\"group\":\"liquibase\",\"options\":[{\"name\":\"changeset\",\"mandatory\":false,\"boolean\":true}]}]"
+        expect(last_response.body).to eq '[{"name":"csv","group":"","options":[{"name":"header","mandatory":false,"boolean":true},{"name":"empty_value","mandatory":false,"boolean":false},{"name":"separator","mandatory":false,"boolean":false}]},{"name":"sql","group":"","options":[]},{"name":"liquibase.xml","group":"liquibase","options":[{"name":"changeset","mandatory":false,"boolean":true}]},{"name":"liquibase.yaml","group":"liquibase","options":[{"name":"changeset","mandatory":false,"boolean":true}]},{"name":"liquibase.json","group":"liquibase","options":[{"name":"changeset","mandatory":false,"boolean":true}]}]'
       end
     end
 
-
     def post_json(uri, json)
-      post(uri, json, {"CONTENT_TYPE" => "application/json"})
+      post(uri, json, 'CONTENT_TYPE' => 'application/json')
     end
   end
 end

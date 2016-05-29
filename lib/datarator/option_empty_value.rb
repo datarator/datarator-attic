@@ -3,20 +3,19 @@
 require_relative 'option'
 
 module Datarator
+  class OptionEmptyValue < Option
+    class << self
+      def name
+        'empty_value'
+      end
+    end
 
-	class OptionEmptyValue < Option
-		class << self
-			def name
-				'empty_value'
-			end
-		end
+    def mandatory?
+      false
+    end
 
-		def mandatory?
-			false
-		end
-
-		def boolean?
-			false
-		end
-	end
+    def boolean?
+      false
+    end
+  end
 end

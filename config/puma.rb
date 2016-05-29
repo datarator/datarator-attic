@@ -7,17 +7,17 @@ preload_app!
 rackup      DefaultRackup
 environment ENV['RACK_ENV'] || 'development'
 
-if ENV['RACK_ENV'] == "development"
-	workdir = Dir.pwd
-else
-	workdir = "/usr/local/share/datarator"
-end
+workdir = if ENV['RACK_ENV'] == 'development'
+            Dir.pwd
+          else
+            '/usr/local/share/datarator'
+          end
 
 # Set up socket location
-if ENV['RACK_ENV'] == "production"
-	bind "unix:///tmp/unicorn.sock"
+if ENV['RACK_ENV'] == 'production'
+  bind 'unix:///tmp/unicorn.sock'
 else
-	port        ENV['PORT']     || 9292
+  port ENV['PORT'] || 9292
 end
 
 # Logging

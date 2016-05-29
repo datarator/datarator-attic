@@ -6,39 +6,39 @@ module Datarator
       end
 
       def supports?(name)
-        TYPES.has_key?(name)
+        TYPES.key?(name)
       end
 
       def validate(type)
-        raise ArgumentError, 'type can\'t be empty' if type.nil? or type.empty?
+        raise ArgumentError, 'type can\'t be empty' if type.nil? || type.empty?
         raise ArgumentError, "type not supported: #{type}" unless supports? type
       end
 
-      def nested? (column)
+      def nested?(column)
         TYPES[column.type].nested?
       end
 
-      def escape? (column)
+      def escape?(column)
         !column.empty_index? && TYPES[column.type].escape?(column)
       end
 
-      def options (type)
+      def options(type)
         TYPES[type].options
       end
 
-      def find_all ()
+      def find_all
         types = []
-        TYPES.each do |key, type|
+        TYPES.each do |_key, type|
           options = []
           type.options.each do |option|
-            options << {:name => option.class.name, :mandatory => option.mandatory?, :boolean => option.boolean?}
+            options << { name: option.class.name, mandatory: option.mandatory?, boolean: option.boolean? }
           end
 
           types << {
-              :name => type.class.name,
-              :nested => type.nested?,
-              :options => options
-              # TODO :categories => [ "name", "string", "human", ... ]
+            name: type.class.name,
+            nested: type.nested?,
+            options: options
+            # TODO: categories => [ "name", "string", "human", ... ]
           }
         end
 
@@ -66,64 +66,64 @@ module Datarator
 
     TYPES = {
 
-        #
-        # specific
-        #
-        TypeConst.name => TypeConst.new,
-        TypeRowIndex.name => TypeRowIndex.new,
-        TypeCopy.name => TypeCopy.new,
+      #
+      # specific
+      #
+      TypeConst.name => TypeConst.new,
+      TypeRowIndex.name => TypeRowIndex.new,
+      TypeCopy.name => TypeCopy.new,
 
-        #
-        # nested columns
-        #
-        TypeListSeq.name => TypeListSeq.new,
-        TypeListRand.name => TypeListRand.new,
-        TypeJoin.name => TypeJoin.new,
+      #
+      # nested columns
+      #
+      TypeListSeq.name => TypeListSeq.new,
+      TypeListRand.name => TypeListRand.new,
+      TypeJoin.name => TypeJoin.new,
 
-        #
-        # faker
-        #
+      #
+      # faker
+      #
 
-        # name
-        TypeNameName.name => TypeNameName.new,
-        TypeNameFirstName.name => TypeNameFirstName.new,
-        TypeNameLastName.name => TypeNameLastName.new,
-        TypeNamePrefix.name => TypeNamePrefix.new,
-        TypeNameSuffix.name => TypeNameSuffix.new,
-        TypeNameTitle.name => TypeNameTitle.new,
+      # name
+      TypeNameName.name => TypeNameName.new,
+      TypeNameFirstName.name => TypeNameFirstName.new,
+      TypeNameLastName.name => TypeNameLastName.new,
+      TypeNamePrefix.name => TypeNamePrefix.new,
+      TypeNameSuffix.name => TypeNameSuffix.new,
+      TypeNameTitle.name => TypeNameTitle.new,
 
-	# bitcoin
-	TypeBitcoinAddress.name => TypeBitcoinAddress.new,
+      # bitcoin
+      TypeBitcoinAddress.name => TypeBitcoinAddress.new,
 
-	# book
-	TypeBookName.name => TypeBookName.new,
-	TypeBookPublisher.name => TypeBookPublisher.new,
-	TypeBookGenre.name => TypeBookGenre.new,
+      # book
+      TypeBookName.name => TypeBookName.new,
+      TypeBookPublisher.name => TypeBookPublisher.new,
+      TypeBookGenre.name => TypeBookGenre.new,
 
-	# boolean
-	TypeBoolean.name => TypeBoolean.new,
+      # boolean
+      TypeBoolean.name => TypeBoolean.new,
 
-	# code
-	TypeCodeIsbn.name => TypeCodeIsbn.new,
-	TypeCodeEan.name => TypeCodeEan.new,
+      # code
+      TypeCodeIsbn.name => TypeCodeIsbn.new,
+      TypeCodeEan.name => TypeCodeEan.new,
 
-	# color
-	TypeColorHex.name => TypeColorHex.new,
-	TypeColorName.name => TypeColorName.new,
+      # color
+      TypeColorHex.name => TypeColorHex.new,
+      TypeColorName.name => TypeColorName.new,
 
-	# credit card
-	TypeCreditCardNumber.name => TypeCreditCardNumber.new,
-	TypeCreditCardType.name => TypeCreditCardType.new,
+      # credit card
+      TypeCreditCardNumber.name => TypeCreditCardNumber.new,
+      TypeCreditCardType.name => TypeCreditCardType.new,
 
-	TypeNumberBinary.name => TypeNumberBinary.new,
-	TypeNumberDecimal.name => TypeNumberDecimal.new,
-	TypeNumberHexadecimal.name => TypeNumberHexadecimal.new,
-	TypeNumberOctal.name => TypeNumberOctal.new,
+      TypeNumberBinary.name => TypeNumberBinary.new,
+      TypeNumberDecimal.name => TypeNumberDecimal.new,
+      TypeNumberHexadecimal.name => TypeNumberHexadecimal.new,
+      TypeNumberOctal.name => TypeNumberOctal.new,
 
- 	#
-        # regexp-examples
-        #
-	TypeRegexp.name => TypeRegexp.new
-    }
+      #
+      # regexp-examples
+      #
+      TypeRegexp.name => TypeRegexp.new
+    }.freeze
   end
 end
