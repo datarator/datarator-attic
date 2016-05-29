@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
 	spec.add_development_dependency "rake", "~> 11.1"
 	spec.add_development_dependency "rspec", "~> 3.4"
 	spec.add_development_dependency "guard", "~> 2.13"
-	spec.add_development_dependency "guard-rspec", "~> 4.6"
+	spec.add_development_dependency "guard-rspec", "~> 4.7"
 	# anyone running mac out there?
 	spec.add_development_dependency "rspec-nc", "~> 0.2.1"
 
