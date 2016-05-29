@@ -11,11 +11,12 @@ script:
   - bundle exec rake
   - docker build -t datarator/datarator:edge .
   - ./scripts/travis/docker_test_run.sh
+  # dockerhub login (to fail build on auth problems)
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 
 after_success:
   # for tagged releases => deploy latest + tag versions as well
   - if [[ ! -z "$TRAVIS_TAG" ]]; then docker tag datarator/datarator:edge datarator/datarator:latest && docker tag datarator/datarator:edge datarator/datarator:$TRAVIS_TAG ; fi
-  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
   - docker push datarator/datarator
 
 deploy:
