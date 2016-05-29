@@ -23,7 +23,7 @@ module Datarator
       if true_ratio.nil?
         Faker::Boolean.boolean
       else
-        Faker::Boolean.boolean true_ratio
+        Faker::Boolean.boolean Options.value(column.options, OptionBooleanTrueRatio.name).to_f
       end
     end
 
